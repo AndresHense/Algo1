@@ -1,0 +1,437 @@
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+
+\input{../macros/Algo1Macros}
+
+
+
+\begin{document}
+
+\practica{2}{Introducción al Lenguaje de Especificación Resuelto}
+
+\subsection*{Comentarios:}
+Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio divertido copiar el formato de la guia.\\
+\section{Secuencias}
+
+\paragraph{\textbf{Ejercicio 1.}} $\bigstar $ Evaluar las siguientes expresiones:
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $ \vert \langle 4,3,1\rangle \vert$
+\item addFirst$(\pi,\langle 2,3,5,7,11\rangle )$
+\item $\langle 0,1,2,3\rangle [3]$
+\item concat$(\langle 2,3\rangle ,\langle 5,7,11\rangle )$
+\item head(tail$(\langle 5,6,7,8\rangle))$
+\item subseq$(\langle 2,3,5,7,11\rangle ,0,3)$
+\item $\pi \in \langle 2,3,5,7,11\rangle$
+\item subseq$(\langle 2,3,5,7,11\rangle ,3,2)$
+\item $1\in \langle 1,2,3,4,5\rangle$
+\item subseq$(\langle 2,3,5,7,11\rangle , 0,65536)$
+\end{enumerate} 
+\end{multicols}
+
+\subsection*{Respuestas}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $3$
+\item $\langle \pi,2,3,5,7,11\rangle$
+\item $3$
+\item $\langle 2,3,5,7,11\rangle$
+\item $6$
+\item $\langle 2,3,5 \rangle$
+\item $False$
+\item $\perp$
+\item $True$
+\item $\perp$
+\end{enumerate}
+\end{multicols}
+
+\paragraph{\textbf{Ejercicio 2.}} $\bigstar $ Sea $x$ de tipo seq$\langle \mathbb{Z}\rangle$.¿Cuáles de las siguientes igualdades sobre secuencias son válidas?
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $\vert x\vert =\vert $tail$(x)\vert +1$
+\item $x=$subseq$(x,0,\vert x \vert -1)$
+\item $x=$subseq$(x,0,\vert x \vert )$
+\item concat(addFirst$(3,x),y)=$ addFirst$(3,$concat$(x,y))$
+\item $x=$ addFirst(head$(x),$tail$(x)$)
+\item $x[0]=$ head$(x)$
+\item $i \in x=\textrm{head(subseq}(x,i,i+1))$
+\item $\textrm{tail}(x)=\textrm{subseq}(x,1,\vert x \vert )$
+\end{enumerate}
+\end{multicols}
+En los casos incorrectos, ¿puede dar condiciones sobre las listas en cuestión para que lo sean?
+\subsection*{Respuesta}
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item Invalida, funciona con $x \neq \langle \rangle$ 
+\item Invalida
+\item Valida
+\item Invalida, funciona con $y$ de tipo seq$\langle \mathbb{Z}\rangle$
+\item Invalida, funciona con $x \neq \langle \rangle$
+\item Invalida, funciona con $x \neq \langle \rangle$
+\item Invalida
+\item Invalida, funciona con $x \neq \langle \rangle$
+\end{enumerate}
+\end{multicols}
+
+\paragraph{Ejercicio 3.} $\bigstar$ Sea $s_0,s_1$ secuencias de tipo $T$ y $e$ un elemento de tipo $T$. Indicar para cada una de las siguientes si son verdaderas o falsas. En caso de ser falsa, mostrar un contraejemplo.
+
+\begin{enumerate}[label=\alph*)]
+\item $\vert \textrm{addFirst}(e,s_0)\vert =1+ \vert s_0\vert$
+\item $\vert \textrm{addFirst}(e,s_0)\vert = \vert \textrm{tail}(s_0)\vert $
+\item $\vert \textrm{concat}(s_0,s_1)\vert = \vert s_0 \vert +\vert s_1\vert $
+\item $s_0 = \textrm{tail(addFirst}(e,s_0))$
+\item $\textrm{head(addFirst}(e,s_0))=e$
+\item $\textrm{addFirst}(e,s_0)=\textrm{tail}(s_0)$
+\item $\textrm{head(addFirst}(e,\textrm{tail}(s_0)))=\textrm{head(tail(addFirst}(e,s_0)))$
+\item $\textrm{addFirst}(e,s_0)[0]=e$
+\item $\textrm{addFirst}(e,s_0)[0]=\textrm{head(addFirst}(e,s_0))$
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+\item $True$
+\item $False$ $e=1;$ $s_0=\langle 2\rangle ;$ $s_1=\langle 3\rangle ;\rightarrow$  $2=0$
+\item $True$
+\item $True$
+\item $True$
+\item $False$ $e=1;$ $s_0=\langle 2\rangle ;$ $s_1=\langle 3\rangle ;\rightarrow$  $\langle 1,2\rangle =\langle \rangle$
+\item $False$ $e=1;$ $s_0=\langle 2\rangle ;$ $s_1=\langle 3\rangle ;\rightarrow$  $ 1 = 2$
+\item $True$
+\item $True$
+\end{enumerate}
+
+\paragraph{Ejercicio 4.} $\bigstar$ Escriba los siguientes predicados auxiliares sobre secuencias de enteros, aclarando los tipos de los parámetros que recibe:
+
+\begin{enumerate}[label=\alph*)]
+\item $estaAcotada,$ que determina si todos los elementos de una sequencia están dentro del rango $[1,100]$.
+\item $capicua,$ que es verdadera sii una secuencia es capicúa. (Por ejemplo, $\langle 0,2,1,2,0 \rangle$ es capicúa y $\langle 0,2,1,4,0\rangle$ no).
+\item $esPrefijo,$ que es verdadera sii una secuencia es prefijo de otra.
+\item $estaOrdenada,$ que es verdadera sii la secuencia está ordenada de menor a mayor.
+\item $todosPrimos,$ que es verdadera sii todos los elementos de la secuencia son números primos.
+\item $primosEnPosicionesPares,$ que es verdadero sii todos los elementos primos de una secuencia están de una posición par.
+\item $todosIguales,$ que es verdadera sii todos los elemntos de la secuencia son iguales.
+\item $hayUnParQueDivideAlResto,$ que determina si hay un elemento par en la secuencia que divide a todos los otros elementos de la secuencia.
+\item $hayUnoEnPosicionParQueDivideAlResto,$ que determina si hay un elemento en una posición par de la secuencia que divide a todos los otros elementos contenidos en la secuencia.
+\item $sinRepetidos,$ que determina si la secuencia no tiene repetidos.
+\item $otroMayorADerecha,$ que determina si todo elemento de la secuencia, salvo el último, tiene otro mayor a su derecha.
+\item $todoEsMultiplo,$ que determina si todo elemento de la secuencia es múltiplo de algún otro.
+\item $enTresPartes,$ que determina si en la secuencia aparecen (de izquierda a derecha) primero 0s, después 1s y por último 2s. Por ejemplo $\langle 0,0,1,1,1,1,2\rangle$ cumple con $enTresPartes,$ pero $\langle 0,1,3,0\rangle$ o $\langle 0,0,0,1,1\rangle$ no.¿Cómo modificaía la expresión para que se admitan cero apariciones de 0s, 1s y 2s (es decir, para que por ejemplo$\langle 0,0,0,1,1\rangle$ o $\langle \rangle$ su cumplan $enTresPartes$)?
+\item $espermutacionOrdenada,$ que dadas dos secuencias $s$ y $t$ sea verdadero sii $s$ es permutación de $t$ y está ordenada.
+\end{enumerate} 
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+\item \textit{pred estaAcotada}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert \rightarrow_L 1<s[i]<100)$\\
+$\}$
+\item \textit{pred capicua}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert \rightarrow_L s[i]=s[\vert s\vert-1-i])$\\
+$\}$
+\item \textit{pred esPrefijo}$(s,q: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert \rightarrow_L s[i]=q[i])$\\
+$\}$
+\item \textit{pred estaOrdenada}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert -1\rightarrow_L s[i]\leq s[i+1])$\\
+$\}$
+\item \textit{pred todosPrimos}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert\rightarrow_L esPrimo(s[i])$\\
+$\}$
+\item \textit{pred primosEnPosicionesPares}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})((0\leq i<\vert s\vert \wedge (i \textrm{ mod } 2 =0))\rightarrow_L esPrimo(s[i])$\\
+$\wedge (\forall i:\mathbb{Z})((0\leq i<\vert s\vert \wedge (i \textrm{ mod }2 =1))\rightarrow_L \neg esPrimo(s[i])$\\
+$\}$
+\item \textit{pred todosIguales}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert\rightarrow_L s[0]=s[i]$\\
+$\}$
+\item \textit{pred hayUnParQueDivideAlResto}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge (i \textrm{ mod } 2 =0))\rightarrow_L s[j] \textrm{ mod } i =0)$\\
+$\}$
+\item \textit{pred hayUnoEnPosicionParQueDivideAlResto}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge (j \textrm{ mod } 2 =0))\rightarrow_L s[j] \textrm{ mod } i =0)$\\
+$\}$
+\item \textit{pred sinRepetidos}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq j<\vert s\vert \wedge 0\leq i<\vert s\vert)\rightarrow_L (s[j] \neq s[i])$\\
+$\}$
+\item \textit{pred otroMayorADerecha}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(\exists j:\mathbb{Z})(0\leq i<\vert s\vert -1 \wedge 0\leq j<\vert s\vert\rightarrow_L s[i]\leq s[j])$\\
+$\}$
+\item \textit{pred todoEsMultiplo}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})(\exists j:\mathbb{Z})(0\leq i<\vert s\vert -1 \wedge 0\leq j<\vert s\vert\rightarrow_L s[i]< s[j])$\\
+$\}$
+\item 
+\begin{itemize}
+\item \textit{pred enTresPartes}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})((0\leq i<\vert s\vert -1 \wedge_L (s[\vert s \vert -1]=2 \wedge s[0]=0) )\rightarrow_L s[i]\leq s[i+1])$\\
+$\}$
+\item \textit{pred enTresPartesMod}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(\forall i:\mathbb{Z})((0\leq i<\vert s\vert -1 \wedge_L (s[\vert s \vert -1]\leq 2 ) )\rightarrow_L s[i]\leq s[i+1])$\\
+$\}$
+\end{itemize}
+\item \textit{pred esPermutacionOrdenada}$(s,q: seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$estaOrdenada(s)\wedge (\forall i:\mathbb{Z})(\exists j:\mathbb{Z})(0\leq i<\vert s\vert \wedge i<\vert s\vert\rightarrow_L s[i]= q[j])$\\
+$\}$
+
+\end{enumerate}
+
+\paragraph{Ejercicio 5.} $\bigstar$ Especificar las siguientes funciones y predicados auxiliares. En caso de no ser posible, explicar las razones.
+\begin{enumerate}[label=\alph*)]
+\item \textit{aux intercambiarPrimeroPorUltimo}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que intercambia el último valor por el primero en una secuencia.
+\item \textit{pred esReverso}$(s: seq\langle \mathbb{Z} \rangle , t:seq\langle \mathbb{Z} \rangle),$ Que indica si la secuencia $s$ es el reverso de la secuencia $t$.
+\item \textit{aux reverso}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que indica el reverso de una secuencia.
+\item \textit{aux agregarTresCeros}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que agrega 3 ceros al final de la secuencia.
+\item \textit{aux agregarNCeros}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que agrega n ceros al final de la secuencia s.
+\item \textit{aux sumar Uno} $(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que suma 1 a cada uno de los elementos de la secuencia s.
+\item \textit{aux ordenar}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$ Que ordena la lista de menor a mayor.
+\end{enumerate}
+
+\subsection*{Respuestas}
+\begin{enumerate}[label=\alph*)]
+\item \textit{aux intercambiarPrimeroPorUltimo}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle = concat(subseq(s,|s|-1,|s|),subseq(s,1,|s|-1),head(s))$ 
+\item \textit{pred esReverso}$(s: seq\langle \mathbb{Z} \rangle , q:seq\langle \mathbb{Z} \rangle)\{$\\
+\hspace*{6mm}$(|s| = |q| )\wedge (\forall i:\mathbb{Z})(0\leq i<\vert s\vert \rightarrow_L s[i]=q[\vert s\vert-i-1])$\\
+$\}$
+\item No se puede hacer;razon=intuición.
+\item \textit{aux agregarTresCeros}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle=concat(s,\langle 0,0,0 \rangle)$
+
+%\item \textit{aux agregarNCeros}$(s: seq\langle \mathbb{Z} \rangle):seq\langle \mathbb{Z} \rangle,$
+\item Este tampoco se puede;razon=intuición.
+\item Este tampoco se puede;razon=intuición.
+\item Este tampoco se puede;razon=intuición.
+\end{enumerate}
+\paragraph{Ejercicio 6.} $\bigstar$ Sean $P(x:\mathbb{Z})$ y $Q(x:\mathbb{Z})$ dos predicados cualesquiera que nunca se indefinen y sea $s$ una secuencia de enteros. Escribir el predicado asociado a cada uno de los siguientes enunciados:
+\begin{enumerate}[label=\alph*)]
+\item \textit{"Si un entero en s cumple P, también cumple Q"}
+\item \textit{"Todos los enteros de s que cumplen P, no cumplen Q"}
+\item \textit{"Todos los enteros de s que están en posiciones pares y cumplen P, no cumplen Q"}
+\item \textit{"Todos los enteros de s que cumplen P y están en posiciones que cumplen Q, son pares"}
+\item \textit{"Si hay un entero en s que no cumple P entonces ninguno en s cumple Q"}
+\item \textit{"Si hay un entero en s que no cumple P entonces ninguno en s cumple Q; y si todos los enteros de s cumplen P entonces hay al menos dos elementos de s que cumplen Q"}
+\end{enumerate}
+
+\subsection*{Respuestas}
+\begin{enumerate}[label=\alph*)]
+\item \textit{pred noName1}$(s :\mathbb{Z})\{$\\
+\hspace*{6mm}$(\forall i: \mathbb{Z})(0\leq i<|s|\wedge_L P(s[i]))\rightarrow Q(s[i])$\\
+$\}$
+\item \textit{pred noName2}$(s :\mathbb{Z})\{$\\
+\hspace*{6mm}$(\forall i: \mathbb{Z})(0\leq i<|s|\wedge_L P(s[i]))\rightarrow \neg Q(s[i])$\\
+$\}$
+\item \textit{pred noName3}$(s :\mathbb{Z})\{$\\
+\hspace*{6mm}$(\forall i: \mathbb{Z})(0\leq i<|s|\wedge_L (i\textrm{ mod }2 =0)\wedge_L P(s[i]))\rightarrow \neg Q(s[i])$\\
+$\}$
+\end{enumerate}
+
+\paragraph{Ejercicio 7.} Sea $P(x:\mathbb{Z})$ un predicado cualquiera y $s$ una secuencia de enteros. Explicar cuál es el error de traducción a fórmulas de los siguientes enunciados. Dar un ejemplo en el cuál sucede el problema y luego corregirlo.
+\begin{enumerate}[label=\alph*)]
+\item \textit{``Todo elemento en una posición válida de la secuencia cumple P''}$:(\forall i: \mathbb{Z})(0\leq i<|s|)\wedge_L P(s[i])$ 
+\item \textit{``Algún elemento en una posición válida de la secuencia cumple P''}$:(\exists i: \mathbb{Z})(0\leq i<|s|)\rightarrow_L P(s[i])$ 
+\end{enumerate}
+
+\subsection*{Respuestas} 
+	
+\begin{enumerate}[label=\alph*)]
+	\item 
+	\textit{Explicación: } Esta mal, porque a la derecha se traduciria como \textit{``Todos los elementos que estan en el rango y ademas cumplen P''.} \\
+	\textit{Contraejemplo: } Si $i$ esta fuera del rango va a retornar falso.\\
+	\textit{Correción: }
+	$(\forall i: \mathbb{Z})(0\leq i<|s|)\rightarrow_L P(s[i])$ \\
+	\item 
+	\textit{Explicación: }Esta mal, porque a la derecha se traduciria como \textit{``Existe un elemento que si esta en el rango cumple P''.}\\
+	\textit{Contraejemplo: } Si $i$  esta fuera del rango va a retornar verdadero.\\
+	\textit{Correción: }
+	$(\exists i: \mathbb{Z})(0\leq i<|s|)\ \wedge_LP(s[i])$ \\
+\end{enumerate}
+\paragraph{Ejercicio 8.} $\bigstar$ Sean $P(x:\mathbb{Z})$ y $Q(x:\mathbb{Z})$ dos predicados cualesquiera que nunca se indefinen, sea $s$ una secuencia de enteros y sean $a,b$ y $k$ enteros. Decidir en cada caso la relación de fuerza entre las dos fórmulas.
+\begin{enumerate}[label=\alph*)]
+\item $P(3)$ y $(\forall k: \mathbb{Z})((0\leq k <10)\rightarrow P(k))$
+\item $P(3)$ y $k>5 \wedge (\forall i: \mathbb{Z})((0\leq i <k)\rightarrow P(i)))$
+\item $(\forall n:\mathbb{Z})((n \in s \wedge P(n))\rightarrow Q(n))$ y $(\forall n: \mathbb{Z})((n \in s)\rightarrow Q(n))$
+\item $(\exists n: \mathbb{Z})(n \in s \wedge P(n) \wedge Q(n))$ y $(\forall n:\mathbb{Z})((n\in s)\rightarrow Q(n))$
+\item $(\exists n: \mathbb{Z})(n \in s \wedge P(n) \wedge Q(n))$ y $|s|>0\wedge ((\forall n:\mathbb{Z})((n\in s)\rightarrow Q(n)))$
+\item $(\exists n: \mathbb{Z})(n \in s \wedge P(n) \wedge Q(n))$ y $(\forall n:\mathbb{Z})(n\in s\rightarrow (P(n)\wedge Q(n)))$
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+	\item $(\forall k: \mathbb{Z})((0\leq k <10)\rightarrow P(k))$
+	\item $(\forall k: \mathbb{Z})((0\leq k <10)\rightarrow P(k))$
+	\item $(\forall n: \mathbb{Z})((n \in s)\rightarrow Q(n))$
+	\item Contingencia.
+	\item Contingencia.
+	\item $(\forall n:\mathbb{Z})(n\in s\rightarrow (P(n)\wedge Q(n)))$
+\end{enumerate}
+\paragraph{Ejercicio 9.} Sea $s$ una secuencia de enteros. Determinar si los siguientes pares de expresiones son equivalentes. En caso de que no lo sean, ilustrar con ejemplos.
+\begin{enumerate}[label=\alph*)]
+\item 
+\begin{itemize}
+\item $(\forall i: \mathbb{Z})((0\leq i< |s|)\rightarrow_L ((\forall j: \mathbb{Z})((0\leq j< |s|)\wedge i <j)\rightarrow_L s[i]<s[j]$ y
+\item $(\forall j: \mathbb{Z})((0\leq j< |s|)\rightarrow_L ((\forall i: \mathbb{Z})((0\leq i< |s|)\wedge i <j)\rightarrow_L s[i]<s[j]$
+\end{itemize}
+\item 
+\begin{itemize}
+\item $(\exists i: \mathbb{Z})(0\leq i< |s|\wedge_L ((\exists j: \mathbb{Z})((0\leq j< |s|)\wedge i < j-1)\wedge_L TodosIguales(\textrm{subseq}(s,i,j)))))$ y
+\item $(\exists j: \mathbb{Z})(0\leq j< |s|\wedge_L ((\exists i: \mathbb{Z})((0\leq i< |s|)\wedge i < j-1)\wedge_L TodosIguales(\textrm{subseq}(s,i,j)))))$
+\end{itemize}
+donde \textit{todosIguales} es el definido en el item e) del ejercicio 4.
+\item 
+\begin{itemize}
+\item $(\forall i: \mathbb{Z})(0\leq i< |s|\rightarrow_L ((\exists j: \mathbb{Z})((0\leq j< |s|)\wedge_L s[i] =s[j]))$ y
+\item $(\exists j: \mathbb{Z})(0\leq j< |s|)\wedge_L ((\forall i: \mathbb{Z})((0\leq i< |s|)\rightarrow_L s[i] =s[j]))$ 
+\end{itemize}
+\end{enumerate} 
+
+\subsection*{Respuestas}
+\begin{enumerate}[label=\alph*)]
+	\item Son Iguales.
+	\item Son Iguales.
+	\item No son Iguales, rompe con $\langle 1,2,3\rangle$.
+\end{enumerate}
+
+\section{Sumatorias y Productorias}
+
+\paragraph{Ejercicio 10.} $\bigstar $ Evaluar las siguientes expresiones
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $\sum_{i=0}^2 \langle 4,3,1 \rangle [i]$
+\item $\sum_{i=0}^0 \langle \pi,2,3,5,7,11 \rangle [i]$
+\item $\sum_{i=0}^{-1} \langle 1,2,3,4,5 \rangle [i]$
+\item $\sum_{i=0}^5 \langle \frac{1}{i} \rangle [i]$
+\item $\sum_{i=0}^{\sqrt{-1}} \langle 2,3,5,7,11 \rangle [i]$
+\item $\sum_{i=15}^2 \langle 2,3,5,7,11 \rangle [i]$
+\item $\sum_{i=2}^{15} \langle 2,3,5,7,11\rangle [i]$
+\item $\sum_{i=1}^3 \langle 2,3,5,7,11 \rangle [i]$
+\item $\sum_{i=0}^4 \langle 1,1,1,1,1 \rangle [i]$
+\item $\sum_{i=0}^4 \langle 0,0,0,0,0 \rangle [i]$
+\end{enumerate}
+\end{multicols}
+
+\subsection*{Respuestas}
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+	\item 8
+	\item $\pi$
+	\item 0
+	\item $\perp$
+	\item $\perp$
+	\item $\perp$
+	\item $\perp$
+	\item 15
+	\item 5
+	\item 0
+\end{enumerate}
+\end{multicols}
+
+\paragraph{Ejercicio 11.} $\bigstar$ Escribir un predicado que usando sumatorias indique si un número entero es primo.
+
+\subsection*{Respuesta}
+\textit{pred esPrimo}$(n: \mathbb{Z})\{$\\
+\hspace*{6mm}$(\sum_{i=0}^{n-1}(IfThenElseFi((n\textrm{ mod }i),1,0)) = 1 $\\
+$\}$
+
+\paragraph{Ejercicio 12.} Sea $s$ una secuencia de elementos de tipo $\mathbb{Z}$. Escribir una expresión tal que:
+\begin{enumerate}[label=\alph*)]
+\item Cuente la cantidad de veces que aparece el elemento $e$ de tipo $\mathbb{Z}$ en la secuencia $s$.
+\item Sume los elementos en las posiciones impares de la secuencia $s$.
+\item Sume los elementos mayores a 0 contenidos en la secuencia $s$.
+\item Sume los inversos multiplicativos $(\frac{1}{x})$ de los elementos contenidos en la secuencia $s$ distintos a 0.
+\item Cuente la cantidad de elementos primos no repetidos en la secuencia $s$.
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+	\item \textit{aux cantAp}$(s:seq\langle \mathbb{Z}\rangle ,e: \mathbb{Z}):\mathbb{Z}
+	= \sum_{i=0}^{|s|-1} IfThenElseFi(e=s[i],1,0)$
+	\item \textit{aux sumaImpares}$(s:seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+	= \sum_{i=0}^{|s|-1} IfThenElseFi((i \textrm{ mod } 2)=1,s[i],0)$
+	\item \textit{aux sumaPositivos}$(s:seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+	= \sum_{i=0}^{|s|-1} IfThenElseFi(s[i]>0,s[i],0)$
+	\item \textit{aux sumaInversos}$(s:seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+	= \sum_{i=0}^{|s|-1} IfThenElseFi(s[i]\neq 0,\frac{1}{s[i]},0)$
+	\item \textit{aux cantPrimosNoRepetidos}$(s:seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+	= \sum_{i=0}^{|s|-1} IfThenElseFi(esPrimo(s[i]\wedge \neg (s[i]\in subseq(s,0,i))),1,0)$
+\end{enumerate}
+
+\paragraph{Ejercicio 13.} Escribir un predicado que indique si una secuencia es permutación de otra secuencia. Una secuencia es permutación de otra secuencia si ambas secuencias poseen los mismos elementos y la misma cantidad de apariciones por elemento. Ejemplos:
+\begin{itemize}
+\item $\langle 1,2,3\rangle$ es permutación de $\langle 3,2,1\rangle$
+\item $\langle 1,2,3\rangle$ es permutación de $\langle 1,2,3\rangle$
+\item $\langle 1,1,2,3\rangle$ es permutación de $\langle 3,2,1,1\rangle$
+\item $\langle 1,2,3\rangle$ no es permutación de $\langle 1,1,3\rangle$
+\item $\langle 1,1,2,3\rangle$ es permutación de $\langle 1,3,2,1\rangle$
+\end{itemize}
+
+\subsection*{Respuesta}.\\
+
+\textit{pred esPermutacion}$(s,q:seq\langle \mathbb{Z}\rangle)\{$\\
+\hspace*{9mm}$(|s|=|q|)\wedge_L (\forall i:\mathbb{Z})(0\leq i <|s|\rightarrow (cantAp(s,s[i])=cantAp(q,s[i]))) $\\
+\hspace*{5mm}$\}$
+
+\paragraph{Ejercicio 14.} $\bigstar$ Sea m una secuencia de secuencias de tipo $\mathbb{Z}$, escribir una expresión tal que:
+\begin{enumerate}[label=\alph*)]
+\item Sume los elementos contenidos en todas las secuencias.
+\item Cuente la cantidad de secuencias vacías.
+\item Sume el valor del último elemento de cada secuencia no vacía.
+\item Retorne True sii todas las secuencias poseen el mismo tamaño.
+\item Retorne la suma de todas las posiciones impares de cada secuencia.
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+	\item \textit{aux sumaTodo}$(m: seq\langle seq\langle \mathbb{Z}\rangle \rangle):\mathbb{Z}
+	=\sum_{i=0}^{|m|-1}\sum_{j=0}^{|m[i]|-1} m[i][j]$
+	\item \textit{aux cantSecVacias}$(m: seq\langle seq\langle \mathbb{Z}\rangle \rangle):\mathbb{Z}
+	=\sum_{i=0}^{|m|-1}\sum_{j=0}^{|m[i]|-1} IfThenElseFi(|m[i]|=0,1,0)$
+	\item \textit{aux sumaUltimos}$(m: seq\langle seq\langle \mathbb{Z}\rangle \rangle):\mathbb{Z}
+	=\sum_{i=0}^{|m|-1}\sum_{j=0}^{|m[i]|-1} IfThenElseFi(|m[i]|\neq 0,m[i][|m[i]-1],0)$
+	\item \textit{aux tamañosIguales}$(m: seq\langle seq\langle \mathbb{Z}\rangle \rangle):bool
+	=(\sum_{i=0}^{|m|-1}\sum_{j=0}^{|m[i]|-1} IfThenElseFi(|m[i]|=|m[0]|,1,0))=|m|*|n|$
+	\item \textit{aux sumaPosicionesImpares}$(m: seq\langle seq\langle \mathbb{Z}\rangle \rangle):\mathbb{Z}
+	=\sum_{i=0}^{|m|-1}\sum_{j=0}^{|m[i]|-1} IfThenElseFi(j\textrm{ mod }2=1,m[i][j],0)$
+\end{enumerate}
+\paragraph{Ejercicio 15.} Sea $s$ un $String$, escribir una expresión que cuente la cantidad de apariciones del caracter vacio ('\ ').
+
+\subsection*{Respuesta}
+
+\textit{aux cantApDeVacio}$(s:seq\langle char\rangle):\mathbb{Z}
+= \sum_{i=0}^{|s|-1} IfThenElseFi($ ' \ ' $=s[i],1,0)$
+
+\paragraph{Ejercicio 16.} $\bigstar$ Sea $s$ un $String$, escribir una expresión que cuente la cantidad de apariciones de un digito (caracteres  '0'\  al '9').
+
+\subsection*{Respuesta}
+\begin{itemize}
+\item \textit{pred esDigito}$(e:char)\{ e=\textrm{'0'\ }\vee e=\textrm{'1'\ }\vee e=\textrm{'2'\ }\vee e=\textrm{'3'\ }\vee e=\textrm{'4'\ }\vee e=\textrm{'5'\ }\vee e=\textrm{'6'\ }\vee e=\textrm{'7'\ }\vee e=\textrm{'8'\ }\vee e=\textrm{'9'\ }\}$
+
+\item \textit{aux cantApDeDigito}$(s:seq\langle char\rangle,e: char):\mathbb{Z}
+= \sum_{i=0}^{|s|-1} IfThenElseFi(esDigito(e)\wedge e=s[i],1,0)$
+\end{itemize}
+\begin{center}
+\section*{FIN.}
+\end{center}
+
+\includegraphics[width=\linewidth]{Dia_de_la_Fugaceta_Estrellada2}
+
+\end{document}

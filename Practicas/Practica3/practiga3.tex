@@ -1,0 +1,499 @@
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+
+\input{../macros/Algo1Macros}
+
+
+
+\begin{document}
+
+\practica{3}{Especificación De Problemas Resuelto}
+
+\subsection*{Comentarios:}
+Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio divertido copiar el formato de la guia.\\
+
+\paragraph*{Ejercicio 1.}$\bigstar$ Las siguientes especificaciones no son correctas. Indicar por qué,y corregirlas para que describan correctamente el problema.
+	\begin{enumerate}[label=\alph*)]
+		\item \textbf{buscar:} Dada una secuencia y un elemento, devuelve en \textit{result} la posición de la secuencia en la cual se encuentra el elemento.\vspace{6mm} \\
+		\textbf{proc buscar }(in l$:seq\langle \mathbb{R}\rangle$,in elem$:\mathbb{R}$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ elem \in l\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{l[result]=elem\}$\\
+		$\}$
+		\item \textbf{progresionGeometricaFactor2:} Indica si la secuencia $l$ representa una progresión geométrica factor 2. Es decir, si cada elemento de la secuencia es el doble del elemento anterior.\vspace{6mm} \\
+		\textbf{proc progresionGeometricaFactor2 }(in l$:seq\langle \mathbb{R}\rangle$,out result$:Bool\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{result=True\leftrightarrow ((\forall i:\mathbb{Z})(0\leq i < |l|\rightarrow_L l[i]=2*l[i-1]))\}$\\
+		$\}$
+		\item \textbf{minimo:} Devuelce en $result$ el menor elemento de $l$.\vspace{6mm} \\
+		\textbf{proc minimo }(in l$:seq\langle \mathbb{R}\rangle$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{(\forall y:\mathbb{Z})((y\in l \wedge y \neq x)\rightarrow y > result)\}$\\
+		$\}$
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item No tengo ni idea de porque está mal, que tiene de malo decir, $result$ es el que cumple que $l[result]$ sea igual al elemento. Si lo tuviera que cambiar, seguiria la logica de los demas ej, lo reescribiria así, . \medskip \\
+		\textbf{proc buscar }(in l$:seq\langle \mathbb{R}\rangle$,in elem$:\mathbb{R}$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ elem \in l\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{result=?\}$\\
+		$\}$
+		\item Este es más facil de ver que el anterior, cuando $i=0$, va a tratar de acceder a la posicion $l[0-1]$, que es cualquier cosa. Y creo que crashearia con una lista vacia o de un elemento. \medskip \\
+		\textbf{proc progresionGeometricaFactor2 }(in l$:seq\langle \mathbb{R}\rangle$,out result$:Bool\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{result=True\leftrightarrow ((\forall i:\mathbb{Z})(0\leq i < |l|-1\rightarrow_L 2*l[i]=l[i+1]))\}$\\
+		$\}$ 
+		\item No se para que esta ese $y\neq x$, y tendria que haber pedido en la \textbf{Pre} que $result$ pertenezca a $l$.\medskip \\
+		\textbf{proc minimo }(in l$:seq\langle \mathbb{R}\rangle$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ result\in l\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{(\forall y:\mathbb{Z})(y\in l\rightarrow y > result)\}$\\
+		$\}$
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 2.} La siguiente no es una especificación válida, ya que para ciertos valores de entrada que cumplen la precondición, no existe una salida que cumpla con la postcondición.\medskip \\
+\textbf{proc elementosQueSumen }(in $l:seq\langle \mathbb{Z}\rangle,$in suma$:\mathbb{Z}$, out result $:seq\langle \mathbb{Z}\rangle)\ \{$\\
+\hspace*{6mm}\textbf{Pre }$\{True\}$\\
+\hspace*{6mm}\textbf{Post }$\{$\\
+\hspace*{6mm}/* La secuencia result está incluída en la secuencia l */\\
+\hspace*{6mm}$(\forall x:\mathbb{Z})(x\in $ result$ \rightarrow \#$apariciones($x,result)\leq \#$apariciones$(x,l)$)\\
+\hspace*{6mm}/* La suma de la result coincide con el valor de la suma */\\
+\hspace*{6mm}$\wedge suma=\sum_{i=0}^{|result|-1}result[i]$\\
+\hspace*{6mm}$\}$\\
+	\begin{enumerate}[label=\alph*)]
+		\item Mostrar valores para $l$ y $suma$ que hagan verdadera la precondición, pero tales que no exista $result$ que cumpla la postcondición.
+		\item Supongamos que agregamos a la especificación la siguiente cláusula:\smallskip \\
+		\hspace*{4mm} \textbf{Pre} : $min\_suma(l)\leq suma\leq max\_suma(l)$\\
+		\hspace*{4mm} \textbf{fun} $min\_suma(l):\mathbb{Z}=\sum_{i=0}^{|l|-1}$if $l[i]<0$ then $l[i]$ else 0 fi\\
+		\hspace*{4mm} \textbf{fun} $max\_suma(l):\mathbb{Z}=\sum_{i=0}^{|l|-1}$if $l[i]>0$ then $l[i]$ else 0 fi\smallskip \\
+		¿Ahora es una especificación válida? Si no lo es, justificarlo con un ejemplo como en el punto anterior.
+		\item Dar una precondición que haga correcta la especificación
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item $l= \langle 9,9,9\rangle$, $suma=1$, si $l$ contiene a $result$, entonces necesariamente va a sumar por lo menos 9, por lo que no puede valer 1 su suma.
+		\item $l= \langle 9,9,9\rangle$, $suma=1$, si $l$ contiene a $result$, entonces necesariamente va a sumar por lo menos 9, por lo que no puede valer 1 su suma, y ademas suma cumple la desigualdad $0\leq suma\leq 27$
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 3.}$\bigstar$ Para los siguientes problemas, dar todas las soluciones posibles a las entradas dadas.
+	\begin{enumerate}[label=\alph*)]
+		\item 
+			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			$\}$
+			\begin{enumerate}[label=\Roman*)]
+				\item $x=0$
+				\item $x=1$
+				\item $x=27$
+			\end{enumerate}
+		\item $\bigstar$ \\
+			\textbf{proc indiceDelMaximo }(in l$: seq\langle\mathbb{R}\rangle$,out result$:\mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l| > 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $0\leq result < |l|$\\
+			\hspace*{6mm} $\wedge_L((\forall i :\mathbb{Z})(0 \leq i < |l|\rightarrow_L l[i]\leq l[result]))$\\
+			\hspace*{6mm}$\}$\\
+			$\}$
+			\begin{enumerate}[label=\Roman*)]
+				\item $l=\langle 1,2,3,4\rangle$
+				\item $l=\langle 15,5,-18,4.215,15.5,-1\rangle$
+				\item $l=\langle 0,0,0,0,0,0\rangle$
+			\end{enumerate}
+		\item
+			$\bigstar$ \\
+			\textbf{proc indiceDelPrimerMaximo }(in l$: seq\langle\mathbb{R}\rangle$,out result$:\mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l| > 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $0\leq result < |l|$\\
+			\hspace*{6mm} $\wedge ((\forall i :\mathbb{Z})(0 \leq i < |l|\rightarrow_L (l[i] < l[result] \vee (l[i]=l[result]\wedge i \geq result))))$\\
+			\hspace*{6mm}$\}$\\
+			$\}$
+			\begin{enumerate}[label=\Roman*)]
+				\item $l=\langle 1,2,3,4\rangle$
+				\item $l=\langle 15,5,-18,4.215,15.5,-1\rangle$
+				\item $l=\langle 0,0,0,0,0,0\rangle$
+			\end{enumerate}
+		\item  ¿Para qué valores de entrada \textbf{indiciDelPrimerMaximo} y \textbf{indiceDelMaximo} tienen necesariamente la misma salida?
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 4.}$\bigstar$ Sea $f:\mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}$ definida como:\\
+\[ f(a,b)=\left\{ \begin{array}{ll}
+			2b  & \textrm{si } a < 0\\
+			b-1 & \textrm{en otro caso }
+		\end{array}\right.
+\]
+¿Cuáles de las siguientes especificaciones son correctas para el problema de calcular $f(x,y)$?\\
+Para las que no lo son, indicar por qué.\bigskip \\
+	\begin{enumerate}[label=\alph*)]
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $(a < 0 \wedge result=2*b)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $(a \geq 0 \wedge result=b-1)$\\			
+			\hspace*{6mm}$\}$\\
+			$\}$
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{(a<0 \wedge result=2*b)\vee (a> 0 \wedge result=b-1)\}$\\
+			$\}$
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{(a<0 \wedge result=2*b)\vee (a\geq 0 \wedge result=b-1)\}$\\
+			$\}$
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			$\}$
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			$\}$
+		\item
+			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			$\}$
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 5.}$\bigstar$ Considerar la siguiente especificación, junto con un algoritmo que dado $x$ devuelve $x^2$.\medskip \\
+		\textbf{proc unoMasGrande }(in x$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{result>x\}$\\
+		$\}$
+	\begin{enumerate}[label=\alph*)]
+		\item ¿Qué devuelve el algoritmo si recibe $x=3$? ¿El resultado hace verdadera la postcondición de \textbf{unoMasGrande}?
+		\item ¿Qué sucede para las entradas $x=0.5,x=1,x=0.2$ y $x=-7$?
+		\item Teniendo en cuenta lo respondido en los puntos anteriores, escribir una precondición para \textbf{unoMasGrande}, de manera tal que el algoritmo sea una implementación correcta.
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 6.}$\bigstar$ Sean $x$ y $r$ variables de tipo $\mathbb{R}$. Considerar los siguientes predicados:
+	\begin{enumerate}[label=\alph*)]
+		\item Indicar la relación de fuerza entre P1, P2 y P3.
+		\item Indicar la relación de fuerza entre Q1, Q2 y Q3.
+		\item Sea E1 la siguiente especificación. Escribir 2 programas que cumplan con E1.\medskip \\
+		\textbf{proc hagoAlgo }(in x$: \mathbb{R}$,out r$:\mathbb{R})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ x\leq 0\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{r \geq x^2\}$\\
+		$\}$
+		\item Sea A un algoritmo que cumple con E1. Decidir si necesariamente cumple las siguientes especificaciones:
+		\begin{enumerate}[label=\alph*)]
+			\item \textbf{Pre: }$\{x\leq -10\}$, \textbf{Post: }$\{r\geq x^2\}$
+			\item \textbf{Pre: }$\{x\leq 10\}$, \textbf{Post: }$\{r\geq x^2\}$
+			\item \textbf{Pre: }$\{x\leq 0\}$, \textbf{Post: }$\{r\geq 0\}$
+			\item \textbf{Pre: }$\{x\leq 0\}$, \textbf{Post: }$\{r= x^2\}$
+			\item \textbf{Pre: }$\{x\leq -10\}$, \textbf{Post: }$\{r\geq 0\}$
+			\item \textbf{Pre: }$\{x\leq 10\}$, \textbf{Post: }$\{r\geq 0\}$
+			\item \textbf{Pre: }$\{x\leq -10\}$, \textbf{Post: }$\{r= x^2\}$
+			\item \textbf{Pre: }$\{x\leq 10\}$, \textbf{Post: }$\{r= x^2\}$
+		\end{enumerate}
+		\item ¿Qué conclusión pueden sacar? ¿Qué debe cumplirse con respecto a las precondiciones y postcondiciones para que sea seguro reemplazar la especificación?
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 7.}$\bigstar$ Considerar las siguientes dos especificaciones, junto con un algoritmo $a$ que satisface la especificación de \textbf{p2}.\medskip \\
+		\textbf{proc p1 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{x\neq 0\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{x^n-1<result\leq x^n\}$\\
+		$\}$\medskip \\
+		\textbf{proc p2 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{ n\leq 0\rightarrow x\neq 0\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{result=\lfloor x^n\rfloor\}$\\
+		$\}$
+	\begin{enumerate}[label=\alph*)]
+		\item Dados valores de $x$ y $n$ que hacen verdadera la precondición de \textbf{p1}, demostrar que hacen también verdadera la precondición de \textbf{p2}.
+		\item Ahora, dados estos valores de $x$ y $n$, supongamos que se ejecuta $a$: llegamos a un valor de $res$ que hace veradadera la postcondición de \textbf{p2}. ¿Será también verdadera la postcondición de \textbf{p1}?
+		\item ¿Podemos concluior que $a$ satisface la especificación de \textbf{p1}? 
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 8.} Considerar las siguientes especificaciones:\medskip \\
+\textbf{proc n-esimo1 }(in l$: seq\langle \mathbb{R}\rangle$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{$\\
+		\hspace*{6mm} /*Los elementos están ordenados */\\
+		\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+		$\}$
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 9.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 10.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 11.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 12.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 13.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 14.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 15.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 16.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 17.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 18.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\paragraph*{Ejercicio 19.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 20.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 21.}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 22.} Especificar los siguientes problemas de modificación de secuencias:
+	\begin{enumerate}[label=\alph*)]
+		\item $\bigstar$ \textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$), que dada una secuencia de enteros mayores a dos, reemplaza dichos valores por el número primo menor más cercano. Por ejemplo, si $l=\langle 6,5,9,14 \rangle$, luego de aplicar \textbf{primosHermanos}($l$), $l=\langle 5,5,7,13 \rangle$
+		\item $\bigstar$ \textbf{proc reemplazar}(inout $l:$\textbf{String}, in $a,b:$\textbf{Char}), que reemplaza todas las apariciones de $a$ en $l$ por $b$.
+		\item \textbf{proc recortar}(inout $l:seq\langle \mathbb{Z}\rangle$, in $a:\mathbb{Z}$), que saca de $l$ todas las apariciones de $a$ consecutivas que aparezcan al principio. Por ejemplo \textbf{recortar}($\langle 2,2,3,2,4\rangle ,2)=\langle 3,2,4\rangle$, mientras que \textbf{recortar}($\langle 2,2,3,2,4\rangle ,3)=\langle 2,2,3,2,4\rangle$.
+		\item \textbf{proc intercambiarParesConImpares}(inout $l:$\textbf{String}), que toma una secuencia de longitud par y la modifica de modo tal que todas las posciciones de la forma $2k$ quedan intercambiadas con las posiciones $2k+1$. Por ejemplo, \textbf{intercambiarParesConImpares}(\textit{``adinle"}) modifica de la siguiente manera: \textit{``daniel"}.
+		\item $\bigstar$ \textbf{proc limpiarDuplicados}(inout $l: seq\langle \mathbb{\textbf{Char}}\rangle$, out $dup:seq\langle \mathbb{\textbf{Char}}\rangle$), que elimina los elementos duplicados de $l$ dejando sólo su primera aparición (en el orden original). Devuelve además, $dup$ una secuencia con todas las apariciones eliminadas (en cualquier orden).
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+
+\begin{center}
+\section*{FIN.}
+\end{center}
+
+\end{document}

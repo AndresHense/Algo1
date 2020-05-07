@@ -1,0 +1,899 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+% align equations to the left
+% use larger type; default would be 10pt
+%\documentclass[fleqn, 11pt]{article}
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+%\usepackage{amsmath, amscd}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+%\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they
+% provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+%\usepackage{geometry} % to change the page dimensions
+%\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% for example, change the margins to 2 inches all round
+%\geometry{margin=12mm}
+% set up the page for landscape
+% \geometry{landscape}
+%   read geometry.pdf for detailed page layout information
+
+% support the \includegraphics command and options
+%\usepackage{graphicx}
+
+% Activate to begin paragraphs with an empty line rather than an indent
+%\usepackage[parfill]{parskip}
+
+%%% PACKAGES
+% for much better looking tables
+%\usepackage{booktabs}
+% for better arrays (eg matrices) in maths
+%\usepackage{array}
+% very flexible & customisable lists (eg. enumerate/itemize, etc.)
+%\usepackage{paralist}
+% adds environment for commenting out blocks of text & for better verbatim
+%\usepackage{verbatim}
+% make it possible to include more than one captioned figure/table in a single
+% float
+%\usepackage{subfig}
+% These packages are all incorporated in the memoir class to one degree or
+% another...
+
+%%% HEADERS & FOOTERS
+%\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+%\pagestyle{fancy} % options: empty , plain , fancy
+%\renewcommand{\headrulewidth}{0pt} % customise the layout...
+%\lhead{}\chead{}\rhead{}
+%\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+%\usepackage{sectsty}
+% (See the fntguide.pdf for font help)
+%\allsectionsfont{\sffamily\mdseries\upshape}
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+% Put the bibliography in the ToC
+%\usepackage[nottoc, notlof, notlot]{tocbibind}
+% Alter the style of the Table of Contents
+%\usepackage[titles, subfigure]{tocloft}
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+
+\input{../macros/Algo1Macros}
+
+%\newcommand{\nat}{\mathbb{N}}
+%\newcommand{\Ccur}{\mathcal{C}}
+%\newcommand{\indef}{\uparrow}
+
+%\overfullrule=2em
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Resueltos Algoritmos y Estructuras de Datos I}
+\author{Andres M. Hense}
+%\date{} % Activate to display a given date or no date (if empty),
+% otherwise the current date is printed 
+
+\begin{document}
+
+
+\practica{1}{Lógica Resuelto}
+
+\subsection*{Comentarios:}
+Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio divertido copiar el formato de la guia, los ejercicios que dicen "Determinar blabla" deberian estar justificados.
+
+\section{Lógica binaria (Verdadero o Falso)}
+
+\paragraph{\textbf{Ejercicio 1.}} $\bigstar$ Sean p y q variables proposicionales. ¿Cuales de las siguientes expresiones son formulas bien formadas?
+
+\begin{tasks}(3)
+	\task $ (p \neg q) $
+	\task[d)] $ \neg (p) $
+	\task[g)] $ ( \neg p) $	
+	\task $ p \bigvee q \bigwedge True $
+	\task[e)] $ (p \bigvee \neg p \bigwedge q) $
+	\task[h)] $ (p \bigvee False) $
+	\task $ (p \rightarrow \neg q \rightarrow q) $		
+	\task[f)] $ (True \bigwedge True \bigwedge True) $	
+	\task[i)] $ (p=q) $ 
+\end{tasks}
+
+\subsection*{Respuesta}
+
+\begin{tasks}(3)
+	\task No está bien formada.
+	\task[d)] No está bien formada.
+	\task[g)] No está bien formada.
+	\task No está bien formada.
+	\task[e)] No está bien formada.
+	\task[h)] Está bien formada.
+	\task No está bien formada.
+	\task[f)] Está bien formada.
+	\task[i)] Está bien formada.
+\end{tasks}
+
+\paragraph{\textbf{Ejercicio 2.}} $\bigstar$  Sean $ x: \mathbb{Z} ,y: \mathbb{Z}$ y $ z: \textbf{Bool} $ tres variables. ¿Cuales de las siguientes expresiones pueden tiparse correctamente?
+
+
+\begin{tasks}(2)
+	\task $ (1=0) \vee (x=y) $
+	\task[d)] $ z= true \leftrightarrow (y=x) $
+	\task $ (x+10)=y $
+	\task[e)] $ (z=0) \vee (z=1) $
+	\task $ (x \vee y) $
+	\task[f)] $ y + (y<0) $
+\end{tasks}
+
+\subsection*{Respuesta}
+
+\begin{tasks}(2)
+	\task Tipa.
+	\task[d)] Tipa.
+	\task Tipa.
+	\task[e)] No tipa.
+	\task No tipa.
+	\task[f)] No tipa.
+\end{tasks}
+
+\paragraph{\textbf{Ejercicio 3.}} La fórmula $ (3+7= \pi -8) \wedge True $ es una fórmula bien formada ¿Por qué? Justifique informal, pero detalladamente, su respuesta.
+
+\subsection*{Respuesta}
+
+Lo que esta en el parentesis pregunta si esos dos números son iguales y devuelve un booleano al que se le aplica una AND con True, no tiene errores de tipo, por lo que esta bien formulado.
+
+\paragraph{\textbf{Ejercicio 4.}} $\bigstar$ Determinar el valor de verdad de las siguientes proposiciones
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+	\item $ ( \neg a \vee b) $
+	\item $ (c \vee (y \wedge x) \vee b) $
+	\item $ \neg (c \vee y) $
+	\item $ (\neg(c \vee y) \leftrightarrow (\neg c \wedge \neg y)) $
+	\item $ ((c \vee y) \wedge (x \vee b)) $
+	\item $ (((c \vee y) \wedge (x \vee b)) \leftrightarrow (c \vee (y \wedge x)\vee b)) $
+	\item $ (\neg c \wedge \neg y)$
+\end{enumerate}
+\end{multicols}
+
+cuando el valor de verdad de a,b y c es verdadero, mientras que el de x e y es falso.
+
+\subsection*{Respuesta}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+	\item $ True$
+	\item $ True$
+	\item $ False$
+	\item $ True$
+	\item $ True$
+	\item $ True$
+	\item $ False$
+\end{enumerate}
+\end{multicols}
+
+
+\paragraph{\textbf{Ejercicio 5.}} Determinar, utilizando tablas de verdad, si las siguientes fórmulas son tautologias, contradicciones o contingencias.
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $ (p \vee \neg p)$
+\item $ (p \wedge \neg p) $
+\item $ ((\neg p \vee q) \leftrightarrow(p \rightarrow q))$
+\item $ ((p \vee q) \rightarrow p)$
+\item $ (\neg (p \wedge q) \leftrightarrow(\neg p \vee \neg q)) $ 
+\item $ (p \rightarrow p) $
+\item $ ((p \wedge q) \rightarrow p)$
+\item $ ((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q)\vee (p \wedge r)))$  
+\item $ ((p \rightarrow (q \rightarrow r))\rightarrow ((p \rightarrow ) \rightarrow (p \rightarrow r))) $
+              
+\end{enumerate}
+\end{multicols}
+
+\subsection*{Respuesta}
+Armar Tablas de la Verdad es un plomazo y no aporta en nada, chiau.
+
+\begin{enumerate}[label=\alph*)]
+\begin{multicols}{2}
+\item 
+\begin{tabular}{|c|c|c|}
+\hline 
+$p$ & $\neg p$ & $(p\vee \neg p)$ \\ 
+\hline 
+0 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|c|}
+\hline 
+$p$ & $\neg p$ & $(p\wedge \neg p)$ \\ 
+\hline 
+0 & 1 & 0 \\ 
+\hline 
+1 & 0 & 0 \\ 
+\hline 
+\end{tabular} 
+Contradicción
+\end{multicols}
+\item
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+p & q & $(\neg p \vee q)$ & $(p\rightarrow q)$ & $(\neg(p\wedge q)\leftrightarrow (\neg p \vee \neg q))$ \\ 
+\hline 
+0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 0 & 0 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$p$ & $q$ & $(p\vee q)$ & $((p \vee q)\rightarrow) p$ \\ 
+\hline 
+0 & 0 & 0 & 1 \\ 
+\hline 
+0 & 1 & 1 & 0 \\ 
+\hline 
+1 & 0 & 1 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+Contingencia
+\item
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+p & q & $\neg (p\wedge q)$ & $(\neg p \vee \neg q)$ & $(\neg (p\wedge q)\leftrightarrow (\neg p \vee \neg q))$ \\ 
+\hline 
+0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 & 1 & 1 \\ 
+\hline 
+1 & 1 & 0 & 0 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|}
+\hline 
+$p$ & $(p\rightarrow p)$ \\ 
+\hline 
+0 & 1 \\ 
+\hline 
+1 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$p$ & $q$ & $(p\wedge q)$ & $((p\wedge q)\rightarrow p)$ \\ 
+\hline 
+0 & 0 & 0 & 1 \\ 
+\hline 
+0 & 1 & 0 & 1 \\ 
+\hline 
+1 & 0 & 0 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+p & q & r & $(p\wedge (q\vee r))$ & $((p\wedge q)\vee (p\wedge r))$ & $((p\wedge (q\vee r))\leftrightarrow ((p\wedge q)\vee (p\wedge r)))$ \\ 
+\hline 
+0 & 0 & 0 & 0 & 0 & 1 \\ 
+\hline 
+0 & 0 & 1 & 0 & 0 & 1 \\ 
+\hline 
+0 & 1 & 0 & 0 & 0 & 1 \\ 
+\hline 
+0 & 1 & 1 & 0 & 0 & 1 \\ 
+\hline 
+1 & 0 & 0 & 0 & 0 & 1 \\ 
+\hline 
+1 & 0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 1 & 0 & 1 & 1 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 & 1 & 1 \\  
+\hline 
+\end{tabular} 
+Tautologia
+\item
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+p & q & r & $(p\rightarrow (q\rightarrow r))$ & $((p\rightarrow q)\rightarrow (p\rightarrow r))$ & $((p\rightarrow (q\rightarrow r))\leftrightarrow ((p\rightarrow q)\rightarrow (p\rightarrow r)))$ \\ 
+\hline 
+0 & 0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 1 & 0 & 0 & 0 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+Tautologia
+\end{enumerate}
+
+\paragraph{\textbf{Ejercicio 6.}} $\bigstar$ Dadas las proposiciones lógicas $\alpha$ y $\beta$,se dice que $\alpha$ es más fuerte que $\beta$ si y sólo si $\alpha \rightarrow \beta$ es una tautologia. En este caso, tambien decimos que $\beta$ es más debil que $\alpha$. Determinar la relacion de fuerza de los siguientes pares de fórmulas:
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $ True,False$
+\item $ (p \wedge q),(p \vee q) $
+\item $ True,True$
+\item $ p,(p \wedge q)$
+\item $ False,False $ 
+\item $ p,(p \vee q) $
+\item $ p,q$
+\item $ p,(p \rightarrow q)$          
+\end{enumerate}
+\end{multicols}
+
+¿Cuál es la proposición más fuerte y cuál la más debil de las que aparecen en este ejercicio?
+
+\subsection*{Respuesta}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $ False$
+\item $ (p \wedge q)$
+\item $ True$
+\item $ (p \wedge q)$
+\item $ False $ 
+\item $ p $
+\item $ Inmesurable$
+\item Ninguna es tautologica, Inmesurable               
+\end{enumerate}
+\end{multicols}
+
+La más fuerte es False, y la más debil es True, y ya me olvide el porque.
+
+\paragraph{
+\textbf{Ejercicio 7.} }$\bigstar$ Usando reglas de equivalencia (conmutatividad, asociatividad, De Morgan, etc) determinar si los siguientes pares de fórmulas son equivalencias.Indicar en cada paso qué regla se utilizó
+
+
+\begin{enumerate}[label=\alph*)]
+\item \begin{itemize}
+\item $ ((\neg p\vee \neg q)\vee (p\wedge q))\rightarrow (p\wedge q)$
+\item $ (p\wedge q)$
+\end{itemize}
+\item \begin{itemize}
+\item $(p\vee q)\wedge (p\vee r)$
+\item $ \neg p \rightarrow (q\wedge r)$
+\end{itemize}
+\item \begin{itemize}
+\item $ \neg (\neg p)\rightarrow (\neg (\neg p \wedge \neg q))$
+\item $ q $
+\end{itemize}
+\item \begin{itemize}
+\item $((True \wedge p) \wedge (\neg p \vee False))\rightarrow \neg (\neg p\vee q)$
+\item $ p \wedge \neg q$
+\end{itemize}
+\item \begin{itemize}
+\item $ (p \vee (\neg p \wedge q))$
+\item $ \neg p \rightarrow q$
+\end{itemize}
+\item \begin{itemize}
+\item $ \neg (p \wedge (q \wedge s))$
+\item $ s \rightarrow (\neg p \vee \neg q)$
+\end{itemize}
+\item \begin{itemize}
+\item $ p \rightarrow (q \wedge \neg (q \rightarrow r))$
+\item $ (\neg p \vee q)\wedge (\neg p \vee (q \wedge \neg r))$
+\end{itemize}
+\end{enumerate}
+
+\subsection*{Respuesta}
+
+\begin{enumerate}[label=\alph*)]
+\item \begin{displaymath}
+((\neg p\vee \neg q)\vee (p\wedge q))\rightarrow (p\wedge q) \qquad \textrm{(De Morgan)}
+\end{displaymath}
+\begin{displaymath}
+( \neg (p \wedge q) \vee (p\wedge q))\rightarrow (p\wedge q) \qquad (\neg (p \wedge q) \vee (p\wedge q))=True \qquad \forall (p,q)
+\end{displaymath}
+\begin{displaymath}
+True \rightarrow (p\wedge q) \qquad (True \rightarrow p )=p
+\end{displaymath}
+\begin{displaymath}
+(p\wedge q)
+\end{displaymath}
+\item \begin{align*}
+\neg p \rightarrow (q\wedge r) & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+(\neg (\neg p) \vee (q\wedge r) & \qquad & \neg (\neg a)=a \\
+(p \vee (q\wedge r)) & \qquad & \textrm{Distributiva}\\
+(p\vee q)\wedge (p\vee r) &
+\end{align*}
+\item \begin{align*}
+\neg (\neg p)\rightarrow (\neg (\neg p \wedge \neg q)) & \qquad & \neg (\neg a)=a\\
+ p\rightarrow (\neg (\neg p \wedge \neg q)) & \qquad & \textrm{De Morgan}\\
+ p\rightarrow (\neg (\neg( p \vee q))) & \qquad & \neg (\neg a)=a\\
+ p\rightarrow ( p \vee q) & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+ (\neg p \vee ( p \vee q)) & \qquad & (\neg a \vee a)=True\\
+ q
+\end{align*}
+\item \begin{align*}
+((True \wedge p) \wedge (\neg p \vee False))\rightarrow \neg (\neg p\vee q) & \qquad & (True \wedge a)=a\\
+(p \wedge (\neg p \vee False))\rightarrow \neg (\neg p\vee q) & \qquad & (False \vee a)=a\\
+(p \wedge \neg p)\rightarrow \neg (\neg p\vee q) & \qquad & (a \wedge \neg a)=False\\
+False\rightarrow \neg (\neg p\vee q) & \qquad & (False \rightarrow a)=a\\
+\neg (\neg p\vee q) & \qquad & Distributiva\\
+p \wedge \neg q
+\end{align*}
+\item \begin{align*}
+ \neg p \rightarrow q & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+ (p \vee q) \wedge True  & \qquad & True=(a \vee \neg a)\\
+ (p \vee q) \wedge (p \vee \neg p)  & \qquad & Distributiva\\
+ (p \vee (\neg p \wedge q)) 
+\end{align*}
+\item \begin{align*}
+ s \rightarrow (\neg p \vee \neg q) & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+ (\neg s) \vee (\neg p \vee \neg q) & \qquad & \textrm{De Morgan}\\
+ (\neg s) \vee \neg(p \wedge q) & \qquad & \textrm{De Morgan}\\
+ \neg ( s \wedge (p \wedge q) & \qquad & Conmutatividad\\ 
+ \neg (p \wedge (q \wedge s)) 
+\end{align*}
+\item \begin{align*}
+ p \rightarrow (q \wedge \neg (q \rightarrow r)) & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+ \neg p \vee (q \wedge \neg (q \rightarrow r)) & \qquad & (a \rightarrow b)=(\neg a \vee b)\\
+ \neg p \vee (q \wedge \neg (\neg q \vee r)) & \qquad & \textrm{De Morgan}\\
+ \neg p \vee (q \wedge  (q \wedge \neg r)) & \qquad & Distributiva\\
+ (\neg p \vee q)\wedge (\neg p \vee (q \wedge \neg r))
+\end{align*}
+\end{enumerate}
+
+\paragraph{\textbf{Ejercicio 8.}} Decimos que un conectivo es expresable mediante otros si es posible escribir una fórmula utilizando exclusivamente estos últimos y que tenga la misma tabla de verdad que el primero (es decir, son equivalentes). Por ejemplo, la disyunción es expresable mediante la conjunción mas la negación, ya que $ (p \vee q)$ tiene la misma tabla de verdad que $ \neg ( \neg p \wedge \neg q) $.\\
+Mostrar que cualquier fórmula de la lógica proposicional que utilice los conectivos $\neg$ (negación), $\wedge$ (conjunción), $\vee$ (disyunción), $\rightarrow$ (implicación), $\leftrightarrow$ (equivalencia) puede reescribirse utilizando sólo los conectivos $\neg$ y $\vee$. 
+
+
+\subsection*{Respuesta}
+\begin{align*}
+ (a \wedge b) \qquad  &= \qquad & \neg (\neg a \vee \neg b) \\
+ (a \rightarrow b) \qquad  &= \qquad &( \neg a \vee b)\\
+ (a \leftrightarrow b) \qquad &= \qquad &\neg ((a \vee b) \vee \neg (\neg (\neg a \vee \neg b)))
+\end{align*}
+
+\paragraph{\textbf{Ejercicio 9.}} $\bigstar$ Sean las variables proposicionales $f$, $e$ y $m$ con los siguientes significados:
+\begin{multicols}{3}
+\begin{itemize}
+\item $ f \equiv$ "es fin de semana"
+\item $ e \equiv$ "Juan estudia"
+\item $ m \equiv$ "Juan escucha música"
+\end{itemize}
+\end{multicols}
+
+\begin{enumerate}[label=\alph*)]
+\item Escribir usando lógica proposicional las siguientes oraciones:\\
+\begin{itemize}
+\item[•] "Si es fin de semana, Juan estudia o escucha música, pero no ambas cosas"
+\item[•] "Si no es fin de semana entonces Juan no estudia"
+\item[•] "Cuando Juan estudia los fines de semana, lo hace escuchando música"
+\end{itemize}
+\item Asumiendo que valen las tres proposiciones anteriores ¿se puede deducir que Juan no estudia?. Justificar usando argumentos de la lógica proposicional.
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+\item 
+\begin{itemize}
+\item[•] $f \rightarrow (\neg (e \leftrightarrow m)) $
+\item[•] $ \neg f \rightarrow \neg e$
+\item[•] $ (f\wedge e) \rightarrow m$
+\end{itemize}
+\item \begin{itemize}
+\item Simplificaciones:
+\begin{align*}
+f \rightarrow (\neg (e \leftrightarrow m)) &= \neg f \vee (\neg (e \leftrightarrow m))\\
+&= \neg f \vee ((e \vee m)\wedge \neg (e\wedge m))\\
+\\
+\neg f \rightarrow \neg e &= f \vee \neg e \\
+\\
+(f\wedge e) \rightarrow m &= \neg (f\wedge e)  \vee m \\ &=(\neg f\vee \neg e\vee m)\\
+\end{align*}
+\end{itemize}
+Demostración:
+\begin{align*}
+((\neg f \vee ((e \vee m)\wedge \neg (e\wedge m)))\wedge (f \vee \neg e)\wedge (\neg (f\wedge e)  \vee m))\rightarrow \neg e &=\\
+\neg ((\neg f \vee ((e \vee m)\wedge \neg (e\wedge m)))\wedge (f \vee \neg e)\wedge (\neg (f\wedge e)  \vee m))\vee \neg e &=?\\
+\end{align*}
+\end{enumerate}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+$e$ & $f$ & $m$ & $A=(\neg f \vee ((e \vee m)\wedge \neg (e \wedge m)))$ & $B=(f\vee \neg e)$ & $C=(\neg f\vee \neg e\vee m)$ & $\neg(A\wedge B\wedge C)\vee \neg e$ \\ 
+\hline 
+0 & 0 & 0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+0 & 0 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 0 & 1 & 0 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 & 1 & 0 & 1 & 1 \\ 
+\hline 
+1 & 1 & 0 & 1 & 1 & 0 & 1 \\ 
+\hline 
+1 & 1 & 1 & 0 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\paragraph{\textbf{Ejercicio 10.}} En la salita verde de un jardin se sabe que las siguientes circunstancias son ciertas:
+\begin{enumerate}[label=\alph*)]
+\item Si todos conocen a Juan entonces todos conocen a Camila (podemos pensar que esto se debe a que siempre caminan juntos).
+\item Si todos conocen a Juan, entonces que todos conozcan a Camila implica que todos conocen a Gonzalo.\\
+\end{enumerate}
+La pregunta entonces es: ¿Es cierto que si todos conocen a Juan entonces todos conocen a Gonzalo? Justificar.
+
+\subsection*{Respuesta}
+$A:$ todos conocen a Juan, $B:$todos conocen a Camila, $C:$ todos conocen a Gonzalo
+\begin{enumerate}[label=\alph*)]
+\item $A\rightarrow B$
+\item $A\rightarrow (B\rightarrow C)$
+\end{enumerate}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+$A$ & $B$ & $C$ & $A\rightarrow B$ & $A\rightarrow (B\rightarrow C)$ & $((A\rightarrow B)\wedge (A\rightarrow (B\rightarrow C))\rightarrow C$ \\
+\hline 
+0 & 0 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 0 & 1 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 0 & 1 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 0 & 0 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 & 0 & 1 & 1 \\ 
+\hline 
+1 & 1 & 0 & 1 & 0 & 0 \\ 
+\hline 
+1 & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\paragraph{\textbf{Ejercicio 11.}} Siempre que Haroldo se pelea con sus compañeritos, vuelve a casa con un ojo morado. Si un dia lo viéramos llegar con el ojo destrozado, podríamos sentirnos inclinados a concluir que se ha tomado a golpes de puño y cabezazos con los otros niñitos. ¿Puede identificar el error en el razonamiento anterior? Pista: Es conocido como falacio de afirmar el consecuente
+
+\subsection*{Respuesta}
+
+$a\rightarrow b$ no implica que $b\rightarrow a$, ver T.V.
+
+\section{Lógica ternaria (Verdadero, Falso o Indefinido)}
+
+\paragraph{\textbf{Ejercicio 12.}} $\bigstar$ Asignar un valor de verdad (verdadero, falso o indefinido) a cada una de las siguientes expresiones ariméticas en los reales.
+
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item $5>0$
+\item $1\leq 1$
+\item $(5+3-8)^{-1}\neq 2$
+\item $0 \geq 5$
+\item $\frac{1}{0} = \frac{1}{0}$
+\item $0 > log_2(2^{2^0-1}-1)$
+\item $0\cdot \sqrt{-1}=0$
+\item $\sqrt{-1} \cdot 0=0$
+\item $ \tan (\frac{\pi}{2})=\tan (\pi) - \tan (2)$
+\end{enumerate}
+\end{multicols}
+
+\subsection*{Respuestas}
+
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item $True$
+\item $True$
+\item $Undefined$
+\item $False$
+\item $Undefined$
+\item $Undefined$
+\item $True$
+\item $Undefined$
+\item $Undefined$
+\end{enumerate}
+\end{multicols}
+
+\paragraph{\textbf{Ejercicio 13.}} $\bigstar$ ¿Cuál es la diferencia entre el operador $\wedge $ y el operador $\wedge _{L} $?Describir la tabla de verdad de ambos operadores. 
+
+\subsection*{Respuesta}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$a$ & $b$ & $a\wedge b$ & $a\wedge _L b$ \\ 
+\hline 
+0 & 0 & 0 & 0 \\ 
+\hline 
+0 & 1 & 0 & 0 \\ 
+\hline 
+1 & 0 & 0 & 0 \\ 
+\hline 
+1 & 1 & 1 & 1 \\ 
+\hline 
+0 & $ \perp$ & $ \perp$ & 0 \\ 
+\hline 
+1 & $ \perp$ & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & 0 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & 1 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & $ \perp$ & $ \perp$ & $ \perp$ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\paragraph{\textbf{Ejercicio 14.}} $\bigstar$ ¿Cuál es la diferencia entre el operador $\vee $ y el operador $\vee _{L} $?Describir la tabla de verdad de ambos operadores.
+
+\subsection*{Respuesta}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$a$ & $b$ & $a\vee b$ & $a\vee _L b$ \\ 
+\hline 
+0 & 0 & 0 & 0 \\ 
+\hline 
+0 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 1 & 1 \\ 
+\hline 
+1 & 1 & 1 & 1 \\ 
+\hline 
+0 & $ \perp$ & $ \perp$ & $\perp$ \\ 
+\hline 
+1 & $ \perp$ & $ \perp$ &  1 \\ 
+\hline 
+$ \perp$ & 0 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & 1 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & $ \perp$ & $ \perp$ & $ \perp$ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+
+\paragraph{\textbf{Ejercicio 15.}} $\bigstar$ ¿Cuál es la diferencia entre el operador $\rightarrow $ y el operador $\rightarrow _{L} $?Describir la tabla de verdad de ambos operadores.
+
+\subsection*{Respuesta}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+$a$ & $b$ & $a\rightarrow b$ & $a\rightarrow _L b$ \\ 
+\hline 
+0 & 0 & 1 & 1 \\ 
+\hline 
+0 & 1 & 1 & 1 \\ 
+\hline 
+1 & 0 & 0 & 0 \\ 
+\hline 
+1 & 1 & 1 & 1 \\ 
+\hline 
+0 & $ \perp$ & $ \perp$ & 1 \\ 
+\hline 
+1 & $ \perp$ & $ \perp$ &  $\perp$ \\ 
+\hline 
+$ \perp$ & 0 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & 1 & $ \perp$ & $ \perp$ \\ 
+\hline 
+$ \perp$ & $ \perp$ & $ \perp$ & $ \perp$ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\paragraph{\textbf{Ejercicio 16.}} $\bigstar$ Determinar los valores de verdad de las siguientes proposiciones cuando el valor de verdad de b y c es verdadero, el de a es falso y el de x e y es indefinido 
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $( \neg x \vee _L b)$
+\item $ ((c \vee _L (y \wedge _L a))\vee b) $
+\item $ \neg (c \vee _L y) $
+\item $ (\neg (c\vee _L y)\leftrightarrow (\neg c \wedge _L \neg y)) $
+\item $ ((c \vee _L y)\wedge _L (a\vee b)) $
+\item $(((c\vee _L y)\wedge _L (a \vee _L b))\leftrightarrow _L (c\vee _L (y \wedge _L a)\vee _Lb))$
+\item $(\neg c \wedge _L \neg y)$
+\end{enumerate}
+\end{multicols}
+
+\subsection*{Respuestas}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $Undefined$
+\item $True$
+\item $False$
+\item $True$
+\item $True$
+\item $True?$
+\item $False$
+\end{enumerate}
+\end{multicols}
+
+\paragraph{
+\textbf{Ejercicio 17.}}Sean $p$, $q$ y $r$ tres variables de las que se sabe que:
+
+\begin{enumerate}
+\item[•] p y q nunca están indefinidas,
+\item[•] r se indefine si q es verdadera
+\end{enumerate}
+Proponer una fórmula que nunca se indefina, utilizando siempre las tres variables y que sea verdadera si y solo si se cumple que:
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item Al menos una es verdadera
+\item Ninguna es verdadera
+\item Exactamente una de las tres es verdadera
+\item Sólo p y q son verdaderas
+\item No todas al mismo tiempo son verdaderas
+\item r es verdadera
+\end{enumerate}
+\end{multicols}
+
+
+\subsection*{Respuestas}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $ (p\vee q)\vee _L r$
+\item $ \neg ((p\vee q)\vee _L r)$
+\item $ (p\wedge \neg q \wedge \neg r)\vee (\neg p\wedge q \wedge \neg r)\vee (\neg p\wedge \neg q \wedge r) $
+\item $ (p \wedge q)\wedge _L \neg r$
+\item $ \neg ((p\wedge q)\wedge (p\vee _L q))$
+\item $ \neg q \wedge _L r$
+\end{enumerate}
+\end{multicols}
+
+\section{Cuantificadores}
+
+\paragraph{\textbf{Ejercicio 18.}}
+\begin{enumerate}[label=\alph*)]
+\item $\bigstar$ Determinar para cada aparición de variables, si dicha aparición se encuentra libre o ligada. En caso de estar ligada, aclarar a qué cuantificador lo está.
+\begin{itemize}
+\item[I)] $( \forall x:\mathbb{Z})(0\leq x < n \rightarrow x+y=z)$
+\item[II)] $( \forall x:\mathbb{Z})( \forall y:\mathbb{Z})(0\leq x < n \wedge 0\leq y <m)\rightarrow x+y=z)) $
+\item[III)] $( \forall j:\mathbb{Z})(0 \leq j < 10 \rightarrow j < 0) $
+\item[IV)] $ s\wedge a < b-1 \wedge (( \forall j:\mathbb{Z})(a \leq j < b \rightarrow _L 2*j<b\vee s))$
+\item[V)] $ ( \forall j:\mathbb{Z})(j \leq 0 \rightarrow ( \forall j:\mathbb{Z})(j>0 \rightarrow j \neq 0))$
+\item[VI)] $ ( \forall j:\mathbb{Z})(j \leq 0 \rightarrow P(j))$
+\item[VII)] $ ( \forall j:\mathbb{Z})(j \leq 0 \rightarrow P(j))\wedge P(j)$
+\end{itemize}
+\item $\bigstar$ En los casos en que sea posible, proponer valores para las variables libres del item anterior de modo tal que las expresiones sean verdaderas.
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+\item
+\begin{itemize}
+\item[I)] $ x$ ligada a $\forall$; $n,y,z$ estan libres.
+\item[II)] $ x,y$ ligadas a $\forall$; $n,m,z$ estan libres.
+\item[III)] $ j$ ligada a $\forall$.
+\item[IV)] $ j$ ligada a $\forall$; $a,b,s$ estan libres.
+\item[V)]  $ j,j$ ligadas a $\forall$; (son jotas distintas, yo no escribi el ejercicio...).
+\item[VI)] $ j$ ligada a $\forall$.
+\item[VII)] $ j$ ligada a $\forall$; la otra $j$ esta libre.
+\end{itemize}
+\item
+\begin{itemize}
+\item[I)] $n=20;y=-x;z=0$
+\item[II)] $n=1;m=1;z=0$
+\item[III)] $\nexists$ ninguna variable libre.
+\item[IV)] nah, muy denso...
+\item[V)] $\nexists$ ninguna variable libre.
+\item[VI)] mmm...
+\item[VII)] mmm...
+\end{itemize}
+\end{enumerate}
+
+\paragraph{\textbf{Ejercicio 19.}} Sean $P(x: \mathbb{Z})$ y $Q(x: \mathbb{Z})$ dos predicados cualesquiera que nunca se indefinen. Considerar los siguientes enunciados y su predicado asociado. Determinar, en cada caso, por qué el predicado no refleja correctamente el enunciado.
+Corregir los errores.
+\begin{enumerate}[label=\alph*)]
+\item \textit{"Todos los naturales menores a 10 que cumplen P, cumplen Q":}\\
+ pred $a()\{(\forall x: \mathbb{Z})((0 \leq x < 10)\rightarrow _L(P(x)\wedge Q(x)))\}$
+\item \textit{"No hay ningún natural menor a 10 que cumpla P y Q":}\\
+ pred $c()\{\neg ((\exists x: \mathbb{Z} )(0 \leq x <10 \wedge P(x)\wedge \neg ((\exists x: \mathbb{Z} )(0 \leq x <10 \wedge Q(x))))\}$
+\end{enumerate}
+
+\subsection*{Respuestas}
+\begin{enumerate}[label=\alph*)]
+\item $pred$ $a()\{(\forall x: \mathbb{Z})(((0 \leq x < 10)\wedge _L P(x))\rightarrow Q(x))\}$
+\item $pred$ $c()\{\neg (\exists x: \mathbb{Z})((0 \leq x < 10)\wedge _L(P(x)\wedge Q(x)))\}$
+\end{enumerate}
+\section{Funciones auxiliares}
+
+\paragraph{\textbf{Ejercicio 20.}} $\bigstar$ Escriba los siguientes predicados y funciones en el lenguaje de especificación:
+\begin{enumerate}[label=\alph*)]
+\item \textit{aux suc} $(x: \mathbb{Z}):\mathbb{Z}$ , que corresponde al sucesor de $x$.
+\item \textit{aux suma} $(x,y: \mathbb{R}):\mathbb{R}$ , que corresponda a la suma entre $x$ e $y$.
+\item \textit{aux producto} $(x,y: \mathbb{R}):\mathbb{R}$ , que corresponda al producto entre $x$ e $y$.
+\item \textit{pred esCuadrado} $(x: \mathbb{Z})$ , que sea verdadero si y solo si $x$ es un numero cuadrado.
+\item \textit{pred esPrimo} $(x: \mathbb{Z})$ , que sea verdadero sii $x$ es primo.
+\item \textit{pred sonCoprimos} $(x,y: \mathbb{Z})$ , que sea verdadero si y solo si $x$ e $y$ son coprimos.
+\item \textit{pred divisoresGrandes} $(x,y: \mathbb{Z})$ , que sea verdadero cuando todos los divisores de $x$, sin contar el uno, son mayores que $y$.
+\item \textit{pred mayorPrimoQueDivide} $(x: \mathbb{Z},y: \mathbb{Z})$ , que sea verdadero si $y$ es el mayor primo que divide a $x$.
+\item \textit{pred sonPrimosHermanos} $(x: \mathbb{Z},y: \mathbb{Z})$ , que sea verdadero cuando $x$ es primo, $y$ es primo, y son primos consecutivos.
+\end{enumerate}
+
+\subsection*{Respuestas}
+
+\begin{enumerate}[label=\alph*)]
+\item \textit{aux suc} $(x: \mathbb{Z}):\mathbb{Z}=x+1;$ 
+\item \textit{aux suma} $(x,y: \mathbb{R}):\mathbb{R}=x+y;$
+\item \textit{aux producto} $(x,y: \mathbb{R}):\mathbb{R}=x*y;$
+\item \textit{pred esCuadrado} $(x: \mathbb{Z})\{$\\ 
+\hspace*{6mm}$(\exists a :\mathbb{N}_0)(a*a=x)$\\
+$\}$
+\item \textit{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
+\hspace*{6mm}$ (x > 1)(\forall i :\mathbb{N})(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
+$\}$
+\item \textit{pred sonCoprimos} $(x,y: \mathbb{Z})\{$\\  
+\hspace*{6mm}$ \neg (\exists i :\mathbb{N})(1<i<max\{abs(x),abs(y)\} \wedge (x\textrm{ mod }i=0)\wedge (y\textrm{ mod }i=0))$\\
+$\}$
+\item \textit{pred divisoresGrandes} $(x,y: \mathbb{Z})\{$\\
+\hspace*{6mm}$ (\forall i :\mathbb{N})(1<i<abs(x) \wedge _L(x\textrm{ mod }i=0 ) \rightarrow  i>y)$\\
+$\}$
+%\item \textit{pred mayorPrimoQueDivide} $(x: \mathbb{Z},y: \mathbb{Z})\{$\\
+%\hspace*{6mm}$esPrimo(y)\wedge _L (x $ mod $y=0)\wedge$\\
+%\hspace*{6mm}$(\forall n' :\mathbb{Z})((n'>abs(y) \wedge _L (x $ mod $n' =0))  \rightarrow  \neg esPrimo(n') )$\\
+%$\}$
+
+\item \textit{pred mayorPrimoQueDivide} $(x: \mathbb{Z},y: \mathbb{Z})\{$\\
+\hspace*{6mm}$esPrimo(y)\wedge _L (x $ mod $y=0)\wedge$\\
+\hspace*{6mm}$(\forall i :\mathbb{N})((abs(y)<i<abs(x) \wedge _L(x $ mod $i =0)  )\rightarrow \neg esPrimo(i) )$\\
+$\}$
+\item
+\end{enumerate}
+\end{document}
