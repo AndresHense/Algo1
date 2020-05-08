@@ -185,17 +185,22 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $(a < 0 \rightarrow result=2*b)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $(a \geq 0 \rightarrow result=b-1)$\\			
+			\hspace*{6mm}$\}$\\
 			$\}$
 		\item
 			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\hspace*{6mm} \textbf{Post }$\{(a<0\rightarrow result=2*b)\vee (
+				a\geq 0 \rightarrow result = b-1)\}$\\
 			$\}$
 		\item
 			\textbf{proc f }(in a, b$: \mathbb{R}$,out result$:\mathbb{R})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\hspace*{6mm} \textbf{Post }$\{result=($if $ a<0$ then $2*b$ else $b-1$ fi $)\}$\\
 			$\}$
 	\end{enumerate}
 \subsection*{Respuesta}
