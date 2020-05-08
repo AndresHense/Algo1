@@ -245,6 +245,11 @@ Para las que no lo son, indicar por qué.\bigskip \\
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 6.}$\bigstar$ Sean $x$ y $r$ variables de tipo $\mathbb{R}$. Considerar los siguientes predicados:
+\begin{flalign*}
+P1:\{x\leq 0\}& \qquad \qquad \qquad \qquad Q1:\{r\geq x^2\}\\
+P2:\{x\leq 10\}& \qquad \qquad \qquad \qquad Q2:\{r\geq 0\}\\
+P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
+\end{flalign*}
 	\begin{enumerate}[label=\alph*)]
 		\item Indicar la relación de fuerza entre P1, P2 y P3.
 		\item Indicar la relación de fuerza entre Q1, Q2 y Q3.
@@ -268,9 +273,23 @@ Para las que no lo son, indicar por qué.\bigskip \\
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
+		\item \begin{itemize}[label=$\cdot$]
+			\item $P1\rightarrow  P2$ es contingencia.
+			\item $P1\rightarrow  P3$ es tautologia.
+			\item $P2\rightarrow  P1$ es tautologia.
+			\item $P2\rightarrow  P3$ es tautologia.
+			\item $P3\rightarrow  P1$ es contingencia.
+			\item $P3\rightarrow  P2$ es contingencia.
+		\end{itemize}	
+		\item \begin{itemize}[label=$\cdot$]
+			\item $Q1\rightarrow  Q2$ es tautologia.
+			\item $Q1\rightarrow  Q3$ es contingencia.
+			\item $Q2\rightarrow  Q1$ es contingencia.
+			\item $Q2\rightarrow  Q3$ es contingencia.
+			\item $Q3\rightarrow  Q1$ es tautologia.
+			\item $Q3\rightarrow  Q2$ es tautologia.
+		\end{itemize}
+		\item Los programas hay que hacerlos en smallLang?
 		\item
 	\end{enumerate}
 
