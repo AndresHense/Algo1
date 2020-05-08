@@ -159,7 +159,7 @@ Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio div
 				\item $result=0$, 
 				\item $result=0$
 			\end{enumerate}
-		\item 
+		\item Van a tener la misma salida cuando no haya más de una aparición del maximo en la lista (ya que en caso contrario \textbf{indiceDelMaximo} crashearia).
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 4.}$\bigstar$ Sea $f:\mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}$ definida como:\\
@@ -233,9 +233,15 @@ Para las que no lo son, indicar por qué.\bigskip \\
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
+		\item Segun lo que interpreto, el algoritmo esta tratando de cumplir la \textbf{Post}, entonces, al pasarle 3 devuelve un 9 que efectivamente cumple la \textbf{Post} ya que $9>3$. 
+		\item 
+			\begin{itemize}[label=$\cdot$]
+			\item $x=0.5; result =0.25$, no cumple la \textbf{Post}.
+			\item $x=1;   result =1$   , no cumple la \textbf{Post}.
+			\item $x=0.2; result =0.04$, no cumple la \textbf{Post}.
+			\item $x=-7;  result =49$,   cumple la \textbf{Post}.
+			\end{itemize}
+		\item \textbf{Pre}$\{ abs(x)>1\}$
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 6.}$\bigstar$ Sean $x$ y $r$ variables de tipo $\mathbb{R}$. Considerar los siguientes predicados:
