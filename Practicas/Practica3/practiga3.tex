@@ -48,10 +48,10 @@ Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio div
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
-		\item No tengo ni idea de porque está mal, que tiene de malo decir, $result$ es el que cumple que $l[result]$ sea igual al elemento. Si lo tuviera que cambiar, seguiria la logica de los demas ej, lo reescribiria así, . \medskip \\
+		\item La \textbf{Pre} no aclara que pasa cuando hay mas de una aparición de $elem$ en $l$, y hace falta pedir que $result$ este en el rango de $l$. \medskip \\
 		\textbf{proc buscar }(in l$:seq\langle \mathbb{R}\rangle$,in elem$:\mathbb{R}$,out result$:\mathbb{Z})\ \{$\smallskip \\
-		\hspace*{6mm} \textbf{Pre }$\{ elem \in l\}$\smallskip \\
-		\hspace*{6mm} \textbf{Post }$\{result=?\}$\\
+		\hspace*{6mm} \textbf{Pre }$\{ elem \in l\wedge cantAparciones(elem,l)=1\}$\smallskip \\
+		\hspace*{6mm} \textbf{Post }$\{0\leq result <|l| \wedge_L l[result]=elem\}$\\
 		$\}$
 		\item Este es más facil de ver que el anterior, cuando $i=0$, va a tratar de acceder a la posicion $l[0-1]$, que es cualquier cosa. Y creo que crashearia con una lista vacia o de un elemento. \medskip \\
 		\textbf{proc progresionGeometricaFactor2 }(in l$:seq\langle \mathbb{R}\rangle$,out result$:Bool\ \{$\smallskip \\
@@ -112,7 +112,7 @@ Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio div
 			$\}$
 			\begin{enumerate}[label=\Roman*)]
 				\item $l=\langle 1,2,3,4\rangle$
-				\item $l=\langle 15,5,-18,4.215,15.5,-1\rangle$
+				\item $l=\langle 15.5,-18,4.215,15.5,-1\rangle$
 				\item $l=\langle 0,0,0,0,0,0\rangle$
 			\end{enumerate}
 		\item
@@ -134,9 +134,24 @@ Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio div
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
 		\item
+			\begin{enumerate}[label=\Roman*)]
+				\item $result=0$
+				\item $result=1;-1$
+				\item $result=3\sqrt{3};-3\sqrt{3}$
+			\end{enumerate}
 		\item
+			\begin{enumerate}[label=\Roman*)]
+				\item $result=3$
+				\item Cualquier cosa, no dice nada cuando hay más de una aparición
+						del maximo.
+				\item Idem
+			\end{enumerate}
 		\item
-		\item
+			\begin{enumerate}[label=\Roman*)]
+				\item $result=3$
+				\item $result=?$, No entiendo porque pide que $i\geq result$, no le veo sentido a esa linea.
+				\item $result=?$
+			\end{enumerate}
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 4.}$\bigstar$ Sea $f:\mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}$ definida como:\\
@@ -281,12 +296,14 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 9.}
+\paragraph*{Ejercicio 9.}$\bigstar$ Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
+		\item Dado un número entero, decidir si es par.
+		\item Dado un entero $n$ y uno $m$, decidir si $n$ es un múltiplo de $m$.
+		\item Dadu un número real, devolver su inverso multiplicativo.
+		\item Dada una secuencia de caracteres, obtener de ella sólo los que son numéricos (con todas sus apariciones sun umportar el orden de aparición).
+		\item Dada una secuencia de reales, devolver la secuencia que resulta de duplicar sus valores en las posiciones impares.
+		\item Dado un número entero, listar todos sus divisores positivos (sin duplicados).
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -296,7 +313,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 10.}
+\paragraph*{Ejercicio 10.} Considerar el problema de decidir, dados $n$ y $m$ enteros, si $n$ es múltiplo de $m$, y la siguiente especificación.
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -311,7 +328,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 
-\paragraph*{Ejercicio 11.}
+\paragraph*{Ejercicio 11.} Considerar el probleam de, dada una secuencia de números reales, devolver la que resulta de duplicar sus valores en las posiciones impares.
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -326,7 +343,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 12.}
+\paragraph*{Ejercicio 12.}$\bigstar$ Especificar el problema de dado un entero positivo retornar una secuencia de 0s y 1s que represente es número en base 2 (es decir, en binario).
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -341,7 +358,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 
-\paragraph*{Ejercicio 13.}
+\paragraph*{Ejercicio 13.} Con lo visto en los ejercicios 9 a 12 ¿Encuentra casos de sub y sobreespecificación en las especificaciones del ejercicio 8?
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -356,7 +373,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 14.}
+\paragraph*{Ejercicio 14.} Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -371,7 +388,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 15.}
+\paragraph*{Ejercicio 15.} Especificar los siguientes problemas sobre secuencias:
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -386,7 +403,39 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 16.}
+\paragraph*{Ejercicio 16.} Especificar los siguientes problemas:
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\section*{Especificación de problemas usando \textbf{inout}}
+
+\paragraph*{Ejercicio 17.} $\bigstar$ Dados dos enteros $a$ y $b$, se necesita calcular su suma y retornarla en un entero $c$. ¿Cúales de las siguientes especificaciones son correctas para este problema? Para las que no lo son, indicar por qué. 
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+\subsection*{Respuesta}
+	\begin{enumerate}[label=\alph*)]
+		\item
+		\item
+		\item
+		\item
+	\end{enumerate}
+	
+\paragraph*{Ejercicio 18.}$\bigstar$ Dada una secuencia $l$, se deas sacar su primer elemento y devolverlo. Decidir cúales de estas especificaciones son correctas. Para las que no lo son, indicar por qué y justificar con ejemplos.
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -401,7 +450,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 
-\paragraph*{Ejercicio 17.}
+\paragraph*{Ejercicio 19.} Considerar la siguiente especificación:
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -416,22 +465,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 18.}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
-\subsection*{Respuesta}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
-
-\paragraph*{Ejercicio 19.}
+\paragraph*{Ejercicio 20.} Explicar coloquialmente la siguiente especificación:
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -446,22 +480,7 @@ Para las que no lo son, indicar por qué.\bigskip \\
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 20.}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
-\subsection*{Respuesta}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
-	
-\paragraph*{Ejercicio 21.}
+\paragraph*{Ejercicio 21.} Dada una secuencia de enteros, se requiere multiplicar por 2 aquéllos valores que se encuentran en posicions pares. Indicar por qué son incorrectas las siguientes especificaciones, y proponer una alternativa correcta
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
