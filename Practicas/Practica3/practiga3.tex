@@ -289,8 +289,35 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 			\item $Q3\rightarrow  Q1$ es tautologia.
 			\item $Q3\rightarrow  Q2$ es tautologia.
 		\end{itemize}
-		\item Los programas hay que hacerlos en smallLang?
+		\item \begin{enumerate}[label=\arabic*)]
+			\item Programa en lenguaje de especificación:\smallskip \\
+				\hspace*{10mm}aux programa1$(x:\mathbb{R})res: \mathbb{R}=x*x+3$
+			\item Programa en Perl: \smallskip \\
+				\textit{\hspace*{10mm}\# !/usr/bin/perl\\
+				\hspace*{10mm}use v5.26;\\
+				\hspace*{10mm}my \$ x;\\
+				\hspace*{10mm}my \$ res;\\
+				\hspace*{10mm}chomp(\$x=$<STDIN>$);\\
+				\hspace*{10mm}if(\$$x<=0)\{$\\
+				\hspace*{13mm} \$res=$x*x+1$;\\
+				\hspace*{10mm}$\}$\\
+				\hspace*{10mm}say \$res;
+				}
+		\end{enumerate}
 		\item
+			\begin{enumerate}[label=\alph*)]
+				\item Cumple.
+				\item No cumple.
+				\item Cumple.
+				\item No Cumple.
+				\item Cumple.
+				\item No cumple.
+				\item No cumple.
+				\item No cumple.
+			\end{enumerate}
+		\item La nueva \textbf{Pre} Tiene que estar incluido en el rango de la
+		 		\textbf{Pre} original,y ademas tiene que pasar lo mismo con las \textbf{Post}.
+		 
 	\end{enumerate}
 
 \paragraph*{Ejercicio 7.}$\bigstar$ Considerar las siguientes dos especificaciones, junto con un algoritmo $a$ que satisface la especificación de \textbf{p2}.\medskip \\
