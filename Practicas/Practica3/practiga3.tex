@@ -351,28 +351,39 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 \textbf{proc n-esimo1 }(in l$: seq\langle \mathbb{R}\rangle$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
 		\hspace*{6mm} \textbf{Pre }$\{$\\
 		\hspace*{6mm} /*Los elementos están ordenados */\\
-		\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
-		$\}$
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
+		\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i < |l|-1
+				\rightarrow_L l[i]<l[i+1])$\\
+		\hspace*{6mm} $\wedge 0 \leq n < |l|$\\
+		\hspace*{6mm} $\}$\\
+		\hspace*{6mm} \textbf{Post }$\{result=l[n]\}$\\
+		$\}$\medskip \\
+		
+\textbf{proc n-esimo1 }(in l$: seq\langle \mathbb{R}\rangle$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
+		\hspace*{6mm} \textbf{Pre }$\{$\\
+		\hspace*{6mm} /*Los elementos son distintos entre si */\\
+		\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i < |l|
+				\rightarrow_L ((\forall j:\mathbb{Z})(0\leq j < |l|
+				\wedge i \neq j)\rightarrow_L l[i]\neq l[j])$\\
+		\hspace*{6mm} $\wedge 0 \leq n < |l|$\\
+		\hspace*{6mm} $\}$\\
+		\hspace*{6mm} \textbf{Post }$\{$\\
+		\hspace*{6mm} $resultl\in l$\\
+		\hspace*{6mm} $\wedge$\\
+		\hspace*{6mm} $n=\sum_{i=0}^{|l|-1}$(if $l[i]<result$ then 1 else 0 fi)\\
+		\hspace*{6mm} $\}$\\
+		$\}$\medskip \\
+	
+¿Es cierto que todo algorimo que cumple con \textbf{n-esimo1} cumple también
+ con \textbf{n-esimo2}? ¿Y al revéz?\\
+ \textbf{Sugerencia:} Razonar de manera análogoa a la del ejercicio anterior.
 \subsection*{Respuesta}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
 	
 \paragraph*{Ejercicio 9.}$\bigstar$ Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
 		\item Dado un número entero, decidir si es par.
 		\item Dado un entero $n$ y uno $m$, decidir si $n$ es un múltiplo de $m$.
 		\item Dadu un número real, devolver su inverso multiplicativo.
-		\item Dada una secuencia de caracteres, obtener de ella sólo los que son numéricos (con todas sus apariciones sun umportar el orden de aparición).
+		\item Dada una secuencia de caracteres, obtener de ella sólo los que son numéricos (con todas sus apariciones sin importar el orden de aparición).
 		\item Dada una secuencia de reales, devolver la secuencia que resulta de duplicar sus valores en las posiciones impares.
 		\item Dado un número entero, listar todos sus divisores positivos (sin duplicados).
 	\end{enumerate}
@@ -398,12 +409,20 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item
 	\end{enumerate}
 	
-\paragraph*{Ejercicio 10.} Considerar el problema de decidir, dados $n$ y $m$ enteros, si $n$ es múltiplo de $m$, y la siguiente especificación.
+\paragraph*{Ejercicio 10.} Considerar el problema de decidir, dados $n$ y $m$ enteros, si $n$ es múltiplo de $m$, y la siguiente especificación. \medskip \\
+			\textbf{proc esMultiplo }(in n,m$: \mathbb{Z}$,out result$:\textbf{Bool})
+			\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ m \neq 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=(n\textrm{ mod }m=0)\}$\\
+			$\}$
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
+		\item Segun la definición matemática de múltiplo, ¿tiene sentido preguntarse si 4
+				es múltiplo de 0? ¿Cúal es la respuesta?
+		\item ¿Debería ser $n=4, m=0$ una entrada válida para el problema? ¿Lo es en esta
+				especificación?
+		\item	Corregir la especificación de manera tal que $n=4, m=0$ satisfaga la precondición
+				(¡cuidado con las indefiniciones!).
+		\item ¿Qué relación de fuerza hay entre la precondición nueva y la original?
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -413,7 +432,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item
 	\end{enumerate}
 
-\paragraph*{Ejercicio 11.} Considerar el probleam de, dada una secuencia de números reales, devolver la que resulta de duplicar sus valores en las posiciones impares.
+\paragraph*{Ejercicio 11.} Considerar el problema de, dada una secuencia de números reales, devolver la que resulta de duplicar sus valores en las posiciones impares.
 	\begin{enumerate}[label=\alph*)]
 		\item
 		\item
@@ -429,41 +448,27 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 12.}$\bigstar$ Especificar el problema de dado un entero positivo retornar una secuencia de 0s y 1s que represente es número en base 2 (es decir, en binario).
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
 \subsection*{Respuesta}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
 
 \paragraph*{Ejercicio 13.} Con lo visto en los ejercicios 9 a 12 ¿Encuentra casos de sub y sobreespecificación en las especificaciones del ejercicio 8?
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
 \subsection*{Respuesta}
-	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
-	\end{enumerate}
 	
 \paragraph*{Ejercicio 14.} Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
+		\item $\bigstar$ Dado un número entero positivo, obtener la suma de sus factores primos.
+		\item Dado un número entero positivo, decidir si es perfecto. Se dice que un número es
+				perfecto cuando es igual a la suma de sus divisores (excluyéndose a sí mismo).
+		\item Dado un número entero positivo $n$, obtener el menor entero positivo $m>1$ tal que
+				$m$ sea coprimo con $n$.
+		\item $\bigstar$ Dado un entero positivo, obtener su descomposición en factores primos.
+			 	Devolver una secuencia de tuplas ($p,c$), donde $p$ es un factor primo y $e$ es su
+			 	exponente, ordenada en forma creciente con respecto a $p$.
+		\item Dada una secuencia de números reales, obtener la diferencia máxima entre dos de sus
+				elementos.
+		\item $\bigstar$ Dada una secuencia de números enteros, devolver aquel que divida a más
+				elementos de dicha secuencia. El elemento tiene que pertenecer a la secuencia
+				original. Si existe más de un elemento que cumple esta propiedad, devolver alguno 
+				de ellos.
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -475,7 +480,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	
 \paragraph*{Ejercicio 15.} Especificar los siguientes problemas sobre secuencias:
 	\begin{enumerate}[label=\alph*)]
-		\item
+		\item 
 		\item
 		\item
 		\item
