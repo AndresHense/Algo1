@@ -88,13 +88,19 @@ Hola, este no es un resuelto oficial, tiene el logo del DC porque me parecio div
 		\item $l= \langle 9,9,9\rangle$, $suma=1$, si $l$ contiene a $result$, entonces necesariamente va a sumar por lo menos 9, por lo que no puede valer 1 su suma.
 		\item $l= \langle 9,9,9\rangle$, $suma=1$, si $l$ contiene a $result$, entonces necesariamente va a sumar por lo menos 9, por lo que no puede valer 1 su suma, y ademas suma cumple la desigualdad $0\leq suma\leq 27$
 		\item \textbf{proc elementosQueSumen }(in $l:seq\langle \mathbb{Z}\rangle,$in suma$:\mathbb{Z}$, out result $:seq\langle \mathbb{Z}\rangle)\ \{$\\
-\hspace*{6mm}\textbf{Pre }$\{(\exists m:seq\langle \mathbb{Z}\rangle)(perteneceAPermutacionesDe(m,l)\wedge_L sumaElementos(m)=suma)\}$\\
+\hspace*{6mm}\textbf{Pre }$\{cantSubSeqCumplenSuma(l,suma)>0\}$\\
 \hspace*{6mm}\textbf{Post }$\{$\\
 \hspace*{6mm}/* La secuencia result está incluída en la secuencia l */\\
 \hspace*{6mm}$(\forall x:\mathbb{Z})(x\in $ result$ \rightarrow \#$apariciones($x,result)\leq \#$apariciones$(x,l)$)\\
 \hspace*{6mm}/* La suma de la result coincide con el valor de la suma */\\
 \hspace*{6mm}$\wedge suma=\sum_{i=0}^{|result|-1}result[i]$\\
-\hspace*{6mm}$\}$\\
+\hspace*{6mm}$\}$\medskip \\
+
+		\textit{aux cantSubSeqCumplenSuma}$(l:seq\langle \mathbb{Z}\rangle,suma :\mathbb{Z}):\mathbb{Z}=$\smallskip \\
+			\hspace*{4mm}$\sum_{j=1}^{|l|}\sum_{i=0}^{|l|-1}$ if $(|subseq(l,i,j)|>0 \wedge
+			 sumaSeq(subseq(l,i,j))=suma)$ 
+			then 1 else 0 fi \bigskip \\
+		\textit{aux sumaSeq}$(l:seq\langle \mathbb{Z}\rangle):\mathbb{Z}=\sum_{k=0}^{|l|-1}l[k]$
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 3.}$\bigstar$ Para los siguientes problemas, dar todas las soluciones posibles a las entradas dadas.
@@ -375,6 +381,20 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item
 		\item
 		\item
+		\item
+		\item
+		
+			\textbf{proc DuplicaValoresEnImpares}
+			$($in $s: seq\langle \mathbb{R}\rangle,$out $m: seq\langle \mathbb{R}\rangle)\ \{$	\\
+					\hspace*{6mm}\textbf{Pre }$\{ |s|>0\}$\\
+					\hspace*{6mm}\textbf{Post }$\{$\\
+					\hspace*{10mm}$|s|=|m|\wedge_L$\\
+					\hspace*{10mm}$(\forall i: \mathbb{Z})(0\leq i <|s|\wedge_L
+					\textrm{i mod }2=1)\rightarrow_L(m[i]=s[i]*2)$\\
+					\hspace*{10mm}$\wedge(\forall j: \mathbb{Z})(0\leq j <|s|\wedge_L
+					\textrm{j mod }2=0)\rightarrow_L(m[i]=s[i])$\\
+					\hspace*{6mm}$\}$\\
+			$\}$
 		\item
 	\end{enumerate}
 	
