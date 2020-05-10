@@ -434,10 +434,21 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 
 \paragraph*{Ejercicio 11.} Considerar el problema de, dada una secuencia de números reales, devolver la que resulta de duplicar sus valores en las posiciones impares.
 	\begin{enumerate}[label=\alph*)]
-		\item
-		\item
-		\item
-		\item
+		\item Para la secuencia $\langle 1,2,3,4\rangle$, ¿es $\langle 0,4,0,8\rangle$
+				 un resultado correcto?
+		\item Sea la siguiente especificación:\medskip \\
+			\textbf{proc duplicarEnImpares }(in l$: seq\langle \mathbb{R}\rangle$
+				,out result$:seq\langle \mathbb{R}\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{|result|=|l|\wedge (\forall i\mathbb{Z})
+					(0\leq i < |result|\wedge i\textrm{ mod }2=1)\rightarrow_L 
+					result[i]=2*l[i]\}$\\
+			$\}$\medskip \\
+			Si $l=\langle 1,2,3,4\rangle ,$ ¿$result=\langle 0,4,0,8\rangle$ satisface
+			la postcondición?
+		\item Si es necesario, corregir la especificación para que describa correctamente
+				el resultado esperado.
+		\item ¿Qué relación de fuerza hay entre la nueva postcondición y la original?
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -476,14 +487,27 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item
 		\item
 		\item
+		\item
+		\item
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 15.} Especificar los siguientes problemas sobre secuencias:
 	\begin{enumerate}[label=\alph*)]
-		\item 
-		\item
-		\item
-		\item
+		\item \textbf{proc nEsimaAparicion}(in $l:seq\langle \mathbb{R}\rangle$,
+			in $e:\mathbb{R}$,in $n:\mathbb{Z}$,out $result:\mathbb{Z}$), que devuelve
+			el índice de la n-ésima aparición de $e$ en $l$.
+		\item $\bigstar$ Dadas dos secuencias $s$ y $t$, decidir si $s$ está $incluida$ 
+		en $t$, es decir,si todos los elementos de $s$ aparecen en $t$ en igual o mayor cantidad.
+		\item \textbf{proc mezclarOrdenado}(in $s,t:seq\langle \mathbb{Z}\rangle$,
+		out $result:seq\langle \mathbb{Z}\rangle$) que recibe dos secuencias ordenadas y devuelve
+			el resultado de intercalar sus elementos de manera ordenada.
+		\item Dadas dos secuencias $s$ y $t$ especificar el procedimiento 
+				\textit{intersecciónSinRepetidos} que retorna una secuencia que contiene
+				únicamente los elementos que aparecen en ambas secuencias.
+		\item $\bigstar$ Dadas dos secuencias $s$ y $t$, devolver su \textit{intersección}, es
+				decir, una secuencia con todos los elemntos que aparecen en ambas. Si un mismo
+				elemento tiene repetidos, la secuencia retornada debe contener la cantidad
+				mínima de apariciones en de $s$ y de $t$.
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -500,16 +524,20 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 			  Ejemplos:\medskip \\
 			 \begin{itemize}
 			 	\item \textit{cantApariciones}
-			 	$(\langle 'a'\rangle)=\langle \langle 'a'\rangle \rangle$
+			 	$(\langle 'a'\rangle)=\langle \langle 'a',1\rangle \rangle$
 			 	\item \textit{cantApariciones}
-			 	$(\langle 'a'\rangle)=\langle \langle 'a'\rangle \rangle$
+			 	$(\langle 'a','b','c'\rangle)=\langle \langle 'a',1\rangle ,\langle 'c',1\rangle
+			 		,\langle 'b',1\rangle \rangle$
 			 	\item \textit{cantApariciones}
-			 	$(\langle 'a'\rangle)=\langle \langle 'a'\rangle \rangle$
+			 	$(\langle 'a','b','c','b','d','b'\rangle)=\langle \langle 'a',1\rangle, 
+			 	\langle 'b',3\rangle ,\langle 'd',1\rangle ,\langle 'c',1\rangle \rangle$
 			 	\item \textit{cantApariciones}
-			 	$(\langle 'a'\rangle)=\langle \langle 'a'\rangle \rangle$
+			 	$(\langle \rangle)=\langle \rangle$
 			 \end{itemize}
-		\item
-		\item
+		\item Dada una secuencia, devolver una secuencia de secuencias que contenga todos sus
+				prefijos, en ordn creciente de longitud.
+		\item $\bigstar$ Dada una secuencia de secuencias de enteros l, devolver una secuencia de
+				l que contenga el máximo valor. Por ejemplo, si l
 		\item
 	\end{enumerate}
 \subsection*{Respuesta}
