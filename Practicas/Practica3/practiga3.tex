@@ -496,6 +496,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item \textbf{proc nEsimaAparicion}(in $l:seq\langle \mathbb{R}\rangle$,
 			in $e:\mathbb{R}$,in $n:\mathbb{Z}$,out $result:\mathbb{Z}$), que devuelve
 			el índice de la n-ésima aparición de $e$ en $l$.
+		\item Dadas dos secuencias $s$ y $t$, decidir si $s$ es una subcadena de $t$.
 		\item $\bigstar$ Dadas dos secuencias $s$ y $t$, decidir si $s$ está $incluida$ 
 		en $t$, es decir,si todos los elementos de $s$ aparecen en $t$ en igual o mayor cantidad.
 		\item \textbf{proc mezclarOrdenado}(in $s,t:seq\langle \mathbb{Z}\rangle$,
@@ -521,7 +522,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	\begin{enumerate}[label=\alph*)]
 		\item \textbf{proc cantApariciones}(in $l:\textbf{String},$out $result :
 			 seq(\textbf{Char}\times \mathbb{Z})$ que devuelve la secuencia con todos los elementos de $l$, sin duplicados con su cantidad de apariciones (en un orden cualquiera).
-			  Ejemplos:\medskip \\
+			  Ejemplos: \\
 			 \begin{itemize}
 			 	\item \textit{cantApariciones}
 			 	$(\langle 'a'\rangle)=\langle \langle 'a',1\rangle \rangle$
@@ -537,8 +538,15 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\item Dada una secuencia, devolver una secuencia de secuencias que contenga todos sus
 				prefijos, en ordn creciente de longitud.
 		\item $\bigstar$ Dada una secuencia de secuencias de enteros l, devolver una secuencia de
-				l que contenga el máximo valor. Por ejemplo, si l
-		\item
+				l que contenga el máximo valor. Por ejemplo, si $l=\langle 
+				\langle 2,3,5\rangle , \langle 8,1\rangle , \langle 2,8,4,3\rangle\rangle$, 
+				devolver $\langle 8,1\rangle$ o $\langle 2,8,4,3\rangle$.
+		\item \textbf{proc interseccionMultiple}(in $ls:seq\langle seq\langle \mathbb{Z}\rangle
+		 \rangle ,$out $l: seq(\langle \mathbb{R}\rangle)$ que devuelve en $l$ el resultado de 
+		 		la intersección de todas las secuencias de $ls$.
+		\item $\bigstar$ Dada una secuencia $l$ con todos sus elementos distintos, devolver la
+				secuencia de $partes$, es decir, la secuencia de todas las secuencias incluidas
+				en $l$, cada una con sus elementos en el mismo orden en que aparecen en $l$.
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
@@ -553,28 +561,24 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 \paragraph*{Ejercicio 17.} $\bigstar$ Dados dos enteros $a$ y $b$, se necesita calcular su suma y retornarla en un entero $c$. ¿Cúales de las siguientes especificaciones son correctas para este problema? Para las que no lo son, indicar por qué. 
 	\begin{enumerate}[label=\alph*)]
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc sumar }(inout a,b,c$: \mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{a+b=c\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc sumar }(in a,b$: \mathbb{Z}$,in c$: \mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{c=a+b\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc sumar }(in a,b$: \mathbb{Z}$,out c$: \mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{c=a+b\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc sumar }(inout a,b$: \mathbb{Z}$,out c$: \mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ a=A_0\wedge b=B_0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{ a=A_0\wedge b=B_0\wedge c=a+b\}$\\
 			$\}$
 	\end{enumerate}
 \subsection*{Respuesta}
@@ -588,34 +592,41 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 \paragraph*{Ejercicio 18.}$\bigstar$ Dada una secuencia $l$, se deas sacar su primer elemento y devolverlo. Decidir cúales de estas especificaciones son correctas. Para las que no lo son, indicar por qué y justificar con ejemplos.
 	\begin{enumerate}[label=\alph*)]
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc tomarPrimero }(inout l$: seq\langle \mathbb{R}\rangle $
+			,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|> 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=\textrm{head}(l)\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc tomarPrimero }(inout l$: seq\langle \mathbb{R}\rangle $
+			,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|> 0\wedge l=L_0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=\textrm{head}(L_0)\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc tomarPrimero }(inout l$: seq\langle \mathbb{R}\rangle $
+			,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|> 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=\textrm{head}(L_0)\wedge
+					|l|=|L_0|-1\}$\\
 			$\}$
 		\item
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc tomarPrimero }(inout l$: seq\langle \mathbb{R}\rangle $
+			,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|> 0\wedge l=L_0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=\textrm{head}(L_0)\wedge
+					l=\textrm{tail}(L_0)\}$\\
 			$\}$
 		\item 
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
-			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\textbf{proc tomarPrimero }(inout l$: seq\langle \mathbb{R}\rangle $
+			,out result$:\mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|> 0\wedge l=L_0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $result=\textrm{head}(L_0)$\\
+			\hspace*{6mm} $\wedge |l|=|L_0|-1$\\
+			\hspace*{6mm} $\wedge_L (\forall i:\mathbb{Z})(0\leq i < |l|
+						\rightarrow_L l[i]=L_0[i+1]))$\\
+			\hspace*{6mm}$\}$\\
 			$\}$
 	\end{enumerate}
 \subsection*{Respuesta}
@@ -628,10 +639,21 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 
 \paragraph*{Ejercicio 19.} Considerar la siguiente especificación:\medskip \\
 
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
+			\textbf{proc intercambiar }(inout l$: seq\langle
+				 \mathbb{R}\rangle$,in $i,j:\mathbb{Z})
 			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\hspace*{6mm} \textbf{Pre }$\{0\leq i<|l|
+					\wedge 0\leq j<|l|\wedge l=L_0\}$\\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} /*Las secuencias tienen la misma longitud*/\\
+			\hspace*{6mm} $|l|=|L_0|$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} /*Intercambia i*/\\
+			\hspace*{6mm} $l[i]=L_0[j]$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} /*Intercambia j*/\\
+			\hspace*{6mm} $l[j]=L_0[i]$\\
+			\hspace*{6mm} $\}$\\
 			$\}$
 			
 	\begin{enumerate}[label=\alph*)]
@@ -649,10 +671,27 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 20.} Explicar coloquialmente la siguiente especificación:\medskip \\
-			\textbf{proc raizCuadrada }(in x$: \mathbb{R}$,out result$:\mathbb{R})
+			\textbf{proc copiarPrimero }(inout l$: seq\langle
+				 \mathbb{R}\rangle$,inout i$:\mathbb{Z})
 			\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ x\geq 0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{result^2=x\}$\\
+			\hspace*{6mm} \textbf{Pre }$\{$\\
+			\hspace*{6mm} /*Valores iniciales*/\\
+			\hspace*{6mm} $l=L_0\wedge i=I_0$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} /*Secuencia no vacia*/\\
+			\hspace*{6mm} $|l|>0$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} /*Indice en rango*/\\
+			\hspace*{6mm} $0\leq i <|l|$\\
+			\hspace*{6mm} $\}$\\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $l[I_0]=L_0[0]$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $i=L_0[I_0]$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $((\forall j:\mathbb{Z})(0\leq j<|l|\wedge j\neq I_0)
+							\rightarrow_L l[j]=L_0[I_0])$\\
+			\hspace*{6mm} $\}$\\
 			$\}$
 	
 \subsection*{Respuesta}
