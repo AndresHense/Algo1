@@ -166,10 +166,10 @@ $\}$
 \hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<\vert s\vert\rightarrow_L s[0]=s[i]$\\
 $\}$
 \item \textit{pred hayUnParQueDivideAlResto}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
-\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge (i \textrm{ mod } 2 =0))\rightarrow_L s[j] \textrm{ mod } i =0)$\\
+\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge 0\leq i<\vert s\vert \wedge (s[i] \textrm{ mod } 2 =0))\wedge_L s[j] \textrm{ mod } s[i] =0)$\\
 $\}$
 \item \textit{pred hayUnoEnPosicionParQueDivideAlResto}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
-\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge (j \textrm{ mod } 2 =0))\rightarrow_L s[j] \textrm{ mod } i =0)$\\
+\hspace*{6mm}$(\exists i:\mathbb{Z})(\forall j:\mathbb{Z})((0\leq j<\vert s\vert \wedge 0\leq i<\vert s\vert \wedge (i \textrm{ mod } 2 =0))\wedge_L s[j] \textrm{ mod } s[i] =0)$\\
 $\}$
 \item \textit{pred sinRepetidos}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
 \hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq j<\vert s\vert \wedge 0\leq i<\vert s\vert)\rightarrow_L (s[j] \neq s[i])$\\
