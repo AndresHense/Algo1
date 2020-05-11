@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use v5.26;
 use warnings;
+use File::Path;
 
 my @inpts;
 foreach(@ARGV){
@@ -11,15 +12,26 @@ foreach(@inpts){
     if($_ eq '-cmk'){
         &cmk;
         }
-    if($_ eq '-NewSv'){
-        if($inpts[$_+1] gt 0){
-            
-        }
+    if($_ eq '-r'){
+        &rebuild;
+    }
+	if($_ eq '-cln'){
+        &clean;
     }
 }
 
-sub NewSv{
+sub clean{
+rmtree 'CMakeFiles';
+unlink 'CMakeCache.txt';
+unlink 'CMakeLists.txt';
+unlink 'cmake_install.cmake';
+unlink 'Makefile';
+unlink 'main';
+}
 
+sub rebuild{
+&clean;
+&cmk;
 }
 sub cmk{
 
@@ -29,13 +41,13 @@ if(! open $cmake,'>',"CMakeLists.txt"){
 }
 my %cmk_data=(
     'project' => 'project(cmake_generated)',
-    'set_flags' => 'add_compile_options(-Wall -Wextra -Werror -g)'
     'min_V' => 'cmake_minimum_required(VERSION 3.10)',
     'set_inc' =>'set(INCROOT ${CMAKE_CURRENT_SOURCE_DIR}/)',
     'set_src' =>'set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR}/)',
     'set_dir' =>'set(DIRROOT ${CMAKE_CURRENT_SOURCE_DIR}/)',
     'set_rt_out' =>'set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})',
     'set_out' => 'set(OUT_NAME main)',
+    'set_flags' => 'set(CMAKE_CXX_FLAGS"${CMAKE_CXX_FLAGS} -Wall -g")',
     'set_libs' =>'set(LIBS )',
     'set_files_h' =>"set(FILES_HEADER\n)",
     'set_files_src' =>"set(FILES_SRC\n)",
@@ -85,7 +97,7 @@ foreach my $dirF(@dirHeaders){
         ;
     }else{
         if($cmk_data{set_files}=~s/(set\(FILES_DIR)/${^MATCH}\n\t$d_rot$dirF/p){
-        #say $dirF;}
+        say $dirF;}
     }
     $oldH=$dirF;
 }
