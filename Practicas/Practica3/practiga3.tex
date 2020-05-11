@@ -383,6 +383,11 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
  con \textbf{n-esimo2}? ¿Y al revéz?\\
  \textbf{Sugerencia:} Razonar de manera análoga a la del ejercicio anterior.
 \subsection*{Respuesta}
+$l=\langle 1,4,6,7\rangle$, y $n=3$ cumple \textbf{n-esimo1} y \textbf{n-esimo2}.\\
+Pero $l=\langle 4,1,6,7\rangle$, y $n=3$ cumple \textbf{n-esimo2} y no \textbf{n-esimo1}.\\
+Detalle, encontrar un contraej, me garantiza que no es verdad que si cumple \textbf{n-esimo2}
+entonces va a cumplir \textbf{n-esimo1}, sin embargo no ocurre lo mismo para el otro caso.
+Lo dejo asi, porque es intuible que es verdad.
 	
 \paragraph*{Ejercicio 9.}$\bigstar$ Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
@@ -396,9 +401,47 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
 		\item
+			
+			\textbf{proc esPar }(in a$: \mathbb{Z},$out res$: \textbf{Bool})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{c=\textrm{a mod }2\}$\\
+			$\}$
+			
 		\item
+		
+			\textbf{proc esMultiplo }(in n,m$: \mathbb{Z}$,out result$:\textbf{Bool})
+			\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{m \neq 0 \vee (m=0\wedge n=0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{result=(n\textrm{ mod }m=0)\}$\\
+			$\}$
+		
 		\item
+			
+			\textbf{proc inversoMul}(in x$: \mathbb{R}$,out res$: \mathbb{R})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{x \neq 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{res=x^{-1}\}$\\
+			$\}$
+			
 		\item
+		
+			\textbf{proc obtenerCaracteres }(in l$: seq\langle \textbf{Char}\rangle$
+			out res$: seq\langle \textbf{Char}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{|l|>0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l|\wedge_L esDigito(l[i]))$\\
+			\hspace*{6mm}$\rightarrow_L$\\
+			\hspace*{6mm}$cantAparicionesDeXEnl(l[i],l)=cantAparicionesDeXEnl(l[i],res)$\\
+			\hspace*{6mm}$\}$\\
+			$\}$\smallskip \\
+			
+			\textbf{aux cantAparicionesDeXEnl }(in c$: \textbf{Char}$
+			in l$: seq\langle \textbf{Char}\rangle$,out res $:\mathbb{Z})\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{|l|>0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $res=\sum_{i=0}^{|l|-1}$(if $l[i]=c$ then 1 else 0 fi)\\
+			\hspace*{6mm}$\}$\\
+			$\}$
+			
 		\item
 		
 			\textbf{proc DuplicaValoresEnImpares}
@@ -413,6 +456,15 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 					\hspace*{6mm}$\}$\\
 			$\}$
 		\item
+			
+			\textbf{proc divisoresPositivos }(in a$: \mathbb{Z}$
+				,out res$: seq\langle \mathbb{R}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{a\neq 0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{(\forall i:\mathbb{Z})
+				(1\leq i \leq a\wedge_L \textrm{a mod i}=0)
+				\rightarrow_L i\in res\}$\\
+			$\}$
+			
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 10.} Considerar el problema de decidir, dados $n$ y $m$ enteros, si $n$ es múltiplo de $m$, y la siguiente especificación. \medskip \\
