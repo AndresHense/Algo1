@@ -327,24 +327,30 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	\end{enumerate}
 
 \paragraph*{Ejercicio 7.}$\bigstar$ Considerar las siguientes dos especificaciones, junto con un algoritmo $a$ que satisface la especificación de \textbf{p2}.\medskip \\
-		\textbf{proc p1 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$out result$:\mathbb{Z})\ \{$\smallskip \\
+		\textbf{proc p1 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
 		\hspace*{6mm} \textbf{Pre }$\{x\neq 0\}$\smallskip \\
 		\hspace*{6mm} \textbf{Post }$\{x^n-1<result\leq x^n\}$\\
 		$\}$\medskip \\
-		\textbf{proc p2 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$out result$:\mathbb{Z})\ \{$\smallskip \\
+		\textbf{proc p2 }(in x$: \mathbb{R}$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
 		\hspace*{6mm} \textbf{Pre }$\{ n\leq 0\rightarrow x\neq 0\}$\smallskip \\
 		\hspace*{6mm} \textbf{Post }$\{result=\lfloor x^n\rfloor\}$\\
 		$\}$
 	\begin{enumerate}[label=\alph*)]
 		\item Dados valores de $x$ y $n$ que hacen verdadera la precondición de \textbf{p1}, demostrar que hacen también verdadera la precondición de \textbf{p2}.
 		\item Ahora, dados estos valores de $x$ y $n$, supongamos que se ejecuta $a$: llegamos a un valor de $res$ que hace veradadera la postcondición de \textbf{p2}. ¿Será también verdadera la postcondición de \textbf{p1}?
-		\item ¿Podemos concluior que $a$ satisface la especificación de \textbf{p1}? 
+		\item ¿Podemos concluir que $a$ satisface la especificación de \textbf{p1}? 
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
 		\item
-		\item
-		\item
+			\begin{align*}
+			x\neq 0 \rightarrow (n\leq 0 \rightarrow x\neq 0) &= True\rightarrow 
+			(n\leq 0 \rightarrow True)\\
+			&= True\rightarrow (True)\\
+			&= True
+			\end{align*}
+		\item Sep.
+		\item No se si concluir; porque no lo demostre, pero ponele que vale.
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 8.} Considerar las siguientes especificaciones:\medskip \\
@@ -358,7 +364,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 		\hspace*{6mm} \textbf{Post }$\{result=l[n]\}$\\
 		$\}$\medskip \\
 		
-\textbf{proc n-esimo1 }(in l$: seq\langle \mathbb{R}\rangle$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
+\textbf{proc n-esimo2 }(in l$: seq\langle \mathbb{R}\rangle$,in n$: \mathbb{Z}$,out result$:\mathbb{Z})\ \{$\smallskip \\
 		\hspace*{6mm} \textbf{Pre }$\{$\\
 		\hspace*{6mm} /*Los elementos son distintos entre si */\\
 		\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i < |l|
@@ -375,7 +381,7 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 	
 ¿Es cierto que todo algorimo que cumple con \textbf{n-esimo1} cumple también
  con \textbf{n-esimo2}? ¿Y al revéz?\\
- \textbf{Sugerencia:} Razonar de manera análogoa a la del ejercicio anterior.
+ \textbf{Sugerencia:} Razonar de manera análoga a la del ejercicio anterior.
 \subsection*{Respuesta}
 	
 \paragraph*{Ejercicio 9.}$\bigstar$ Especificar los siguientes problemas:
