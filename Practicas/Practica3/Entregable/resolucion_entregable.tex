@@ -113,8 +113,8 @@ sumatorias.
 			
 			\textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$) $\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{l=l_0 \wedge$\\
-			\hspace*{6mm} $(\forall i:\mathbb{Z})(i\in l \rightarrow_L
-			 l[i]>2)\}$\smallskip \\
+			\hspace*{6mm} $(\forall number:\mathbb{Z})(number\in l \rightarrow
+			 number>2)\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $|l_0|=|l|$\\
 			\hspace*{6mm} $\wedge_L$\\
@@ -123,9 +123,10 @@ sumatorias.
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{aux menorPrimoCerc}(l$: seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+			\textbf{aux menorPrimoCerc}($n: \mathbb{Z}):\mathbb{Z}
 			\ \{$\smallskip \\
-			\hspace*{6mm}$apalala$\\
+			\hspace*{6mm}if $esPrimo(n)$ then n else $menorPrimoCerc(n-1)$ fi\\
+			\hspace*{6mm} juajua, re que no se puede usar recursion en un $aux$
 			$\}$
 
 \textit{Dudas:} lo ideal seria poder hacer un proc menorPrimoCerc que use un while, pero no creo
