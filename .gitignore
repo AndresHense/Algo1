@@ -1,4 +1,9 @@
 *.aux
 *.log
 *.gz
-
+Makefile
+main
+CMakeList.txt
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles

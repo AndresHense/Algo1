@@ -350,7 +350,10 @@ P3:\{x\leq -10\}& \qquad \qquad \qquad \qquad Q3:\{r= x^2\}
 			&= True
 			\end{align*}
 		\item Sep.
-		\item No se si concluir; porque no lo demostre, pero ponele que vale.
+		\item No, el item anterior valia, porque partiamos del supuesto que las 
+			variables cumplian la pre de \textbf{p1}, sin esa restricción entonces ya
+			no es verdad que $a$ satisface la especificación de \textbf{p1}.\\
+			$n=4$ y $x=0$ cumple \textbf{p2}, pero no cumple \textbf{p1}.
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 8.} Considerar las siguientes especificaciones:\medskip \\
@@ -434,13 +437,9 @@ Lo dejo asi, porque es intuible que es verdad.
 			\hspace*{6mm}$\}$\\
 			$\}$\smallskip \\
 			
-			\textbf{aux cantAparicionesDeXEnl }(in c$: \textbf{Char}$
-			in l$: seq\langle \textbf{Char}\rangle$,out res $:\mathbb{Z})\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{|l|>0\}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $res=\sum_{i=0}^{|l|-1}$(if $l[i]=c$ then 1 else 0 fi)\\
-			\hspace*{6mm}$\}$\\
-			$\}$
+			\textbf{aux cantAparicionesDeXEnl }(c$: \textbf{Char}$
+			,l$: seq\langle \textbf{Char}\rangle$)$:\mathbb{Z})$\smallskip \\
+			\hspace*{6mm} $=\sum_{i=0}^{|l|-1}$(if $l[i]=c$ then 1 else 0 fi)\\
 			
 		\item
 		
@@ -458,13 +457,17 @@ Lo dejo asi, porque es intuible que es verdad.
 		\item
 			
 			\textbf{proc divisoresPositivos }(in a$: \mathbb{Z}$
-				,out res$: seq\langle \mathbb{R}\rangle)\ \{$\smallskip \\
+				,out res$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{a\neq 0\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{(\forall i:\mathbb{Z})
-				(1\leq i \leq a\wedge_L \textrm{a mod i}=0)
-				\rightarrow_L i\in res\}$\\
-			$\}$
+				((1\leq i \leq a\wedge_L \textrm{a mod i}=0)
+				\rightarrow_L i\in res)$\\
+			\hspace*{6mm}$\wedge_L sinRepetidos(res)\}$\\
+			$\}$\smallskip \\
 			
+			\textbf{pred sinRepetidos}l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq i,j< |l|\rightarrow_L l[i]\neq l[j])$
+			$\}$
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 10.} Considerar el problema de decidir, dados $n$ y $m$ enteros, si $n$ es múltiplo de $m$, y la siguiente especificación. \medskip \\
