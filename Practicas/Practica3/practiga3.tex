@@ -646,18 +646,20 @@ Despues lo discuto con alguien a este.
 			
 			\textbf{pred losValoresDePSonPrimos}(l$:seq\langle \mathbb{Z} \times \mathbb{Z}
 			\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\hspace*{6mm}$(\forall elem:\mathbb{Z}\times \mathbb{Z})
+				(elem\in result\rightarrow esPrimo((elem)_0))$\\
 			$\}$\smallskip \\
 			
 			\textbf{pred descomposicionCorrecta}(a $:\mathbb{Z}$,
 			l$:seq\langle \mathbb{Z} \times \mathbb{Z}\rangle)\ 
 			\{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\hspace*{6mm}$a=\prod_{i=0}^{|result|-1}(result[i])_{0}^{(result[i])_1}$\\
 			$\}$\smallskip \\	
 			
 			\textbf{pred tuplasOrdenadas}(l$:seq\langle \mathbb{Z} \times \mathbb{Z}
 			\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i <|result|-1\rightarrow_L 
+				(result[i])_0<(result[i+1])_0)$\\
 			$\}$\smallskip \\	
 			
 		\item
