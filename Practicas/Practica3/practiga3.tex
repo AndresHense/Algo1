@@ -515,10 +515,34 @@ Lo dejo asi, porque es intuible que es verdad.
 	\end{enumerate}
 \subsection*{Respuesta}
 	\begin{enumerate}[label=\alph*)]
+		\item Depende de como entiendas el enunciados, asi como esta lo unico que dice es
+			que tiene que devolver una lista con los numeros de las posiciones impares de la lista
+			de entrada multiplicados por dos, no predica nada mas acerca de que pasa con las 
+			posiciones pares, uno puede asumir dos cosa, o que se espera que se mantengan 
+			igual a la lista original, o que son irrelevantes y no es necesario respetar
+			el contenido de la original.
 		\item
+			Satisface la postcondición, porque asi como esta, no esta pidiendo nada a las
+			posiciones pares, por lo que pueden tomar cualquier valor.
 		\item
-		\item
-		\item
+		
+			\textbf{proc duplicarEnImpares }(in l$: seq\langle \mathbb{R}\rangle$
+				,out result$:seq\langle \mathbb{R}\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $|result|=|l|$\\
+			\hspace*{6mm} $\wedge $\\
+			\hspace*{6mm} $(\forall i\mathbb{Z})
+					(0\leq i < |result|\wedge i\textrm{ mod }2=1)\rightarrow_L 
+					result[i]=2*l[i]$\\
+			\hspace*{6mm} $\wedge $\\
+			\hspace*{6mm} $(\forall j\mathbb{Z})
+					(0\leq j < |result|\wedge j\textrm{ mod }2=0)\rightarrow_L 
+					result[j]=l[j]$\\
+			\hspace*{6mm} $\}$\\
+			$\}$\medskip \\
+			
+		\item La original es más fuerte que la nueva.
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 12.}$\bigstar$ Especificar el problema de dado un entero positivo retornar una secuencia de 0s y 1s que represente es número en base 2 (es decir, en binario).

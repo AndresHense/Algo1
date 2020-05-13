@@ -3,7 +3,7 @@
 *.gz
 Makefile
 main
-CMakeList.txt
+CMakeLists.txt
 CMakeCache.txt
 cmake_install.cmake
 CMakeFiles
