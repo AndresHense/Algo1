@@ -50,18 +50,18 @@
 \subsection*{Respuesta}
 
 \begin{itemize}
-	\item pred sinRepetidosv1$(S: seq\langle \mathbb{Z} \rangle)\{$\\
-\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq i\wedge i<\vert S\vert \wedge 0\leq j\wedge j<\vert S\vert)\rightarrow_L (S[j] \neq S[i])$\\
-$\}$
-	\item pred sinRepetidosv2$(S: seq\langle \mathbb{Z} \rangle)\{$\\
-\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i\wedge i<\vert S\vert)\neg(\exists j\neq i:\mathbb{Z})
- (0\leq j\wedge j<\vert S\vert \wedge_L s[i]=[j])$\\
-$\}$
-	\item pred sinRepetidosv3$(S: seq\langle \mathbb{Z} \rangle)\{$\\
-\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq i\wedge_L i<\vert S\vert \wedge_L 0\leq j\wedge_L
- j<\vert S\vert\wedge_L i\neq j)\rightarrow_L (S[j] \neq S[i])$\\
-$\}$
-	\item pred sinRepetidosv4$(S: seq\langle \mathbb{Z} \rangle)\{$\\
+%	\item pred sinRepetidosv1$(S: seq\langle \mathbb{Z} \rangle)\{$\\
+%\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq i\wedge i<\vert S\vert \wedge 0\leq j\wedge j<\vert S\vert)\rightarrow_L (S[j] \neq S[i])$\\
+%$\}$
+%	\item pred sinRepetidosv2$(S: seq\langle \mathbb{Z} \rangle)\{$\\
+%\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i\wedge i<\vert S\vert)\neg(\exists j\neq i:\mathbb{Z})
+% (0\leq j\wedge j<\vert S\vert \wedge_L s[i]=[j])$\\
+%$\}$
+%	\item pred sinRepetidosv3$(S: seq\langle \mathbb{Z} \rangle)\{$\\
+%\hspace*{6mm}$(\forall i,j:\mathbb{Z})(0\leq i\wedge_L i<\vert S\vert \wedge_L 0\leq j\wedge_L
+% j<\vert S\vert\wedge_L i\neq j)\rightarrow_L (S[j] \neq S[i])$\\
+%$\}$
+	\item pred sinRepetidos$(S: seq\langle \mathbb{Z} \rangle)\{$\\
 \hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i\wedge_L i<\vert S\vert)\neg(\exists j:\mathbb{Z})
  (0\leq j\wedge_L j<\vert S\vert \wedge_L i\neq j\wedge s[i]=[j])$\\
 $\}$
