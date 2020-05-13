@@ -562,7 +562,7 @@ Lo dejo asi, porque es intuible que es verdad.
 			$\}$
 \paragraph*{Ejercicio 13.} Con lo visto en los ejercicios 9 a 12 ¿Encuentra casos de sub y sobreespecificación en las especificaciones del ejercicio 8?
 \subsection*{Respuesta}
-Dejenme citar a \textbf{Mr. Rodriguez}, \textit{``alta fiacubi, que dice el otro ejercicio''}.
+Dejenme citar a \textbf{Mr. Rodriguez}, \textit{``alta fiacubi, que dice el otro ejercicio?''}.
 Despues lo discuto con alguien a este.
 	
 \paragraph*{Ejercicio 14.} Especificar los siguientes problemas:
@@ -586,9 +586,9 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\textbf{proc sumaFactoresPrimos }(in a$:\mathbb{Z}$
+				,out result$: \mathbb{Z} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
 			\hspace*{6mm} $\wedge$\\
@@ -602,9 +602,9 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\textbf{proc esPerfecto }(in a$:\mathbb{Z}$
+				,out result$:\textbf{Bool} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
 			\hspace*{6mm} $\wedge$\\
@@ -618,8 +618,52 @@ Despues lo discuto con alguien a este.
 			
 		\item
 		
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc menorCoprimo }(in a$:\mathbb{Z}$
+				,out result$:\mathbb{Z} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$	
+			
+		\item 
+			
+			\textbf{proc factores }(in a$:\mathbb{Z}$
+				,out result$:seq\langle \mathbb{Z} \times \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $losValoresDePSonPrimos(result)\wedge$\\
+			\hspace*{6mm} $descomposicionCorrecta(numero,result)\wedge$\\
+			\hspace*{6mm} $tuplasOrdenadas(result)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred losValoresDePSonPrimos}(l$:seq\langle \mathbb{Z} \times \mathbb{Z}
+			\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$\smallskip \\
+			
+			\textbf{pred descomposicionCorrecta}(a $:\mathbb{Z}$,
+			l$:seq\langle \mathbb{Z} \times \mathbb{Z}\rangle)\ 
+			\{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$\smallskip \\	
+			
+			\textbf{pred tuplasOrdenadas}(l$:seq\langle \mathbb{Z} \times \mathbb{Z}
+			\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$\smallskip \\	
+			
+		\item
+			
+			\textbf{proc difMax}(in l$:seq\langle \mathbb{R}\rangle$,out res$:\mathbb{R} )\ 
+			\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -634,40 +678,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
-			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
-			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
-			
-		\item
-			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
-			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
-			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
-			
-		\item
-			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc DivideMas}(in l$:seq\langle \mathbb{Z}\rangle$,out res$:\mathbb{Z} )\ 
+			\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -704,8 +716,8 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc nEsimaAparicion }(in l$:seq\langle \mathbb{Z}\rangle$,in $e:\mathbb{R}$
+			,in $n:\mathbb{Z}$,out $result:\mathbb{Z})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -720,8 +732,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc esSubcadena }(in $l:seq\langle \mathbb{Z}\rangle$
+				,in $m:seq\langle \mathbb{Z}\rangle$,out res$\textbf{Bool} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -736,8 +748,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 		
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc estaIncluilda }(in $l:seq\langle \mathbb{Z}\rangle$
+				,in $m:seq\langle \mathbb{Z}\rangle$,out res$\textbf{Bool} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -752,8 +764,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc mezclarOrdenado }(in $l:seq\langle \mathbb{Z}\rangle$
+				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -768,8 +780,9 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc interseccionSinRepetidos }(in $l:seq\langle \mathbb{Z}\rangle$
+				,in $m:seq\langle \mathbb{Z}\rangle$
+				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -784,8 +797,9 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc interseccion }(in $l:seq\langle \mathbb{Z}\rangle$
+				,in $m:seq\langle \mathbb{Z}\rangle$
+				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -817,7 +831,7 @@ Despues lo discuto con alguien a este.
 			 	$(\langle \rangle)=\langle \rangle$
 			 \end{itemize}
 		\item Dada una secuencia, devolver una secuencia de secuencias que contenga todos sus
-				prefijos, en ordn creciente de longitud.
+				prefijos, en orden creciente de longitud.
 		\item $\bigstar$ Dada una secuencia de secuencias de enteros l, devolver una secuencia de
 				l que contenga el máximo valor. Por ejemplo, si $l=\langle 
 				\langle 2,3,5\rangle , \langle 8,1\rangle , \langle 2,8,4,3\rangle\rangle$, 
@@ -833,8 +847,8 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc cantApariciones}(in $l:\textbf{String},$out $result :
+			 seq(\textbf{Char}\times \mathbb{Z})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -849,7 +863,7 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
+			\textbf{proc prefijos }(in l$:seq\langle \mathbb{Z}\rangle$
 				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
@@ -865,7 +879,7 @@ Despues lo discuto con alguien a este.
 			
 		\item
 		
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
+			\textbf{proc MaxValor }(out result$:seq\langle seq\langle \mathbb{Z}\rangle \rangle$
 				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
@@ -881,8 +895,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc interseccionMultiple}(in $ls:seq\langle seq\langle \mathbb{Z}\rangle
+			 \rangle ,$out $l: seq\langle \mathbb{R}\rangle)\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -894,6 +908,22 @@ Despues lo discuto con alguien a este.
 			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
 			\hspace*{6mm}$body$\\
 			$\}$		
+			
+		\item
+		
+			\textbf{proc partesDeDistintos}(in $l: seq \langle \mathbb{Z}\rangle$
+				,out $res:seq\langle seq\langle \mathbb{Z}\rangle \rangle \ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$	
 	\end{enumerate}
 	
 \section*{Especificación de problemas usando \textbf{inout}}
@@ -1094,8 +1124,7 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$) $\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -1110,8 +1139,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc reemplazar}(inout $l:$\textbf{String}, in $a,b:$\textbf{Char}) 
+			$\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -1126,8 +1155,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 		
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc recortar}(inout $l:seq\langle \mathbb{Z}\rangle$, in $a:\mathbb{Z}$)
+			$\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -1142,8 +1171,8 @@ Despues lo discuto con alguien a este.
 			
 		\item
 			
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc intercambiarParesConImpares}(inout $l:$\textbf{String})
+			$\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
@@ -1158,8 +1187,9 @@ Despues lo discuto con alguien a este.
 		
 		\item
 		
-			\textbf{proc esTmp }(in a$:\mathbb{Z}$
-				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc limpiarDuplicados}(inout $l: seq\langle \mathbb{\textbf{Char}}\rangle$
+			,out $dup:seq\langle \mathbb{\textbf{Char}}\rangle$)
+			$\{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $prd1(a)$\\
