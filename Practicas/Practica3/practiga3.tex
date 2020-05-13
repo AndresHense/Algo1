@@ -548,8 +548,22 @@ Lo dejo asi, porque es intuible que es verdad.
 \paragraph*{Ejercicio 12.}$\bigstar$ Especificar el problema de dado un entero positivo retornar una secuencia de 0s y 1s que represente es número en base 2 (es decir, en binario).
 \subsection*{Respuesta}
 
+\textbf{proc esBinario }(in numero$:\mathbb{Z}$
+				,out result$:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ numero >0\}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $solo0sY1s(result)\wedge$\\
+			\hspace*{6mm} $numero=\sum_{i=0}^{|result|-1}result[i]*2^{|result|-1-i}$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textit{pred solo0sY1s}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i< |l|\rightarrow_L l[i]=0\vee l[i]=1)$\\
+			$\}$
 \paragraph*{Ejercicio 13.} Con lo visto en los ejercicios 9 a 12 ¿Encuentra casos de sub y sobreespecificación en las especificaciones del ejercicio 8?
 \subsection*{Respuesta}
+Dejenme citar a \textbf{Mr. Rodriguez}, \textit{``alta fiacubi, que dice el otro ejercicio''}.
+Despues lo discuto con alguien a este.
 	
 \paragraph*{Ejercicio 14.} Especificar los siguientes problemas:
 	\begin{enumerate}[label=\alph*)]
