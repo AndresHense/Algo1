@@ -74,15 +74,16 @@ sumatorias.
 				,out $res:seq\langle T\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $perteneceAAmbos(l,m,res)$\\
+			\hspace*{6mm} $incluidoEnAmbos(l,m,res)$\\
 			\hspace*{6mm} $\wedge_L$\\
 			\hspace*{6mm} $mismaCantRep(l,m,res)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred perteneceAAmbos}($l,m,res:seq\langle T\rangle)
+			\textbf{pred incluidoEnAmbos}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
-			\hspace*{6mm}$ res \in l \wedge res \in m$\\
+			\hspace*{6mm}$ (\forall elem:T)(elem\in res) \leftrightarrow (elem\in l \wedge 
+			elem\in m)$\\
 			$\}$\smallskip \\	
 			
 			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
@@ -101,9 +102,7 @@ sumatorias.
 			\ \{$\smallskip \\
 			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
 			$\}$\smallskip \\	
-\textit{Dudas:} Tiene que tener algo la \textbf{Pre}?, ese \textit{perteneceAAmbos},
- tranquilamente puede volar, o asi como esta, esta demasiado escueto?, como me asegura esta implementación que $res$ no tiene elementos de
- más?.
+
 \paragraph*{Ejercicio 22.a} Especificar los siguientes problemas de modificación de secuencias:
 	\begin{itemize}
 		\item \textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$), que dada una secuencia de enteros mayores a dos, reemplaza dichos valores por el número primo menor más cercano. Por ejemplo, si $l=\langle 6,5,9,14 \rangle$, luego de aplicar \textbf{primosHermanos}($l$), $l=\langle 5,5,7,13 \rangle$
@@ -118,17 +117,30 @@ sumatorias.
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $|l_0|=|l|$\\
 			\hspace*{6mm} $\wedge_L$\\
-			\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i < |l_0|)\rightarrow_L 
-				l_0[i]=menorPrimoCerc(l[i])$\\
+			\hspace*{6mm} $mismosPrimos(l,l_0 )$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $primosCercanos(l,l_0)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{aux menorPrimoCerc}($n: \mathbb{Z}):\mathbb{Z}
+			\textbf{pred mismosPrimos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
-			\hspace*{6mm}if $esPrimo(n)$ then n else $menorPrimoCerc(n-1)$ fi\\
-			\hspace*{6mm} juajua, re que no se puede usar recursion en un $aux$
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i])$\\
+			\hspace*{6mm}$\rightarrow_L(l_0[i]=l[i])$\\
+			$\}$\smallskip \\
+			
+			\textbf{pred primosCercanos}($l,l_0: seq\langle\mathbb{Z}\rangle
+			\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<|l_0|\wedge_L\neg(esPrimo(l_0[i]))
+			\rightarrow_L esPrimo(l[i])$\\
+			\hspace*{6mm}$\wedge l[i]<l_0[i]\wedge_L \neg(\exists n:\mathbb{Z})(n>l[i]\wedge
+			n<l_0[i]\wedge esPrimo(n)))$\\
+			$\}$\smallskip \\
+			
+			\textit{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
+			\hspace*{6mm}$ (x > 1)(\forall i :\mathbb{N})
+			(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
 			$\}$
 
-\textit{Dudas:} lo ideal seria poder hacer un proc menorPrimoCerc que use un while, pero no creo
-que se pueda hacer eso, y asi como esta no le veo la vuelta.
+
 \end{document}
