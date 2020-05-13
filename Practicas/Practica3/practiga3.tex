@@ -586,13 +586,11 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc sumaFactoresPrimos }(in a$:\mathbb{Z}$
+			\textbf{proc sumaFactoresPrimos }(in n$:\mathbb{Z}$
 				,out result$: \mathbb{Z} )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)$ then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
@@ -639,7 +637,7 @@ Despues lo discuto con alguien a este.
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $losValoresDePSonPrimos(result)\wedge$\\
-			\hspace*{6mm} $descomposicionCorrecta(numero,result)\wedge$\\
+			\hspace*{6mm} $descomposicionCorrecta(,result)\wedge$\\
 			\hspace*{6mm} $tuplasOrdenadas(result)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
