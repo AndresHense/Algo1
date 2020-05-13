@@ -69,9 +69,9 @@ sumatorias.
 
 \subsection*{Respuesta}
 
-			\textbf{proc interseccion }(in $l:seq\langle \mathbb{Z}\rangle$
-				,in $m:seq\langle \mathbb{Z}\rangle$
-				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\textbf{proc interseccion }(in $l:seq\langle T\rangle$
+				,in $m:seq\langle T\rangle$
+				,out $res:seq\langle T\rangle )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $perteneceAAmbos(l,m,res)$\\
@@ -80,29 +80,29 @@ sumatorias.
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred perteneceAAmbos}($l,m,res:seq\langle \mathbb{Z}\rangle)
+			\textbf{pred perteneceAAmbos}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
 			\hspace*{6mm}$ res \in l \wedge res \in m$\\
 			$\}$\smallskip \\	
 			
-			\textbf{pred mismaCantRep}($l,m,res:seq\langle \mathbb{Z}\rangle)
+			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
 			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
 			cantRep(res,res[j])=minRep(l,m,res[j])$\\
 			$\}$\smallskip \\	
 			
-			\textbf{aux minRep}($l,m:seq\langle \mathbb{Z}\rangle$
-				,$n:\mathbb{Z} ):\mathbb{Z}\ \{$\smallskip \\
-			\hspace*{6mm}if $cantRep(l,res[j])<cantRep(m,res[j])$
-				 then $cantRep(l,res[j])$ else $cantRep(m,res[j])$ fi\\
+			\textbf{aux minRep}($l,m:seq\langle T\rangle$
+				,$n:T ):\mathbb{Z}\ \{$\smallskip \\
+			\hspace*{6mm}if $cantRep(l,n)<cantRep(m,n)$
+				 then $cantRep(l,n)$ else $cantRep(m,n)$ fi\\
 			$\}$\smallskip \\			
 			
-			\textbf{aux cantRep}(l$: seq\langle \mathbb{Z}\rangle$, $n:\mathbb{Z})
+			\textbf{aux cantRep}(l$: seq\langle T\rangle$, $n:T):\mathbb{Z}
 			\ \{$\smallskip \\
 			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
 			$\}$\smallskip \\	
 \textit{Dudas:} Tiene que tener algo la \textbf{Pre}?, ese \textit{perteneceAAmbos},
- tranquilamente puede volar, como me asegura esta implementación que $res$ no tiene elementos de
+ tranquilamente puede volar, o asi como esta, esta demasiado escueto?, como me asegura esta implementación que $res$ no tiene elementos de
  más?.
 \paragraph*{Ejercicio 22.a} Especificar los siguientes problemas de modificación de secuencias:
 	\begin{itemize}
