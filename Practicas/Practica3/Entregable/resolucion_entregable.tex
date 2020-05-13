@@ -41,21 +41,69 @@
 \textbf{Integrantes:} Andrés M. Hense, Victoria Espil
 \end{center}
 
-\paragraph*{Ejercicio 14.} Especificar los siguientes problemas:
-	\begin{enumerate}[label=\alph*)]
-		\item $\bigstar$ Dado un número entero positivo, obtener la suma de sus factores primos.
-	\end{enumerate}
+\paragraph*{Ejercicio 14.a} Especificar los siguientes problemas:
+	\begin{itemize}
+		\item Dado un número entero positivo, obtener la suma de sus factores primos.
+	\end{itemize}
+	
+\subsection*{Respuesta}
 
-\paragraph*{Ejercicio 15.} Especificar los siguientes problemas sobre secuencias:
-	\begin{enumerate}[label=\alph*)]
-		\item $\bigstar$ Dadas dos secuencias $s$ y $t$, devolver su \textit{intersección}, es
+			\textbf{proc sumaFactoresPrimos }(in a$:\mathbb{Z}$
+				,out result$: \mathbb{Z} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$
+			
+\paragraph*{Ejercicio 15.f} Especificar los siguientes problemas sobre secuencias:
+	\begin{itemize}
+		\item Dadas dos secuencias $s$ y $t$, devolver su \textit{intersección}, es
 				decir, una secuencia con todos los elemntos que aparecen en ambas. Si un mismo
 				elemento tiene repetidos, la secuencia retornada debe contener la cantidad
 				mínima de apariciones en de $s$ y de $t$.
-	\end{enumerate}
+	\end{itemize}
+	
+\subsection*{Respuesta}
 
-\paragraph*{Ejercicio 22.} Especificar los siguientes problemas de modificación de secuencias:
-	\begin{enumerate}[label=\alph*)]
-		\item $\bigstar$ \textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$), que dada una secuencia de enteros mayores a dos, reemplaza dichos valores por el número primo menor más cercano. Por ejemplo, si $l=\langle 6,5,9,14 \rangle$, luego de aplicar \textbf{primosHermanos}($l$), $l=\langle 5,5,7,13 \rangle$
-	\end{enumerate}
+			\textbf{proc interseccion }(in $l:seq\langle \mathbb{Z}\rangle$
+				,in $m:seq\langle \mathbb{Z}\rangle$
+				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$	
+
+\paragraph*{Ejercicio 22.a} Especificar los siguientes problemas de modificación de secuencias:
+	\begin{itemize}
+		\item \textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$), que dada una secuencia de enteros mayores a dos, reemplaza dichos valores por el número primo menor más cercano. Por ejemplo, si $l=\langle 6,5,9,14 \rangle$, luego de aplicar \textbf{primosHermanos}($l$), $l=\langle 5,5,7,13 \rangle$
+	\end{itemize}
+	
+\subsection*{Respuesta}
+			
+			\textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$) $\{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $\}$\\
+			$\{$\smallskip \\
+			
+			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
+			\hspace*{6mm}$body$\\
+			$\}$
 \end{document}
