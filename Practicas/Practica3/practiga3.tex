@@ -744,68 +744,128 @@ Despues lo discuto con alguien a este.
 		\item
 		
 			\textbf{proc estaIncluilda }(in $l:seq\langle \mathbb{Z}\rangle$
-				,in $m:seq\langle \mathbb{Z}\rangle$,out res$\textbf{Bool} )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+				,in $m:seq\langle \mathbb{Z}\rangle$,out res$:\textbf{Bool} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{|l| \leq |m|\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $res=(\forall elem:\mathbb{Z})(elem\in l)\rightarrow 
+			\#apariciones(elem,l)\leq \#apariciones(elem,m)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
+			\textbf{aux \#apariciones}($e:\mathbb{Z},l: seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $e=l[i]$ then 1 else 0 fi\\
+			$\}$
 			
 		\item
 			
 			\textbf{proc mezclarOrdenado }(in $l:seq\langle \mathbb{Z}\rangle$
 				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ estaOrdenada(l)\wedge
+			 estaOrdenada(m)\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $incluidoEnAlguno(l,m,res)$\\
 			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $mismaCantRep(l,m,res)$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $estaOrdenada(res)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
+			\textbf{pred incluidoEnAlguno}($l,m,res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$ (\forall elem:T)(elem\in res) \leftrightarrow (elem\in l \vee 
+			elem\in m)$\\
+			$\}$\smallskip \\	
+			
+			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
+			cantRep(res,res[j])=sumRep(l,m,res[j])$\\
+			$\}$\smallskip \\	
+			
+			\textbf{aux sumRep}($l,m:seq\langle T\rangle$
+				,$n:T ):\mathbb{Z}\ \{$\smallskip \\
+			\hspace*{6mm} $cantRep(l,n)+cantRep(m,n)$\\
+			$\}$\smallskip \\			
+			
+			\textbf{aux cantRep}(l$: seq\langle T\rangle$, $n:T):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
+			$\}$\smallskip \\
+			
+			\textbf{pred estaOrdenada}$(s: seq\langle \mathbb{Z} \rangle)\{$\\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})
+				(0\leq i<\vert s\vert -1\rightarrow_L s[i]\leq s[i+1])$\\
+			$\}$\smallskip \\
 			
 		\item
 			
-			\textbf{proc interseccionSinRepetidos }(in $l:seq\langle \mathbb{Z}\rangle$
-				,in $m:seq\langle \mathbb{Z}\rangle$
-				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\textbf{proc interseccionSinRepetidos }(in $l:seq\langle T\rangle$
+				,in $m:seq\langle T\rangle$
+				,out $res:seq\langle T\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $incluidoEnAmbos(l,m,res)$\\
+			\hspace*{6mm} $\wedge_L$\\
+			\hspace*{6mm} $sinRep(res)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
+			\textbf{pred incluidoEnAmbos}($l,m,res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$ (\forall elem:T)(elem\in res) \leftrightarrow (elem\in l \wedge 
+			elem\in m)$\\
+			$\}$\smallskip \\	
+			
+			\textbf{pred sinRep}($res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
+			cantRep(res,res[j])=1$\\
+			$\}$\smallskip \\	
+						
+			
+			\textbf{aux cantRep}(l$: seq\langle T\rangle$, $n:T):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
+			$\}$\smallskip \\	
 			
 		\item
 			
-			\textbf{proc interseccion }(in $l:seq\langle \mathbb{Z}\rangle$
-				,in $m:seq\langle \mathbb{Z}\rangle$
-				,out $res:seq\langle \mathbb{Z}\rangle )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\textbf{proc interseccion }(in $l:seq\langle T\rangle$
+				,in $m:seq\langle T\rangle$
+				,out $res:seq\langle T\rangle )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $incluidoEnAmbos(l,m,res)$\\
+			\hspace*{6mm} $\wedge_L$\\
+			\hspace*{6mm} $mismaCantRep(l,m,res)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
+			\textbf{pred incluidoEnAmbos}($l,m,res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$ (\forall elem:T)(elem\in res) \leftrightarrow (elem\in l \wedge 
+			elem\in m)$\\
+			$\}$\smallskip \\	
+			
+			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
+			\ \{$\smallskip \\
+			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
+			cantRep(res,res[j])=minRep(l,m,res[j])$\\
+			$\}$\smallskip \\	
+			
+			\textbf{aux minRep}($l,m:seq\langle T\rangle$
+				,$n:T ):\mathbb{Z}\ \{$\smallskip \\
+			\hspace*{6mm}if $cantRep(l,n)<cantRep(m,n)$
+				 then $cantRep(l,n)$ else $cantRep(m,n)$ fi\\
+			$\}$\smallskip \\			
+			
+			\textbf{aux cantRep}(l$: seq\langle T\rangle$, $n:T):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
+			$\}$\smallskip \\	
+			
 	\end{enumerate}
 	
 \paragraph*{Ejercicio 16.} Especificar los siguientes problemas:
