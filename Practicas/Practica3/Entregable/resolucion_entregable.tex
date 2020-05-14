@@ -52,8 +52,23 @@
 				,out result$: \mathbb{Z} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$ then $i$ else 0 fi\\
+			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$
+			 then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
+			\hspace*{5mm}$\}$\smallskip \\
+			
+			\textbf{proc sumaFactoresPrimosConPotencias }(in n$:\mathbb{Z}$
+				,out result$: \mathbb{Z} )\ \{$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
+			\hspace*{6mm} \textbf{Post }$\{$\\
+			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$
+			 then $\#vecesQueDivide(i,n)*i$ else 0 fi\\
+			\hspace*{6mm} $\}$\\
+			\hspace*{5mm}$\}$\smallskip \\
+			
+			\textbf{aux \#vecesQueDivide}($m,n: \mathbb{Z}):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=1}^{m^i<n}$ if $n$ mod $m^i=0$ then 1 else 0 fi\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
