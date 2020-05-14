@@ -54,7 +54,12 @@
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$ then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
+			\hspace*{5mm}$\}$\smallskip \\
+			
+			\textbf{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
+			\hspace*{6mm}$ (x > 1)\wedge(\forall i :\mathbb{N})
+			(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
+			\hspace*{5mm}$\}$\smallskip \\
 			
 Notar que si $n<2$ entonces la sumatoria devolvera 0, por definición de como se comportan las 
 sumatorias.
@@ -78,30 +83,30 @@ sumatorias.
 			\hspace*{6mm} $\wedge_L$\\
 			\hspace*{6mm} $mismaCantRep(l,m,res)$\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
+			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred incluidoEnAmbos}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
 			\hspace*{6mm}$ (\forall elem:T)(elem\in res) \leftrightarrow (elem\in l \wedge 
 			elem\in m)$\\
-			$\}$\smallskip \\	
+			\hspace*{5mm}$\}$\smallskip \\	
 			
 			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
 			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
 			cantRep(res,res[j])=minRep(l,m,res[j])$\\
-			$\}$\smallskip \\	
+			\hspace*{5mm}$\}$\smallskip \\	
 			
 			\textbf{aux minRep}($l,m:seq\langle T\rangle$
 				,$n:T ):\mathbb{Z}\ \{$\smallskip \\
 			\hspace*{6mm}if $cantRep(l,n)<cantRep(m,n)$
 				 then $cantRep(l,n)$ else $cantRep(m,n)$ fi\\
-			$\}$\smallskip \\			
+			\hspace*{5mm}$\}$\smallskip \\			
 			
 			\textbf{aux cantRep}(l$: seq\langle T\rangle$, $n:T):\mathbb{Z}
 			\ \{$\smallskip \\
 			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]=n$ then 1 else 0 fi\\
-			$\}$\smallskip \\	
+			\hspace*{5mm}$\}$\smallskip \\	
 
 \paragraph*{Ejercicio 22.a} Especificar los siguientes problemas de modificación de secuencias:
 	\begin{itemize}
@@ -121,13 +126,13 @@ sumatorias.
 			\hspace*{6mm} $\wedge$\\
 			\hspace*{6mm} $primosCercanos(l,l_0)$\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
+			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred mismosPrimos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
 			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i])$\\
 			\hspace*{6mm}$\rightarrow_L(l_0[i]=l[i])$\\
-			$\}$\smallskip \\
+			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred primosCercanos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
@@ -135,12 +140,12 @@ sumatorias.
 			\rightarrow_L esPrimo(l[i])$\\
 			\hspace*{6mm}$\wedge l[i]<l_0[i]\wedge_L \neg(\exists n:\mathbb{Z})(n>l[i]\wedge
 			n<l_0[i]\wedge esPrimo(n)))$\\
-			$\}$\smallskip \\
+			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
-			\hspace*{6mm}$ (x > 1)(\forall i :\mathbb{N})
+			\hspace*{6mm}$ (x > 1)\wedge(\forall i :\mathbb{N})
 			(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
-			$\}$
+			\hspace*{5mm}$\}$
 
 
 \end{document}
