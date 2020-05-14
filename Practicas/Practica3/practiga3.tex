@@ -712,18 +712,17 @@ Despues lo discuto con alguien a este.
 	\begin{enumerate}[label=\alph*)]
 		\item
 			
-			\textbf{proc nEsimaAparicion }(in l$:seq\langle \mathbb{Z}\rangle$,in $e:\mathbb{R}$
+			\textbf{proc nEsimaAparicion }(in l$:seq\langle \mathbb{R}\rangle$,in $e:\mathbb{R}$
 			,in $n:\mathbb{Z}$,out $result:\mathbb{Z})\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ cantApariciones(e,l)\geq n\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $n=cantApariciones(subseq(l,0,l[res]),e)$\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
+			$\}$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\textbf{aux cantApariciones}($e:\mathbb{R},l: seq\langle \mathbb{R}\rangle):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $e=l[i]$ then 1 else 0 fi\\
 			$\}$			
 			
 		\item
