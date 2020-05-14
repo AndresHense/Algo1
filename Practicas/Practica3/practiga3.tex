@@ -592,11 +592,7 @@ Despues lo discuto con alguien a este.
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)$ then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
-			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$			
+			$\}$\smallskip \\		
 			
 		\item
 			
@@ -604,31 +600,28 @@ Despues lo discuto con alguien a este.
 				,out result$:\textbf{Bool} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
-			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $a=sumaDivisores(a)$\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
+			$\}$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\textbf{aux sumaDivisores}(n$: \mathbb{Z}):\mathbb{Z}\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=1}^{n-1}$ if $n$ mod $i=0$ then $i$ else 0 fi \\
 			$\}$	
 			
 		\item
 		
 			\textbf{proc menorCoprimo }(in a$:\mathbb{Z}$
-				,out result$:\mathbb{Z} )\ \{$\smallskip \\
+				,out m$:\mathbb{Z} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{a>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $m\textrm{ mod }n\neq 0$\\
 			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $n\textrm{ mod }m\neq 0$\\
+			\hspace*{6mm} $\wedge$\\
+			\hspace*{6mm} $(\forall i:\mathbb{Z})(0<i<m)\rightarrow n\textrm{ mod }i= 0$\\
 			\hspace*{6mm} $\}$\\
-			$\{$\smallskip \\
-			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
-			$\}$	
+			$\}$\smallskip \\
+				
 			
 		\item 
 			
@@ -664,11 +657,12 @@ Despues lo discuto con alguien a este.
 			
 			\textbf{proc difMax}(in l$:seq\langle \mathbb{R}\rangle$,out res$:\mathbb{R} )\ 
 			\{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|>1\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $(\exists e1,e2:\mathbb{R})(e1,e2\in l \wedge res=abs(e1-e2))$\\
 			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $(\forall i,j:\mathbb{R})(i,j\in l \wedge \neg(i=e1 \wedge j=e2)
+			\wedge \neg(i=e2 \wedge j=e1))\rightarrow abs(j-i)<abs(e1-e2)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
@@ -680,16 +674,18 @@ Despues lo discuto con alguien a este.
 			
 			\textbf{proc DivideMas}(in l$:seq\langle \mathbb{Z}\rangle$,out res$:\mathbb{Z} )\ 
 			\{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
+			\hspace*{6mm} \textbf{Pre }$\{ |l|>0\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $res\in l$\\
 			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $(\forall elem:\mathbb{Z})(elem \in l\wedge elem\neq res)\rightarrow
+			cantDivEnLporN(res,l)>cantDivEnLporN(elem,l)$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
-			\textbf{pred pred1}(l$: seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-			\hspace*{6mm}$body$\\
+			\textbf{aux cantDivEnLporN}($n:\mathbb{Z},l: seq\langle \mathbb{Z}\rangle):\mathbb{Z}
+			\ \{$\smallskip \\
+			\hspace*{6mm}$\sum_{i=0}^{|l|-1}$ if $l[i]$ mod $n=0$ then 1 else 0 fi\\
 			$\}$	
 	\end{enumerate}
 	
