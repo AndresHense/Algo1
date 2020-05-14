@@ -52,7 +52,7 @@
 				,out result$: \mathbb{Z} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)$ then $i$ else 0 fi\\
+			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$ then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
