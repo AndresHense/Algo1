@@ -99,7 +99,7 @@ sumatorias.
 			\hspace*{6mm} \textbf{Pre }$\{ True\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $incluidoEnAmbos(l,m,res)$\\
-			\hspace*{6mm} $\wedge_L$\\
+			\hspace*{6mm} $\wedge$\\
 			\hspace*{6mm} $mismaCantRep(l,m,res)$\\
 			\hspace*{6mm} $\}$\\
 			\hspace*{5mm}$\}$\smallskip \\
@@ -113,7 +113,7 @@ sumatorias.
 			\textbf{pred mismaCantRep}($l,m,res:seq\langle T\rangle)
 			\ \{$\smallskip \\
 			\hspace*{6mm}$(\forall j:\mathbb{Z})(0\leq j<|res|)\rightarrow_L
-			cantRep(res,res[j])=minRep(l,m,res[j])$\\
+			(cantRep(res,res[j])=minRep(l,m,res[j]))$\\
 			\hspace*{5mm}$\}$\smallskip \\	
 			
 			\textbf{aux minRep}($l,m:seq\langle T\rangle$
@@ -158,7 +158,7 @@ sumatorias.
 			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<|l_0|\wedge_L\neg esPrimo(l_0[i]))$\\
 			\hspace*{6mm}$\rightarrow_L$ \\
 			\hspace*{6mm}$(esPrimo(l[i]) \wedge 
-				l[i]<l_0[i]\wedge_L \neg hayPrimoEntre(l[i],l_0[i]))$\\
+				l[i]<l_0[i]\wedge \neg hayPrimoEntre(l[i],l_0[i]))$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred hayPrimoEntre} $(a,b: \mathbb{Z})\{$\\ 
