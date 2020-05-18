@@ -874,26 +874,26 @@ Corregir los errores.
 \item \textit{aux suma} $(x,y: \mathbb{R}):\mathbb{R}=x+y;$
 \item \textit{aux producto} $(x,y: \mathbb{R}):\mathbb{R}=x*y;$
 \item \textit{pred esCuadrado} $(x: \mathbb{Z})\{$\\ 
-\hspace*{6mm}$(\exists a :\mathbb{N}_0)(a*a=x)$\\
+\hspace*{6mm}$(\exists a :\mathbb{Z}_0)(a*a=x)$\\
 $\}$
 \item \textit{pred esPrimo} $(x: \mathbb{Z})\{$\\ 
-\hspace*{6mm}$ (x > 1)(\forall i :\mathbb{N})(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
+\hspace*{6mm}$ (x > 1)(\forall i :\mathbb{Z})(1<i<x \rightarrow _L x\textrm{ mod }i\neq 0 )$\\
 $\}$
 \item \textit{pred sonCoprimos} $(x,y: \mathbb{Z})\{$\\  
-\hspace*{6mm}$ \neg (\exists i :\mathbb{N})(1<i<max\{abs(x),abs(y)\} \wedge (x\textrm{ mod }i=0)\wedge (y\textrm{ mod }i=0))$\\
+\hspace*{6mm}$ \neg (\exists i :\mathbb{Z})(1<i<max\{abs(x),abs(y)\} \wedge (x\textrm{ mod }i=0)\wedge (y\textrm{ mod }i=0))$\\
 $\}$
 \item \textit{pred divisoresGrandes} $(x,y: \mathbb{Z})\{$\\
-\hspace*{6mm}$ (\forall i :\mathbb{N})(1<i<abs(x) \wedge _L(x\textrm{ mod }i=0 ) \rightarrow  i>y)$\\
+\hspace*{6mm}$ (\forall i :\mathbb{Z})(1<i<abs(x) \wedge _L(x\textrm{ mod }i=0 ) \rightarrow  i>y)$\\
 $\}$
 %\item \textit{pred mayorPrimoQueDivide} $(x: \mathbb{Z},y: \mathbb{Z})\{$\\
 %\hspace*{6mm}$esPrimo(y)\wedge _L (x $ mod $y=0)\wedge$\\
 %\hspace*{6mm}$(\forall n' :\mathbb{Z})((n'>abs(y) \wedge _L (x $ mod $n' =0))  \rightarrow  \neg esPrimo(n') )$\\
 %$\}$
 
-\item \textit{pred mayorPrimoQueDivide} $(x: \mathbb{Z},y: \mathbb{Z})\{$\\
-\hspace*{6mm}$esPrimo(y)\wedge _L (x $ mod $y=0)\wedge$\\
-\hspace*{6mm}$(\forall i :\mathbb{N})((abs(y)<i<abs(x) \wedge _L(x $ mod $i =0)  )\rightarrow \neg esPrimo(i) )$\\
-$\}$
+\item \textbf{pred esPrimo} $(n: \mathbb{Z})\{$\\ 
+			\hspace*{6mm}$ n > 1 \wedge(\forall i :\mathbb{Z})
+			(1<i<n \rightarrow _L n\textrm{ mod }i\neq 0 )$\\
+			\hspace*{5mm}$\}$\smallskip \\
 \item
 \end{enumerate}
 \end{document}
