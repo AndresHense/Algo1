@@ -49,29 +49,29 @@
 				,out result$: \mathbb{Z} )\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$
+			\hspace*{6mm} $result=\sum_{i=2}^{n}$ if $esPrimo(i)\wedge(n$ mod $i=0)$
 			 then $i$ else 0 fi\\
 			\hspace*{6mm} $\}$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
-			\textbf{proc sumaFactoresPrimosConPotencias }(in n$:\mathbb{Z}$
-				,out result$: \mathbb{Z} )\ \{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
-			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$
-			 then $\#vecesQueDivide(i,n)*i$ else 0 fi\\
-			\hspace*{6mm} $\}$\\
-			\hspace*{5mm}$\}$\smallskip \\
+			%\textbf{proc sumaFactoresPrimosConPotencias }(in n$:\mathbb{Z}$
+			%	,out result$: \mathbb{Z} )\ \{$\smallskip \\
+			%\hspace*{6mm} \textbf{Pre }$\{n>0 \}$\smallskip \\
+			%\hspace*{6mm} \textbf{Post }$\{$\\
+			%\hspace*{6mm} $result=\sum_{i=2}^{n}$if $esPrimo(i)\wedge(n$ mod $i=0)$
+			% then $\#vecesQueDivide(i,n)*i$ else 0 fi\\
+			%\hspace*{6mm} $\}$\\
+			%\hspace*{5mm}$\}$\smallskip \\
 			
-			\textbf{aux \#vecesQueDivide}($m,n: \mathbb{Z}):\mathbb{Z}
-			\ \{$\smallskip \\
-			\hspace*{6mm}$\sum_{i=1}^{m^i<n}$ if $n$ mod $m^i=0$ then 1 else 0 fi\\
-			\hspace*{5mm}$\}$\smallskip \\
+			%\textbf{aux \#vecesQueDivide}($m,n: \mathbb{Z}):\mathbb{Z}
+			%\ \{$\smallskip \\
+			%\hspace*{6mm}$\sum_{i=1}^{m^i<n}$ if $n$ mod $m^i=0$ then 1 else 0 fi\\
+			%\hspace*{5mm}$\}$\smallskip \\
 			
-			\textbf{aux \#vecesQueDivide2}($m,n: \mathbb{Z}):\mathbb{Z}
-			\ \{$\smallskip \\
-			\hspace*{6mm}$\sum_{i=1}^{n}$ if $n$ mod $m^i=0$ then 1 else 0 fi\\
-			\hspace*{5mm}$\}$\smallskip \\
+			%\textbf{aux \#vecesQueDivide2}($m,n: \mathbb{Z}):\mathbb{Z}
+			%\ \{$\smallskip \\
+			%\hspace*{6mm}$\sum_{i=1}^{n}$ if $n$ mod $m^i=0$ then 1 else 0 fi\\
+			%\hspace*{5mm}$\}$\smallskip \\
 			
 			
 			
@@ -135,8 +135,8 @@ sumatorias.
 \subsection*{Respuesta}
 			
 			\textbf{proc primosHermanos}(inout $l:seq\langle \mathbb{Z}\rangle$) $\{$\smallskip \\
-			\hspace*{6mm} \textbf{Pre }$\{l=l_0 \wedge$\\
-			\hspace*{6mm} $(\forall number:\mathbb{Z})(number\in l \rightarrow
+			\hspace*{6mm} \textbf{Pre }$\{l=l_0 \wedge 
+				(\forall number:\mathbb{Z})(number\in l \rightarrow
 			 number>2)\}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
 			\hspace*{6mm} $|l_0|=|l|$\\
@@ -149,15 +149,16 @@ sumatorias.
 			
 			\textbf{pred mismosPrimos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
-			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i])$\\
-			\hspace*{6mm}$\rightarrow_L(l_0[i]=l[i])$\\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i])
+				\rightarrow_L(l_0[i]=l[i])$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred primosCercanos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
 			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<|l_0|\wedge_L\neg(esPrimo(l_0[i]))
 			\rightarrow_L esPrimo(l[i])$\\
-			\hspace*{6mm}$\wedge l[i]<l_0[i]\wedge_L \neg(\exists n:\mathbb{Z})(n>l[i]\wedge
+			\hspace*{6mm}$\wedge $\\
+			\hspace*{6mm}$l[i]<l_0[i]\wedge_L \neg(\exists n:\mathbb{Z})(n>l[i]\wedge
 			n<l_0[i]\wedge esPrimo(n)))$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
