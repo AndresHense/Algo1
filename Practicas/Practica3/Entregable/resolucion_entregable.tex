@@ -149,17 +149,21 @@ sumatorias.
 			
 			\textbf{pred mismosPrimos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
-			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i])
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i < |l_0|\wedge_L esPrimo(l_0[i]))
 				\rightarrow_L(l_0[i]=l[i])$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred primosCercanos}($l,l_0: seq\langle\mathbb{Z}\rangle
 			\ \{$\smallskip \\
-			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<|l_0|\wedge_L\neg(esPrimo(l_0[i]))
-			\rightarrow_L esPrimo(l[i])$\\
-			\hspace*{6mm}$\wedge $\\
-			\hspace*{6mm}$l[i]<l_0[i]\wedge_L \neg(\exists n:\mathbb{Z})(n>l[i]\wedge
-			n<l_0[i]\wedge esPrimo(n)))$\\
+			\hspace*{6mm}$(\forall i:\mathbb{Z})(0\leq i<|l_0|\wedge_L\neg esPrimo(l_0[i]))$\\
+			\hspace*{6mm}$\rightarrow_L$ \\
+			\hspace*{6mm}$(esPrimo(l[i]) \wedge 
+				l[i]<l_0[i]\wedge_L \neg hayPrimoEntre(l[i],l_0[i]))$\\
+			\hspace*{5mm}$\}$\smallskip \\
+			
+			\textbf{pred hayPrimoEntre} $(a,b: \mathbb{Z})\{$\\ 
+			\hspace*{6mm}$(\exists n:\mathbb{Z})(n>a\wedge
+			n<b\wedge esPrimo(n))$\\
 			\hspace*{5mm}$\}$\smallskip \\
 			
 			\textbf{pred esPrimo} $(n: \mathbb{Z})\{$\\ 
