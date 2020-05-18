@@ -8,7 +8,7 @@
 \usepackage{longtable}
 \usepackage{graphics}
 \usepackage{listings}
-
+\usepackage{xcolor}
 \usepackage{calc}
 \usepackage{lmodern}
 \usepackage{amssymb}
@@ -113,16 +113,26 @@ $a, b$ son variables reales, $i$ una variable entera y $A$
 es una secuencia de reales.
 
 \begin{enumerate}[label=\alph*)]
-\item $wp(a := a+1; b := a/2, b \geq 0).$
-\item $wp(a := A[i] + 1; b := a*a, b\  6= 2).$
-\item $wp(a := A[i] + 1; a := b*b, a \geq 0).$
-\item $wp(a := a-b; b := a+b, a \geq 0 \wedge b \geq 0).$
+\item $wp(\textbf{a := a+1; b := a/2}, b \geq 0).$
+\item $wp(\textbf{a := A[i] + 1; b := a*a}, b\neq 2).$
+\item $wp(\textbf{a := A[i] + 1; a := b*b}, a \geq 0).$
+\item $wp(\textbf{a := a-b; b := a+b}, a \geq 0 \wedge b \geq 0).$
 \end{enumerate}
 
 \subsection*{Respuestas}
 
 \begin{enumerate}[label=\alph*)]
 	\item
+		
+		\begin{align*}
+		\color{blue}\{wp(\textbf{a := a+1; b := a/2}, b \geq 0)\} &\color{blue}
+			\equiv \{(a+1)/2\geq 0\}\\
+		\textbf{a := a+1;}\\
+		\color{blue}\{wp(\textbf{b := a/2},Q)\}&\color{blue}\equiv \{a/2\geq 0\}\\
+		\textbf{b := a/2;}\\
+		\color{blue}\{Q:b \geq 0\}
+		\end{align*}
+		
 	\item
 	\item
 	\item
