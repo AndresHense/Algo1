@@ -906,9 +906,11 @@ Despues lo discuto con alguien a este.
 			 seq(\textbf{Char}\times \mathbb{Z})\ \{$\smallskip \\
 			\hspace*{6mm} \textbf{Pre }$\{ \}$\smallskip \\
 			\hspace*{6mm} \textbf{Post }$\{$\\
-			\hspace*{6mm} $prd1(a)$\\
+			\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i <|l|)\rightarrow_L
+					(l[i] \in result_0 \wedge \#apariciones(l[i],result_0)=1)$\\
 			\hspace*{6mm} $\wedge$\\
-			\hspace*{6mm} $prd2(a)$\\
+			\hspace*{6mm} $(\forall i:\mathbb{Z})(0\leq i <|l|)\rightarrow_L
+					(l[i] \in result_0 \wedge \#apariciones(l[i],result_1)=\#apariciones(l[i],l))$\\
 			\hspace*{6mm} $\}$\\
 			$\{$\smallskip \\
 			
