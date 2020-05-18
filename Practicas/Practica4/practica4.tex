@@ -68,11 +68,44 @@ una secuencia de reales.
 \subsection*{Respuestas}
 
 \begin{enumerate}[label=\alph*)]
+	\item 
+		\begin{align*}
+			wp(\textbf{a := a+1}, a \geq 0) &\equiv \textrm{def}(a+1)
+				\wedge_L (a\geq 0)_{a+1}^a\\
+			&\equiv True\wedge_L a+1\geq 0\\
+			&\equiv a\geq -1
+		\end{align*}
 	\item
+		\begin{align*}
+			wp(\textbf{a := a/b}, a \geq 0) &\equiv \textrm{def}(a/b)\wedge_L 
+		    \wedge_L (a\geq 0)_{a/b}^a \\
+			&\equiv \textrm{def}(a)\wedge_L 
+			\textrm{def}(b)\wedge_L b\neq 0 \wedge_L (a\geq 0)_{a/b}^a\\
+			&\equiv True\wedge_L True \wedge_L b\neq 0\wedge_L  a/b\geq 0\\
+			&\equiv b\neq 0 \wedge_L a \geq 0
+		\end{align*}
 	\item
+		\begin{align*}
+			wp(\textbf{a := A[i]}, a \geq 0) &\equiv \textrm{def}(A[i])
+				\wedge_L (a\geq 0)_{A[i]}^a\\
+			&\equiv (\textrm{def}(A)\wedge_L 
+			\textrm{def}(i)) \wedge_L 0\leq i <|A| \wedge_L A[i]\geq 0\\
+			&\equiv 0\leq i <|A| \wedge_L A[i]\geq 0
+		\end{align*}
 	\item
+		\begin{align*}
+			wp(\textbf{a := b*b}, a \geq 0) &\equiv \textrm{def}(b*b)
+				\wedge_L (a\geq 0)_{b*b}^a\\
+			&\equiv True\wedge_L b*b\geq 0\\
+			&\equiv b*b\geq 0
+		\end{align*}
 	\item
-	\item
+		\begin{align*}
+			wp(\textbf{b := b+1}, a \geq 0) &\equiv \textrm{def}(b+1)
+				\wedge_L (a\geq 0)_{a}^a\\
+			&\equiv True\wedge_L a\geq 0\\
+			&\equiv a\geq 0
+		\end{align*}
 \end{enumerate}
 
 \paragraph{Ejercicio 3.} $\bigstar$ Calcular las siguientes precondiciones más débiles, donde 
