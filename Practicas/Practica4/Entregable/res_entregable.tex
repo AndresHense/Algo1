@@ -47,13 +47,13 @@ de reales.
 \end{itemize}
 
 \subsection*{Respuesta:}
+Supongo que def$(x)\equiv True$, para todas las variables por lo expuesto en la teorica;
+ya que de este\\ \hspace*{4mm} modo se simplifica la notación.
 
 \begin{itemize}
   \item def$( \sqrt{a/b})\equiv b\neq 0\wedge (a/b)\geq 0$.
   \item def$(A[i + 2])\equiv 0\leq i+2 < |A|$
 \end{itemize}
-
-Suponiendo que todas las variables estan definidas.
 
 \paragraph{Ejercicio 6.e}Escribir programas para los siguientes problemas y demostrar 
 formalmente su corrección usando la precondición
@@ -69,8 +69,11 @@ más débil.
 
 \subsection*{Respuesta:}
 
+\begin{enumerate}
+
+\item Calculamos $\color{blue}\{wp(S,Post)\}$
 		\begin{align*}
-		\color{blue}\{wp(S,Post)\} \color{blue}
+		\color{blue}\{wp(S,Post)\}
 			&\color{blue} \equiv \{\textrm{def}(a[i] + a[i + 1])
 				\wedge_L a[i] + a[i + 1]=a[i] + a[i + 1] \}\\
 			&\color{blue} \equiv \textrm{def}(a[i]) \wedge_L
@@ -82,12 +85,14 @@ más débil.
 			&\color{blue} \equiv 0\leq i \wedge i+1<|a| \\	  
 		\textbf{S:} &\  result := a[i] + a[i + 1]\\
 		\color{blue}\{\textbf{Post:} &\color{blue}\  result = a[i] + a[i + 1]\}\\
-		\\
-		Pre &\rightarrow \{wp(S,Post)\}\\
+		\end{align*}
+\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
 		\{0 \leq i \wedge i + 1 < |a|\}&\rightarrow \color{blue}\{0\leq i \wedge i+1<|a|\}\\
 		& True 
 		\end{align*}
-
+\end{enumerate}
 \paragraph{Ejercicio 8.} Escribir programas para los siguientes problemas y demostrar 
 formalmente su corrección usando la precondición más débil
 
