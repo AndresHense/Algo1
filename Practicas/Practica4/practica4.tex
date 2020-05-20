@@ -220,11 +220,11 @@ una variable entera y A es una secuencia de reales.
 
 \begin{enumerate}[label=\alph*)]
 \item $S \equiv i := i + 1$\\
-  $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] 6= 0)$
+  $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] \neq 0)$
 \item $S \equiv A[0] := 4$\\
-   $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] 6= 0)$
+   $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] \neq 0)$
 \item $S \equiv A[2] := 4$\\
-   $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] 6= 0)$
+   $Q \equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] \neq 0)$
 \item $S \equiv A[i] := A[i+1] - 1$\\
    $Q \equiv (\forall j :Z)(0 < j < |A| \rightarrow_L A[j] \geq A[j - 1])$
 \item $S \equiv A[i] := A[i+1] - 1$\\
@@ -235,10 +235,45 @@ una variable entera y A es una secuencia de reales.
 
 \begin{enumerate}[label=\alph*)]
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Q)\} &\color{blue}
+			\equiv \{Q\}\\
+		S \equiv i &:= i + 1\\
+		\color{blue}\{Q \equiv  (\forall j :Z)(0 \leq j & \color{blue} <|A| \rightarrow_L A[j] \neq 0)\}
+		\end{align*}
+		Y a mi que me contas, no hace nada esto.
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Q)\} &\color{blue}
+			\equiv \{\}\\
+		S \equiv A[0] &:= 4\\
+		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
+			\rightarrow_L A[j] \neq 0)\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Q)\} &\color{blue}
+			\equiv \{\}\\
+		S \equiv A[2] &:= 4\\
+		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
+			\rightarrow_L A[j] \neq 0)\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Q)\} &\color{blue}
+			\equiv \{\}\\
+		S \equiv A[i] &:= A[i+1] - 1\\
+		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
+			\rightarrow_L A[j] \geq A[j - 1])\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Q)\} &\color{blue}
+			\equiv \{\}\\
+		S \equiv A[i] &:= A[i+1] - 1\\
+		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
+			\rightarrow_L A[j] \leq A[j - 1])\}
+		\end{align*}
 \end{enumerate}
 
 \paragraph{Ejercicio 6.}. Escribir programas para los siguientes problemas y demostrar 
