@@ -145,7 +145,7 @@ es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(\textbf{a := A[i] + 1; a := b*b}, a \geq 0)\} &\color{blue}
-			\equiv \{b\geq 0\}\\
+			\equiv \{0\leq i<|A|\wedge b\geq 0\}\\
 		\textbf{a := A[i] + 1;}\\
 		\color{blue}\{wp(\textbf{a := b*b},Q)\}&\color{blue}\equiv \{b\geq 0\}\\
 		\textbf{a := b*b;}\\
@@ -180,10 +180,40 @@ una variable entera y A es una secuencia de reales.
 
 \begin{enumerate}[label=\alph*)]
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{A[i] := 0 },Q)\} &\color{blue}
+			\equiv \{0\leq i<|A|\wedge Q\}\\
+		\textbf{A[i] := 0}\\
+		\color{blue}\{Q\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{A[i+2] := 0 },Q)\} &\color{blue}
+			\equiv \{0\leq i+2<|A|\wedge Q\}\\
+		\textbf{A[i+2] := 0}\\
+		\color{blue}\{Q\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{A[i+2] := -1 },Q)\} &\color{blue}
+			\equiv \{0\leq i+2<|A|\wedge Q\wedge \textbf{Esto no pasa la post nunca}\}\\
+		\textbf{A[i+2] := -1}\\
+		\color{blue}\{Q\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{A[i] := 2 * A[i] },Q)\} &\color{blue}
+			\equiv \{0\leq i<|A|\wedge A[i]\geq 0 \wedge Q\}\\
+		\textbf{A[i] := 2 * A[i]}\\
+		\color{blue}\{Q\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{A[i] := A[i-1] },Q)\} &\color{blue}
+			\equiv \{0\leq i-1<|A|\wedge Q\}\\
+		\textbf{A[i] := A[i-1]}\\
+		\color{blue}\{Q\}
+		\end{align*}
 \end{enumerate}
 
 \paragraph{Ejercicio 5.} Calcular wp(S, Q), para los siguientes pares de programas S y postcondiciones Q.
