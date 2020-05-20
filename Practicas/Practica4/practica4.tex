@@ -287,7 +287,7 @@ más débil.
    }
 
 \item \textbf{proc problema2 }(in a$:\mathbb{Z}$, out b$:\mathbb{Z}$) {\\
-   \hspace*{6mm} \textbf{Pre }$\{a 6= 0\}$\\
+   \hspace*{6mm} \textbf{Pre }$\{a \neq 0\}$\\
    \hspace*{6mm} \textbf{Post }$\{b = a + 3\}$\\
    }
 
@@ -326,11 +326,67 @@ Para probar la correctitud de la tripla \textbf{\{Pre\} S \{Post\}} alcanza prob
 		& True 
 		\end{align*}
 	\item
-	\item
-	\item
-	\item
+	\begin{enumerate}[label=\arabic*.]
+
+	\item Calculamos $\color{blue}\{wp(S,Post)\}$
 		\begin{align*}
-		\color{blue}\{wp(S,Post)\} \color{blue}
+		\color{blue}\{wp(S,Post)\}
+			&\color{blue} \equiv \{a + 3 = a + 3\}\\
+			&\color{blue} \equiv True\\	  	  
+		\textbf{S:} &\  b := a + 3\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  b = a + 3\}\\
+		\end{align*}
+	\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
+		\{a \neq 0\}&\rightarrow \color{blue}\{True\}\\
+		& True 
+		\end{align*}
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=\arabic*.]
+
+	\item Calculamos $\color{blue}\{wp(S,Post)\}$
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\}
+			&\color{blue} \equiv \{a+b=a+b\}\\
+			&\color{blue} \equiv True\\  	  
+		\textbf{S:} &\  c := a + b\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  c = a + b\}\\
+		\end{align*}
+	\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
+		\{True\}&\rightarrow \color{blue}\{True\}\\
+		& True 
+		\end{align*}
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=\arabic*.]
+
+	\item Calculamos $\color{blue}\{wp(S,Post)\}$
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\}
+			&\color{blue} \equiv \{\textrm{def}(2*a[i])\wedge_L 2 * a[i]=2 * a[i]\}\\
+			&\color{blue} \equiv \textrm{def}(a[i])\wedge_L 0\leq i<|a| \wedge True\\
+			&\color{blue} \equiv True \wedge_L 0\leq i<|a|\\
+			&\color{blue} \equiv 0\leq i<|a|\\	  
+		\textbf{S:} &\  result := 2 * a[i]\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  result = 2 * a[i]\}\\
+		\end{align*}
+	\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
+		\{0 \leq i < |a|\}&\rightarrow \color{blue}\{0\leq i<|a|\}\\
+		& True 
+		\end{align*}
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=\arabic*.]
+
+	\item Calculamos $\color{blue}\{wp(S,Post)\}$
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\}
 			&\color{blue} \equiv \{\textrm{def}(a[i] + a[i + 1])
 				\wedge_L a[i] + a[i + 1]=a[i] + a[i + 1] \}\\
 			&\color{blue} \equiv \textrm{def}(a[i]) \wedge_L
@@ -342,11 +398,14 @@ Para probar la correctitud de la tripla \textbf{\{Pre\} S \{Post\}} alcanza prob
 			&\color{blue} \equiv 0\leq i \wedge i+1<|a| \\	  
 		\textbf{S:} &\  result := a[i] + a[i + 1]\\
 		\color{blue}\{\textbf{Post:} &\color{blue}\  result = a[i] + a[i + 1]\}\\
-		\\
-		Pre &\rightarrow \{wp(S,Post)\}\\
+		\end{align*}
+	\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
 		\{0 \leq i \wedge i + 1 < |a|\}&\rightarrow \color{blue}\{0\leq i \wedge i+1<|a|\}\\
 		& True 
 		\end{align*}
+	\end{enumerate}
 \end{enumerate}
                                                             
 \paragraph{Ejercicio 7.} $\bigstar$ Calcular wp(S, Q), para los siguientes pares de programas S y postcondiciones Q.
