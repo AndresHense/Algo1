@@ -1,0 +1,106 @@
+
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+
+
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+
+
+\input{../../macros/Algo1Macros}
+
+
+\title{Resuelto Entregable Algoritmos y Estructuras de Datos I}
+\author{Andres M. Hense,Victoria Espil}
+\date{}
+\begin{document}
+%\maketitle
+
+
+%\section*{Práctica 1 --- Lógica}
+
+\practica{4}{Resolución de los Ejercicios Entregables}
+
+\begin{center}
+\textbf{Integrantes:} Andrés M. Hense, Victoria Espil
+\end{center}
+
+\paragraph{Ejercicio 1.} Calcular las siguientes expresiones, donde $a, b$ son variables 
+reales, $i$ una variable entera y $A$ es una secuencia
+de reales.
+\begin{itemize}
+\item def$( \sqrt{a/b}).$
+\item def$(A[i + 2]).$
+\end{itemize}
+
+\subsection*{Respuesta:}
+
+\begin{itemize}
+  \item def$( \sqrt{a/b})\equiv b\neq 0\wedge (a/b)\geq 0$.
+  \item def$(A[i + 2])\equiv 0\leq i+2 < |A|$
+\end{itemize}
+
+Suponiendo que todas las variables estan definidas.
+
+\paragraph{Ejercicio 6.e}Escribir programas para los siguientes problemas y demostrar 
+formalmente su corrección usando la precondición
+más débil.
+
+\begin{itemize}
+\item \textbf{proc problema5 }(in a$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
+	, out result$: \mathbb{Z}$) {\\
+   \hspace*{6mm} \textbf{Pre }$\{0 \leq i \wedge i + 1 < |a|\}$\\
+   \hspace*{6mm} \textbf{Post }$\{result = a[i] + a[i + 1]\}$\\
+   }
+\end{itemize}
+
+\subsection*{Respuesta:}
+
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\} \color{blue}
+			&\color{blue} \equiv \{\textrm{def}(a[i] + a[i + 1])
+				\wedge_L a[i] + a[i + 1]=a[i] + a[i + 1] \}\\
+			&\color{blue} \equiv \textrm{def}(a[i]) \wedge_L
+				 \textrm{def}(a[i + 1]) \wedge_L 0\leq i \wedge i+1<|a|
+				  \wedge a[i] + a[i + 1]=a[i] + a[i + 1]\\
+			&\color{blue} \equiv True \wedge_L
+				 True \wedge_L True \wedge_L 0\leq i \wedge i+1<|a|
+				  \wedge True\\
+			&\color{blue} \equiv 0\leq i \wedge i+1<|a| \\	  
+		\textbf{S:} &\  result := a[i] + a[i + 1]\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  result = a[i] + a[i + 1]\}\\
+		\\
+		Pre &\rightarrow \{wp(S,Post)\}\\
+		\{0 \leq i \wedge i + 1 < |a|\}&\rightarrow \color{blue}\{0\leq i \wedge i+1<|a|\}\\
+		& True 
+		\end{align*}
+
+\paragraph{Ejercicio 8.} Escribir programas para los siguientes problemas y demostrar 
+formalmente su corrección usando la precondición más débil
+
+\begin{itemize}
+\item \textbf{proc problema5 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
+	, inout a$: \mathbb{Z}$) \{\smallskip \\                            
+    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a=\sum_{j=0}^{i-1}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\smallskip \\          
+   \hspace*{6mm} \textbf{Post }$\{a=\sum_{j=0}^{i}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\\
+   \}     
+\end{itemize}
+
+\subsection*{Respuesta:}
+
+\end{document}
