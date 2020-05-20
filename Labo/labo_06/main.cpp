@@ -28,11 +28,15 @@ int main()
     cout << "Tests Ejercicio 3" << endl;
     exitos += multiplicarTest_test1() ? 1 : 0;
     exitos += multiplicarTest_test2() ? 1 : 0;
+    cout << "Correctos:" << exitos << endl;
+    total += exitos;
 
     exitos = 0;
     cout << "Tests Ejercicio 4" << endl;
     exitos += promediarTest_test1() ? 1 : 0;
     exitos += promediarTest_test2() ? 1 : 0;
+    cout << "Correctos:" << exitos << endl;
+    total += exitos;
 
     exitos = 0;
     cout << "Tests Ejercicio 5" << endl;
@@ -73,6 +77,7 @@ int main()
     total += exitos;
 
     cout << "# Ejercicios incorrectos: " << 28 - total << endl;
+    cout << "# Ejercicios correctos: " <<  total << endl;
     
 }
 

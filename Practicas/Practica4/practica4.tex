@@ -134,9 +134,32 @@ es una secuencia de reales.
 		\end{align*}
 		
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{a := A[i] + 1; b := a*a}, b\neq 2)\} &\color{blue}
+			\equiv \{0\leq i<|A|\wedge_L (A[i] + 1)*(A[i] + 1)\neq 0\}\\
+		\textbf{a := A[i] + 1;}\\
+		\color{blue}\{wp(\textbf{b := a*a},Q)\}&\color{blue}\equiv \{a*a\neq 0\}\\
+		\textbf{b := a*a;}\\
+		\color{blue}\{Q:b \neq 0\}
+		\end{align*}
 	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{a := A[i] + 1; a := b*b}, a \geq 0)\} &\color{blue}
+			\equiv \{(a+1)/2\geq 0\}\\
+		\textbf{a := A[i] + 1;}\\
+		\color{blue}\{wp(\textbf{a := b*b},Q)\}&\color{blue}\equiv \{b\geq 0\}\\
+		\textbf{a := b*b;}\\
+		\color{blue}\{Q:b \geq 0\}
+		\end{align*}
 	\item
-	\item
+		\begin{align*}
+		\color{blue}\{wp(\textbf{a := a-b; b := a+b}, a \geq 0 \wedge b \geq 0)\} &\color{blue}
+			\equiv \{(a+1)/2\geq 0\}\\
+		\textbf{a := a-b;}\\
+		\color{blue}\{wp(\textbf{b := a/2},Q)\}&\color{blue}\equiv \{a/2\geq 0\}\\
+		\textbf{b := a+b;}\\
+		\color{blue}\{Q:a \geq 0 \wedge b \geq 0\}
+		\end{align*}
 \end{enumerate}
 
 \paragraph{Ejercicio 4.} $\bigstar$ Sea $Q \equiv (\forall j :\mathbb{Z})(0 \leq j < |A| \rightarrow_L
