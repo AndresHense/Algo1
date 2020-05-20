@@ -475,13 +475,14 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    		\hspace*{24mm}$\color{blue}Q \equiv (b = -|a|)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(a < 0)\wedge_L 
-   				(((a < 0)\wedge (a=-|a|)) \vee(\neg  (a < 0)\wedge (-a=-|a|)))\\
-   							&\equiv True \wedge_L(((a < 0)\wedge (a=a)) 
-   								\vee((a\geq 0)\wedge (-a=-a)))\\
-   							&\equiv (((a < 0)\wedge True) 
-   								\vee((a\geq 0)\wedge true))\\
-   							&\equiv ((a < 0) 
-   								\vee(a\geq 0))\\
+   				\Bigg(\Big((a < 0)\wedge (a=-|a|)\Big) 
+   				\vee \Big(\neg  (a < 0)\wedge (-a=-|a|)\Big)\Bigg)\\
+   							&\equiv True \wedge_L \Bigg(\Big((a < 0)\wedge (a=a)\Big) 
+   								\vee \Big((a\geq 0)\wedge (-a=-a)\Big)\Bigg)\\
+   							&\equiv \Bigg(\Big((a < 0)\wedge True\Big) 
+   								\vee\Big((a\geq 0)\wedge True\Big)\Bigg)\\
+   							&\equiv (a < 0) 
+   								\vee(a\geq 0)\\
    							&\equiv True
    		\end{align*}
 	\item
@@ -489,13 +490,14 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    		\hspace*{24mm}$\color{blue}Q \equiv (b = |a|)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(a < 0)\wedge_L 
-   				(((a < 0)\wedge (a=|a|)) \vee(\neg  (a < 0)\wedge (-a=|a|)))\\
-   							&\equiv True \wedge_L(((a < 0)\wedge (a=-a)) 
-   								\vee((a\geq 0)\wedge (a=-a)))\\
-   							&\equiv (((a < 0)\wedge False) 
-   								\vee((a\geq 0)\wedge False))\\
-   							&\equiv (False 
-   								\vee False)\\
+   				\Bigg(\Big((a < 0)\wedge (a=|a|)\Big) 
+   					\vee\Big(\neg  (a < 0)\wedge (-a=|a|)\Big)\Bigg)\\
+   							&\equiv True \wedge_L \Bigg(\Big((a < 0)\wedge (a=-a)\Big) 
+   								\vee \Big((a\geq 0)\wedge (a=-a)\Big)\Bigg)\\
+   							&\equiv \Bigg(\Big((a < 0)\wedge False\Big) 
+   								\vee\Big((a\geq 0)\wedge False\Big)\Bigg)\\
+   							&\equiv False 
+   								\vee False\\
    							&\equiv False
    		\end{align*}
 	\item
@@ -504,8 +506,8 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] \geq 0)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(i>0)\wedge_L 
-   				(((i>0)\wedge S1) \vee(\neg (i>0)\wedge S2)))\\
-   							&\equiv True \wedge_L() \vee ()\\
+   				\Bigg(\Big((i>0)\wedge S1\Big) \vee\Big(\neg (i>0)\wedge S2)\Big)\Bigg)\\
+   							&\equiv True \wedge_L \Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}
 	\item
@@ -514,8 +516,8 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] = s[j - 1])$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(i>1)\wedge_L 
-   				(((i>1)\wedge S1) \vee(\neg (i>1)\wedge S2)))\\
-   							&\equiv True \wedge_L() \vee ()\\
+   				\Bigg(\Big((i>1)\wedge S1\Big) \vee\Big(\neg (i>1)\wedge S2)\Big)\Bigg)\\
+   							&\equiv True \wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}
 	\item
@@ -523,8 +525,8 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    		\hspace*{24mm}$\color{blue}Q \equiv 0 \leq i < |s| \wedge_L s[i] \geq 0$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(s[i]<0)\wedge_L 
-   				(((s[i]<0)\wedge S1) \vee(\neg (s[i]<0)\wedge S2)))\\
-   							&\equiv 0\leq i<|s|\wedge_L() \vee ()\\
+   				\Bigg(\Big((s[i]<0)\wedge S1\Big) \vee\Big(\neg (s[i]<0)\wedge S2)\Big)\Bigg)\\
+   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}
    	\item
@@ -533,8 +535,8 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] \geq 0)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(s[i]>0)\wedge_L 
-   				(((s[i]>0)\wedge S1) \vee(\neg (s[i]>0)\wedge S2)))\\
-   							&\equiv 0\leq i<|s|\wedge_L() \vee ()\\
+   				\Bigg(\Big((s[i]>0)\wedge S1\Big) \vee\Big(\neg (s[i]>0)\wedge S2)\Big)\Bigg)\\
+   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}	
 \end{enumerate}
@@ -544,46 +546,40 @@ formalmente su corrección usando la precon-dición más débil.
 
 \begin{enumerate}[label=\alph*)]
 \item \textbf{proc problema1 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
-	, inout a$: \mathbb{Z}$) {\\
-                                   
-   \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a = j=0 s[j]\}$\\
-                    
-   \hspace*{6mm} \textbf{Post }$\{a = j=0 s[j]\}$\\
-   }
+	, inout a$: \mathbb{Z}$) \{\smallskip \\                            
+    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a=\sum_{j=0}^{i-1} s[j])\}$\smallskip \\          
+   \hspace*{6mm} \textbf{Post }$\{a=\sum_{j=0}^{i} s[j] \}$\\
+   \}    
 
 \item \textbf{proc problema2 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
-	, inout a$: \mathbb{Z}$) {\\
-                                  
-   \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge a = j=0 s[j]\}$\\
-                    
-   \hspace*{6mm} \textbf{Post }$\{a = j=1 s[j]\}$\\
-   }
+	, inout a$: \mathbb{Z}$) \{\smallskip \\                            
+    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a=\sum_{j=0}^{i} s[j])\}$\smallskip \\          
+   \hspace*{6mm} \textbf{Post }$\{a=\sum_{j=1}^{i} s[j] \}$\\
+   \}      
 
 \item \textbf{proc problema3 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
 	, out res$:\textbf{Bool}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge 
-   		(\forall j :Z)(0 \leq j < i \rightarrow_L s[j] \geq 0)\}$\\
-   \hspace*{6mm} \textbf{Post }$\{res = true \leftrightarrow (\forall j :Z)
+   		(\forall j :\mathbb{Z})(0 \leq j < i \rightarrow_L s[j] \geq 0)\}$\\
+   \hspace*{6mm} \textbf{Post }$\{res = true \leftrightarrow (\forall j :\mathbb{Z})
           (0 \leq j \leq i \rightarrow_L s[j] \geq 0)\}$\\
    }
 
 \item \textbf{proc problema4 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
-	, inout a$: \mathbb{Z}$) {\\
-                                   
-   \hspace*{6mm} \textbf{Pre }${0 \leq i < |s| \wedge_L a = j=0 (if s[j] 6= 0 
-   		then 1 else 0 fi)}$\\
-                   
-   \hspace*{6mm} \textbf{Post }$\{a = j=0 (if s[j] 6= 0 then 1 else 0 fi)\}$\\
-   }
+	, inout a$: \mathbb{Z}$) \{\smallskip \\                            
+    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a=\sum_{j=0}^{i-1}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\smallskip \\          
+   \hspace*{6mm} \textbf{Post }$\{a=\sum_{j=0}^{i}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\\
+   \}    
 
 \item \textbf{proc problema5 }(in s$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
-	, inout a$: \mathbb{Z}$) {\\
-                                  
-    \hspace*{6mm} \textbf{Pre }$\{0 < i \leq |s| \wedge_L a = j=1 (if s[j] 6= 0 
-    then 1 else 0 fi)\}$\\
-                    
-   \hspace*{6mm} \textbf{Post }$\{a = j=0 (if s[j] 6= 0 then 1 else 0 fi)\}$\\
-   }                     
+	, inout a$: \mathbb{Z}$) \{\smallskip \\                            
+    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |s| \wedge_L a=\sum_{j=1}^{i-1}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\smallskip \\          
+   \hspace*{6mm} \textbf{Post }$\{a=\sum_{j=0}^{i-1}($if $s[j] \neq 0$ 
+    then 1 else 0 fi$)\}$\\
+   \}                        
 \end{enumerate}
 
 \subsection*{Respuestas}
