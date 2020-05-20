@@ -245,7 +245,7 @@ una variable entera y A es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{\}\\
+			\equiv \{0\leq 4 <|A|\wedge_L Q\}\\
 		S \equiv A[0] &:= 4\\
 		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
 			\rightarrow_L A[j] \neq 0)\}
@@ -253,7 +253,7 @@ una variable entera y A es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{\}\\
+			\equiv \{0\leq 2 <|A|\wedge_L Q\}\\
 		S \equiv A[2] &:= 4\\
 		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
 			\rightarrow_L A[j] \neq 0)\}
@@ -261,7 +261,7 @@ una variable entera y A es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{\}\\
+			\equiv \{0\leq i\wedge i+1<|A|\wedge_L Q\}\\
 		S \equiv A[i] &:= A[i+1] - 1\\
 		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
 			\rightarrow_L A[j] \geq A[j - 1])\}
@@ -269,7 +269,7 @@ una variable entera y A es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{\}\\
+			\equiv \{0\leq i\wedge i+1<|A|\wedge_L Q\}\\
 		S \equiv A[i] &:= A[i+1] - 1\\
 		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
 			\rightarrow_L A[j] \leq A[j - 1])\}
@@ -281,40 +281,72 @@ formalmente su corrección usando la precondición
 más débil.
 
 \begin{enumerate}[label=\alph*)]
-\item \textbf{proc problema1 }(inout a: Z) {\\
+\item \textbf{proc problema1 }(inout a$:\mathbb{Z}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{a = a_0 \wedge a \geq 0\}$\\
    \hspace*{6mm} \textbf{Post }$\{a = a_0 + 2\}$\\
    }
 
-\item \textbf{proc problema2 }(in a: Z, out b: Z) {\\
+\item \textbf{proc problema2 }(in a$:\mathbb{Z}$, out b$:\mathbb{Z}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{a 6= 0\}$\\
    \hspace*{6mm} \textbf{Post }$\{b = a + 3\}$\\
    }
 
-\item \textbf{proc problema3 }(in a: Z, in b: Z, out c: Z) {\\
+\item \textbf{proc problema3 }(in a$:\mathbb{Z}$, in b$:\mathbb{Z}$, out c$:\mathbb{Z}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{true\}$\\
    \hspace*{6mm} \textbf{Post }$\{c = a + b\}$\\
    }
 
-\item \textbf{proc problema4 }(in a: seqhZi, in i: Z, out result: Z) {\\
+\item \textbf{proc problema4 }(in a$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
+	, out result$: \mathbb{Z}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{0 \leq i < |a|\}$\\
    \hspace*{6mm} \textbf{Post }$\{result = 2 * a[i]\}$\\
    }
 
-\item \textbf{proc problema5 }(in a: seqhZi, in i: Z, out result: Z) {\\
+\item \textbf{proc problema5 }(in a$: seq\langle \mathbb{Z}\rangle$, in i$:\mathbb{Z}$
+	, out result$: \mathbb{Z}$) {\\
    \hspace*{6mm} \textbf{Pre }$\{0 \leq i \wedge i + 1 < |a|\}$\\
    \hspace*{6mm} \textbf{Post }$\{result = a[i] + a[i + 1]\}$\\
    }
 \end{enumerate}
 
 \subsection*{Respuestas}
-
+Para probar la correctitud de la tripla \textbf{\{Pre\} S \{Post\}} alcanza probar que\\
+\hspace*{40mm}Pre $\rightarrow \color{blue}wp(\textbf{S},Post)$
 \begin{enumerate}[label=\alph*)]
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\} &\color{blue}
+			\equiv \{a_0+2=a_0+2\}\\
+		\textbf{S:} &\  a := a_0 + 2\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  a = a_0 + 2\}\\
+		\\
+		Pre &\rightarrow \{wp(S,Post)\}\\
+		\{a = a_0 \wedge a \geq 0\}&\rightarrow \color{blue}\{a_0+2=a_0+2\}\\
+		\{a = a_0 \wedge a \geq 0\}&\rightarrow \color{blue}\{True\}\\
+		& True 
+		\end{align*}
 	\item
 	\item
 	\item
 	\item
+		\begin{align*}
+		\color{blue}\{wp(S,Post)\} \color{blue}
+			&\color{blue} \equiv \{\textrm{def}(a[i] + a[i + 1])
+				\wedge_L a[i] + a[i + 1]=a[i] + a[i + 1] \}\\
+			&\color{blue} \equiv \textrm{def}(a[i]) \wedge_L
+				 \textrm{def}(a[i + 1]) \wedge_L 0\leq i \wedge i+1<|a|
+				  \wedge a[i] + a[i + 1]=a[i] + a[i + 1]\\
+			&\color{blue} \equiv True \wedge_L
+				 True \wedge_L True \wedge_L 0\leq i \wedge i+1<|a|
+				  \wedge True\\
+			&\color{blue} \equiv 0\leq i \wedge i+1<|a| \\	  
+		\textbf{S:} &\  result := a[i] + a[i + 1]\\
+		\color{blue}\{\textbf{Post:} &\color{blue}\  result = a[i] + a[i + 1]\}\\
+		\\
+		Pre &\rightarrow \{wp(S,Post)\}\\
+		\{0 \leq i \wedge i + 1 < |a|\}&\rightarrow \color{blue}\{0\leq i \wedge i+1<|a|\}\\
+		& True 
+		\end{align*}
 \end{enumerate}
                                                             
 \paragraph{Ejercicio 7.} $\bigstar$ Calcular wp(S, Q), para los siguientes pares de programas S y postcondiciones Q.
