@@ -145,7 +145,7 @@ es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(\textbf{a := A[i] + 1; a := b*b}, a \geq 0)\} &\color{blue}
-			\equiv \{(a+1)/2\geq 0\}\\
+			\equiv \{b\geq 0\}\\
 		\textbf{a := A[i] + 1;}\\
 		\color{blue}\{wp(\textbf{a := b*b},Q)\}&\color{blue}\equiv \{b\geq 0\}\\
 		\textbf{a := b*b;}\\
@@ -154,9 +154,10 @@ es una secuencia de reales.
 	\item
 		\begin{align*}
 		\color{blue}\{wp(\textbf{a := a-b; b := a+b}, a \geq 0 \wedge b \geq 0)\} &\color{blue}
-			\equiv \{(a+1)/2\geq 0\}\\
+			\equiv \{a-b \geq 0 \wedge a+b \geq 0\}\\
 		\textbf{a := a-b;}\\
-		\color{blue}\{wp(\textbf{b := a/2},Q)\}&\color{blue}\equiv \{a/2\geq 0\}\\
+		\color{blue}\{wp(\textbf{b := a+b},Q)\}&\color{blue}
+			\equiv \{a \geq 0 \wedge a+b \geq 0\}\\
 		\textbf{b := a+b;}\\
 		\color{blue}\{Q:a \geq 0 \wedge b \geq 0\}
 		\end{align*}
@@ -168,11 +169,11 @@ siguientes precondiciones más débiles, donde i es
 una variable entera y A es una secuencia de reales.
 
 \begin{enumerate}[label=\alph*)]
-\item $wp(A[i] := 0, Q).$
-\item $wp(A[i+2] := 0, Q).$
-\item $wp(A[i+2] := -1, Q).$
-\item $wp(A[i] := 2 * A[i], Q).$
-\item $wp(A[i] := A[i-1], Q).$
+\item $wp(\textbf{A[i] := 0}, Q).$
+\item $wp(\textbf{A[i+2] := 0}, Q).$
+\item $wp(\textbf{A[i+2] := -1}, Q).$
+\item $wp(\textbf{A[i] := 2 * A[i]}, Q).$
+\item $wp(\textbf{A[i] := A[i-1]}, Q).$
 \end{enumerate}
 
 \subsection*{Respuestas}
