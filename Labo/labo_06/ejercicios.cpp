@@ -82,23 +82,123 @@ vector<vector<int> > multiplicar(vector<vector<int> > m1, vector<vector<int> > m
 	return res;
 }
 
+void imprimirMatriz(const vector<vector<int>> &m){
+	cout<<"\n\n{\n";
+	for(unsigned int i=0;i<m.size();i++){
+		for(unsigned int j=0;j<m[0].size();j++){
+			cout<<m[i][j]<<", ";
+		}
+		cout<<endl;
+	}
+	cout<<"}\n\n";
+}
+
+int sumaVecinosLinea(int i,int j,const vector<vector<int>> &m,int &cantVecinos){
+	int longM=m.size();
+	int longMi=m[i].size();
+	if(i<0 || i>=longM)
+		return 0;
+	else{
+		int suma=0;
+		int tope=j+3;
+		for(int k=j;k<tope;k++){
+			if(k<0 || k>=longMi){
+				;
+			}else{
+				suma+=m[i][k];
+				cantVecinos++;
+			}
+		}
+		return suma;
+	}
+}
+
 vector<vector<int> > promediar(vector<vector<int> > m){
-	//COMPLETAR
-	m.clear();
 	vector<vector<int> > res;
+	int longM=m.size();
+	int longMi=m[0].size();
+	for (int i=0;i<longM;i++){
+		vector<int> temp;
+		res.push_back(temp);
+		for(int j=0;j<longMi;j++){
+			int lugar=0;
+			int cantVecinos=0;
+			lugar+=sumaVecinosLinea(i-1,j-1,m,cantVecinos);
+			lugar+=sumaVecinosLinea(i,j-1,m,cantVecinos);
+			lugar+=sumaVecinosLinea(i+1,j-1,m,cantVecinos);
+			res[i].push_back(lugar/cantVecinos);
+		}
+	}
+	//imprimirMatriz(m);
+	//imprimirMatriz(res);
 	return res;
+
+}
+
+
+bool mayorQueVecinosLinea(int i,int j,const vector<vector<int>> &m,const int u,const int l){
+	int longM=m.size();
+	int longMi=m[i].size();
+	if(i<0 || i>=longM)
+		return true;
+	else{
+		bool res=true;
+		int tope=j+3;
+		for(int k=j;k<tope;k++){
+			if(k<0 || k>=longMi || (i==u &&k==l)){
+				;
+			}else{
+				res&=m[u][l]>m[i][k];
+				
+			}
+		}
+		return res;
+	}
 }
 
 int contarPicos(vector<vector<int> > m){
-	//COMPLETAR
-	m.clear();
-	return true;
+	int res=0;
+	int longM=m.size();
+	int longMi=m[0].size();
+	for (int i=0;i<longM;i++){
+		for(int j=0;j<longMi;j++){
+			bool lugar=true;
+			lugar&=mayorQueVecinosLinea(i-1,j-1,m,i,j);
+			lugar&=mayorQueVecinosLinea(i,j-1,m,i,j);
+			lugar&=mayorQueVecinosLinea(i+1,j-1,m,i,j);
+			if(lugar)
+				res++;
+		}
+	}
+	//imprimirMatriz(m);
+	//imprimirMatriz(res);
+	return res;
+
+}
+
+bool esTriangularInferior(const vector<vector<int> >& m){
+	bool res=true;
+	for(unsigned int i=0;i<m.size();i++){
+		for(unsigned int j=0;j<m[0].size();j++){
+			if(i>j)
+				res&=m[i][j]==0;
+		}
+	}
+	return res;
 }
 
 bool esTriangular(vector<vector<int> > m){
-	//COMPLETAR
-	m.clear();
-	return true;
+	bool res=true;
+	//cout<<"La matriz "<<endl;
+	//imprimirMatriz(m);
+
+	res&=esTriangularInferior(m);
+	//cout<<"es "<<((res==true) ?"verdadero":"false")<<" que es triangular"<<endl;
+	trasponer(m);
+	//imprimirMatriz(m);
+	res|=esTriangularInferior(m);
+	//cout<<"es "<<((res==true) ?"verdadero":"false")<<" que es triangular"<<endl;
+	return res;
 }
 
 bool hayAmenaza(vector<vector<int> > m){
