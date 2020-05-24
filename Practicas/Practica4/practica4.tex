@@ -272,43 +272,44 @@ una variable entera y A es una secuencia de reales.
 \begin{enumerate}[label=\alph*)]
 	\item
 		\begin{align*}
-		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{Q\}\\
-		S \equiv i &:= i + 1\\
-		\color{blue}\{Q \equiv  (\forall j :Z)(0 \leq j & \color{blue} <|A| \rightarrow_L A[j] \neq 0)\}
-		\end{align*}
-		Y a mi que me contas, no hace nada esto.
-	\item
-		\begin{align*}
-		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{0\leq 4 <|A|\wedge_L Q\}\\
-		S \equiv A[0] &:= 4\\
-		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
-			\rightarrow_L A[j] \neq 0)\}
+		wp(S,Q) &\equiv  wp(i := i + 1,Q_{i+1}^{i})\\
+			&\equiv (\forall j :Z)(0 \leq j < |A| \rightarrow_L A[j] \neq 0) \\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{0\leq 2 <|A|\wedge_L Q\}\\
-		S \equiv A[2] &:= 4\\
-		\color{blue}\{Q \equiv (\forall j :Z)(0 \leq j & \color{blue}< |A| 
-			\rightarrow_L A[j] \neq 0)\}
+		wp(S,Q) &\equiv  wp(A[0] := 4,Q_{setAt(A,0,4)}^{A})\\
+			&\equiv 0\leq 0 <|setAt(A,0,4)|\wedge_L(\forall j :\mathbb{Z})(0 \leq j < |setAt(A,0,4)| 
+				\rightarrow_L setAt(A,0,4)[j] \neq 0) \\
+			&\equiv 0\leq 0<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((0\neq j \wedge A[j] \neq 0)\vee(0=j\wedge 4\neq 0)\Big)\\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{0\leq i\wedge i+1<|A|\wedge_L Q\}\\
-		S \equiv A[i] &:= A[i+1] - 1\\
-		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
-			\rightarrow_L A[j] \geq A[j - 1])\}
+		wp(S,Q) &\equiv  wp(A[2] := 4,Q_{setAt(A,2,4)}^{A})\\
+			&\equiv 0\leq 2<|setAt(A,2,4)|\wedge_L(\forall j :\mathbb{Z})(0 \leq j < |setAt(A,2,4)| 
+				\rightarrow_L setAt(A,2,4)[j] \neq 0) \\
+			&\equiv 0\leq 2<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((2\neq j \wedge A[j] \neq 0)\vee(2=j\wedge 4\neq 0)\Big)\\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(S,Q)\} &\color{blue}
-			\equiv \{0\leq i\wedge i+1<|A|\wedge_L Q\}\\
-		S \equiv A[i] &:= A[i+1] - 1\\
-		\color{blue}\{Q \equiv (\forall j :Z)(0 < j & \color{blue}< |A| 
-			\rightarrow_L A[j] \leq A[j - 1])\}
+		wp(S,Q) &\equiv  wp(A[i]:=A[i+1]-1,Q_{setAt(A,i,A[i+1]-1)}^{A})\\
+			&\equiv 0\leq i+1<|setAt(A,i,A[i+1]-1)|\wedge_L(\forall j :\mathbb{Z})(0 \leq j < |setAt(A,i,A[i+1]-1)|\\
+				&\rightarrow_L setAt(A,i,A[i+1]-1)[j] \neq 0) \\
+			&\equiv 0\leq i+1<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i\neq j \wedge A[j] \geq A[j - 1])\vee(i=j\wedge A[i+1]-1\geq A[i - 1])\Big)\\
+		\end{align*}
+	\item
+		\begin{align*}
+		wp(S,Q) &\equiv  wp(A[i]:=A[i+1]-1,Q_{setAt(A,i,A[i+1]-1)}^{A})\\
+			&\equiv 0\leq i+1<|setAt(A,i,A[i+1]-1)|\wedge_L(\forall j :\mathbb{Z})(0 \leq j < |setAt(A,i,A[i+1]-1)|\\
+				&\rightarrow_L setAt(A,i,A[i+1]-1)[j] \neq 0) \\
+			&\equiv 0\leq i+1<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i\neq j \wedge A[j] \leq A[j - 1])\vee(i=j\wedge A[i+1]-1\leq A[i - 1])\Big)\\
 		\end{align*}
 \end{enumerate}
 
