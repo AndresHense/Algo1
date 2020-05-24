@@ -127,7 +127,7 @@ es una secuencia de reales.
 		\begin{align*}
 		\color{blue}\{wp(\textbf{a := a+1; b := a/2}, b \geq 0)\} &\color{blue}
 			\equiv \{(a+1)/2\geq 0\}\\
-		\textbf{a := a+1;}\\
+		a &:= a+1;\\
 		\color{blue}\{wp(\textbf{b := a/2},Q)\}&\color{blue}\equiv \{a/2\geq 0\}\\
 		\textbf{b := a/2;}\\
 		\color{blue}\{Q:b \geq 0\}
@@ -181,38 +181,74 @@ una variable entera y A es una secuencia de reales.
 \begin{enumerate}[label=\alph*)]
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{A[i] := 0 },Q)\} &\color{blue}
-			\equiv \{0\leq i<|A|\wedge Q\}\\
-		\textbf{A[i] := 0}\\
-		\color{blue}\{Q\}
+		wp&(\textrm{A[i] := 0 },Q) \\
+			&\equiv wp(\textrm{A := setAt(A,i,0) },Q) \\
+			&\equiv \textrm{def(A := setAt(A,i,0)) }\wedge_L Q_{setAt(A,i,0)}^{A} \\
+			&\equiv \Big((\textrm{def(A)}\wedge \textrm{def(i)})\wedge_L 0\leq i<|A|\Big) 
+				\wedge_LQ_{setAt(A,i,0)}^{A} \\
+			&\equiv 0\leq i<|setAt(A,i,0)| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |setAt(A,i,0)|\Big) \rightarrow_L  
+				\Big(setAt(A,i,0) \geq 0\Big)\\
+			&\equiv 0\leq i<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i\neq j \wedge A[j] \geq 0)\vee(i=j\wedge 0\geq 0)\Big)\\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{A[i+2] := 0 },Q)\} &\color{blue}
-			\equiv \{0\leq i+2<|A|\wedge Q\}\\
-		\textbf{A[i+2] := 0}\\
-		\color{blue}\{Q\}
+		wp&(\textrm{A[i+2] := 0 },Q) \\
+			&\equiv wp(\textrm{A := setAt(A,i+2,0) },Q) \\
+			&\equiv \textrm{def(A := setAt(A,i+2,0)) }\wedge_L Q_{setAt(A,i+2,0)}^{A} \\
+			&\equiv \Big((\textrm{def(A)}\wedge \textrm{def(i)})\wedge_L 0\leq i+2<|A|\Big) 
+				\wedge_LQ_{setAt(A,i+2,0)}^{A} \\
+			&\equiv 0\leq i+2<|setAt(A,i+2,0)| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |setAt(A,i+2,0)|\Big) \rightarrow_L  
+				\Big(setAt(A,i+2,0) \geq 0\Big)\\
+			&\equiv 0\leq i+2<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i+2\neq j \wedge A[j] \geq 0)\vee(i+2=j\wedge 0\geq 0)\Big)\\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{A[i+2] := -1 },Q)\} &\color{blue}
-			\equiv \{0\leq i+2<|A|\wedge Q\wedge \textbf{Esto no pasa la post nunca}\}\\
-		\textbf{A[i+2] := -1}\\
-		\color{blue}\{Q\}
+		wp&(\textrm{A[i+2] := -1 },Q) \\
+			&\stackrel{Ax.1}{\equiv} wp(\textrm{A := setAt(A,i+2,-1) },Q) \\
+			&\equiv \textrm{def(A := setAt(A,i+2,0)) }\wedge_L Q_{setAt(A,i+2,-1)}^{A} \\
+			&\equiv \Big((\textrm{def(A)}\wedge \textrm{def(i)})\wedge_L 0\leq i+2<|A|\Big) 
+				\wedge_LQ_{setAt(A,i+2,0)}^{A} \\
+			&\equiv 0\leq i+2<|setAt(A,i+2,-1)| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |setAt(A,i+2,-1)|\Big) \rightarrow_L  
+				\Big(setAt(A,i+2,-1) \geq 0\Big)\\
+			&\equiv 0\leq i+2<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i+2\neq j \wedge A[j] \geq 0)\vee(i+2=j\wedge -1\geq 0)\Big)\\
+			&\equiv False
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{A[i] := 2 * A[i] },Q)\} &\color{blue}
-			\equiv \{0\leq i<|A|\wedge A[i]\geq 0 \wedge Q\}\\
-		\textbf{A[i] := 2 * A[i]}\\
-		\color{blue}\{Q\}
+		wp&(\textrm{A[i] := 2 * A[i] },Q) \\
+			&\equiv wp(\textrm{A := setAt(A,i,2 * A[i]) },Q) \\
+			&\equiv \textrm{def(A := setAt(A,i,2 * A[i])) }\wedge_L Q_{setAt(A,i,2 * A[i])}^{A} \\
+			&\equiv \Big((\textrm{def(A)}\wedge \textrm{def(i)})\wedge_L 0\leq i<|A|\Big) 
+				\wedge_LQ_{setAt(A,i,2 * A[i])}^{A} \\
+			&\equiv 0\leq i<|setAt(A,i,2 * A[i])| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |setAt(A,i,2 * A[i])|\Big) \rightarrow_L  
+				\Big(setAt(A,i,2 * A[i]) \geq 0\Big)\\
+			&\equiv 0\leq i<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i\neq j \wedge A[j] \geq 0)\vee(i=j\wedge 2*A[i]\geq 0)\Big)\\
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{A[i] := A[i-1] },Q)\} &\color{blue}
-			\equiv \{0\leq i-1<|A|\wedge Q\}\\
-		\textbf{A[i] := A[i-1]}\\
-		\color{blue}\{Q\}
+		wp&(\textrm{A[i] := A[i-1] },Q) \\
+			&\equiv wp(\textrm{A := setAt(A,i,A[i-1]) },Q) \\
+			&\equiv \textrm{def(A := setAt(A,i,A[i-1])) }\wedge_L Q_{setAt(A,i,A[i-1])}^{A} \\
+			&\equiv \Big((\textrm{def(A)}\wedge \textrm{def(i)})\wedge_L 0\leq i-1<|A|\Big) 
+				\wedge_LQ_{setAt(A,i,A[i-1])}^{A} \\
+			&\equiv 0\leq i-1<|setAt(A,i,A[i-1])| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |setAt(A,i,A[i-1])|\Big) \rightarrow_L  
+				\Big(setAt(A,i,0) \geq 0\Big)\\
+			&\equiv 0\leq i-1<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 \leq j < |A|\Big) \rightarrow_L  
+				\Big((i-1\neq j \wedge A[j] \geq 0)\vee(i-1=j\wedge 0\geq 0)\Big)\\
 		\end{align*}
 \end{enumerate}
 
@@ -525,8 +561,9 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    		\hspace*{24mm}$\color{blue}Q \equiv 0 \leq i < |s| \wedge_L s[i] \geq 0$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(s[i]<0)\wedge_L 
-   				\Bigg(\Big((s[i]<0)\wedge S1\Big) \vee\Big(\neg (s[i]<0)\wedge S2)\Big)\Bigg)\\
-   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
+   				\Bigg(\Big((s[i]<0)\wedge S1\Big) \vee\Big(\neg (s[i]<0)\wedge True)\Big)\Bigg)\\
+   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(s[i]\geq 0
+   							\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}
    	\item
@@ -535,8 +572,9 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] \geq 0)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(s[i]>0)\wedge_L 
-   				\Bigg(\Big((s[i]>0)\wedge S1\Big) \vee\Big(\neg (s[i]>0)\wedge S2)\Big)\Bigg)\\
-   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
+   				\Bigg(\Big((s[i]>0)\wedge S1\Big) \vee\Big(\neg (s[i]>0)\wedge True)\Big)\Bigg)\\
+   							&\equiv 0\leq i<|s|\wedge_L\Bigg(\Big(\Big) \vee \Big(s[i]\leq 0
+   							\Big)\Bigg)\\
    							&\equiv () \\
    		\end{align*}	
 \end{enumerate}
@@ -591,5 +629,11 @@ formalmente su corrección usando la precon-dición más débil.
 	\item
 	\item
 \end{enumerate}
+\begin{center}
+\section*{FIN.}
+\end{center}
+
+\includegraphics[width=\linewidth]{pe.png}
+
 
 \end{document}

@@ -7,3 +7,5 @@ CMakeLists.txt
 CMakeCache.txt
 cmake_install.cmake
 CMakeFiles
+*.png
+*.jpg
