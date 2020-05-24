@@ -200,11 +200,76 @@ bool esTriangular(vector<vector<int> > m){
 	//cout<<"es "<<((res==true) ?"verdadero":"false")<<" que es triangular"<<endl;
 	return res;
 }
+bool amenazaEnX(const vector<vector<int> > m,const int i,const int&j){
+	bool res=false;
+	int longM=m.size();
+	int longMi=m[0].size();
+
+	for( int k=i,l=j;k<longM && l<longMi;k++,l++){
+		if(k==i&&l==j)
+			;
+		else
+			res|=(m[k][l])==1;
+	}
+	for( int k=i,l=j;k>=0&&l>=0;k--,l--){
+		if(k==i&&l==j)
+			;
+		else
+			res|=(m[k][l])==1;
+	}
+	for(int k=i,l=j;k>=0&&l<longMi;k--,l++){
+		if(k==i&&l==j)
+			;
+		else
+			res|=(m[k][l])==1;
+	}
+	for(int k=i,l=j;k<longM&&l>=0;k++,l--){
+		if(k==i&&l==j)
+			;
+		else
+			res|=(m[k][l])==1;
+	}
+	return res;
+}
+bool amenazaEnCruz(const vector<vector<int> > m,const int i,const int &j){
+	bool res=false;
+	int longM=m.size();
+	int longMi=m[0].size();
+
+	for( int k=0;k<longMi;k++){
+		if(k==j)
+			;
+		else{
+			res|=m[i][k]==1;
+		}
+	}
+	for( int k=0;k<longM;k++){
+		if(k==i)
+			;
+		else{
+			res|=m[k][j]==1;
+		}
+	}
+	return res;
+}
+bool estaAmenazada(const vector<vector<int> > m,const unsigned int i,const unsigned int& j){
+	bool res=false;
+	res|=amenazaEnCruz(m,i,j);
+	res|=amenazaEnX(m,i,j);
+	return res;
+}
 
 bool hayAmenaza(vector<vector<int> > m){
-	//COMPLETAR
-	m.clear();
-	return true;
+	imprimirMatriz(m);
+	bool res=false;
+	for(unsigned int i=0;i<m.size();i++){
+		for(unsigned int j=0;j<m[0].size();j++){
+			if(m[i][j]==1)
+				res|=estaAmenazada(m,i,j);
+		}
+	}
+	
+	return res;
 }
 
 int diferenciaDiagonales(vector<vector<int> > m) {
