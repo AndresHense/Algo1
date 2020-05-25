@@ -68,7 +68,7 @@ más débil.
 \end{itemize}
 
 \subsection*{Respuesta:}
-
+$$\textbf{S:} \  result := a[i] + a[i + 1]\\$$
 \begin{enumerate}
 
 \item Calculamos $\color{blue}\{wp(S,Post)\}$
@@ -76,7 +76,7 @@ más débil.
 		\color{blue}\{wp(S,Post)\}
 			&\color{blue} \equiv wp(result := a[i] + a[i + 1],Post) \\
 			&\color{blue} \stackrel{Ax.1}{\equiv}
-			\{\textrm{def}(result := a[i] + a[i + 1])\wedge_L Post_{a[i]+a[i+1]}^{result} \\
+			\textrm{def}(result := a[i] + a[i + 1])\wedge_L Post_{a[i]+a[i+1]}^{result} \\
 			&\color{blue} \equiv \textrm{def}(a[i] + a[i + 1])
 				\wedge_L a[i] + a[i + 1]=a[i] + a[i + 1] \\
 			&\color{blue} \equiv \textrm{def}(a[i] + a[i + 1])
@@ -85,11 +85,7 @@ más débil.
 				 \textrm{def(i)})\wedge_L 0\leq i+1<|a| \\
 			&\color{blue} \equiv (True \wedge
 				 True)\wedge_L 0\leq i+1<|a| \\
-			&\color{blue} \equiv 0\leq i+1<|a| \\
-			\\	  
-		\textbf{S:} &\  result := a[i] + a[i + 1]\\
-		\\
-		\color{blue}\{\textbf{Post:} &\color{blue}\  result = a[i] + a[i + 1]\}\\
+			&\color{blue} \equiv 0\leq i+1<|a| \\	  		
 		\end{align*}
 \item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
 		\begin{align*}
@@ -112,5 +108,51 @@ formalmente su corrección usando la precondición más débil
 \end{itemize}
 
 \subsection*{Respuesta:}
+\textbf{S: if $( s[i]\neq 0)$ then $a := a+1$ else $skip$ endif}\\
+\hspace*{24mm}$\color{blue}Post \equiv a=\sum_{j=0}^{i}(\textrm{if }s[j] \neq 0
+    \textrm{ then 1 else 0 fi})$\\
+\begin{enumerate}
 
+\item Calculamos $\color{blue}\{wp(S,Post)\}$
+		\begin{align*}
+		wp(\textbf{S},Post)&\stackrel{Ax.3}{\equiv} \textrm{def}(s[i]\neq 0)\wedge_L 
+   					\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
+   					\vee \Big(\neq(s[i]\neq 0)\wedge (wp(skip,Post))\Big)\Bigg)\\
+   			&\stackrel{Ax.2}{\equiv}  \textrm{def}(s[i]\neq 0)\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
+   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   			&\equiv \textrm{def}(s[i]\neq 0)\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
+   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   			&\equiv \textrm{def}(s[i]\neq 0)\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
+   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   			&\equiv \Big(((\textrm{def(s)}\wedge
+				 \textrm{def(i)})\wedge_L 0\leq i<|s|\Big)\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
+   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\  
+   			&\stackrel{Ax.1}{\equiv} \Big(((True\wedge
+				 True)\wedge_L 0\leq i<|s|\Big)\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (\textrm{def}(a:=a+1)\wedge_L
+   					Post_{a+1}^{a})\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   			&\equiv  0\leq i<|s|\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge (True \wedge_L
+   					Post_{a+1}^{a})\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   			&\equiv  0\leq i<|s|\wedge_L 
+   				\Bigg(\Big((s[i]\neq 0)\wedge
+   					Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\ 									
+		\end{align*}
+\item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
+		\begin{align*}
+		Pre &\rightarrow \color{blue}\{wp(S,Post)\}\\
+		\Bigg\{0 \leq i < |s| \wedge_L a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi })\Bigg\} &\rightarrow  \color{blue}\Bigg\{0\leq i<|s|\wedge_L 
+   			\Bigg(\Big((s[i]\neq 0)\wedge
+   				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\Bigg\}\\
+   			0 \leq i < |s| &\rightarrow \color{blue} 0\leq i<|s|\\
+   			a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((s[i]\neq 0)\wedge
+   				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)
+		\end{align*}
+\end{enumerate}
 \end{document}
