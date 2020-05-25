@@ -117,14 +117,8 @@ formalmente su corrección usando la precondición más débil
 		\begin{align*}
 		wp(\textbf{S},Post)&\stackrel{Ax.3}{\equiv} \textrm{def}(s[i]\neq 0)\wedge_L 
    					\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
-   					\vee \Big(\neq(s[i]\neq 0)\wedge (wp(skip,Post))\Big)\Bigg)\\
+   					\vee \Big(\neg(s[i]\neq 0)\wedge (wp(skip,Post))\Big)\Bigg)\\
    			&\stackrel{Ax.2}{\equiv}  \textrm{def}(s[i]\neq 0)\wedge_L 
-   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
-   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
-   			&\equiv \textrm{def}(s[i]\neq 0)\wedge_L 
-   				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
-   				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
-   			&\equiv \textrm{def}(s[i]\neq 0)\wedge_L 
    				\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
    				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
    			&\equiv \Big(((\textrm{def(s)}\wedge
@@ -152,7 +146,43 @@ formalmente su corrección usando la precondición más débil
    			0 \leq i < |s| &\rightarrow \color{blue} 0\leq i<|s|\\
    			a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((s[i]\neq 0)\wedge
-   				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)
+   				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   		\end{align*}
+
+   		\textbf{Separo en casos.}\medskip \\
+   		\textbf{1.}$(s[i]=0)=True$\\
+   		\begin{align*}
+   		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((False)\wedge
+   				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
+   		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big(False\Big) \vee \Big((s[i] = 0)\wedge Post\Big)\Bigg)\\
+   		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Big(True\wedge Post\Big)\\
+    	a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} Post\\
+    	a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a=\sum_{j=0}^{i}(\textrm{if }s[j] \neq 0
+    \textrm{ then 1 else 0 fi})\\
+    a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a=\sum_{j=0}^{i-1}(\textrm{if }s[j] \neq 0
+    \textrm{ then 1 else 0 fi})\\
 		\end{align*}
+\textbf{2.}$(s[i]\neq 0)=True$\\
+   		\begin{align*}
+   		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((True)\wedge
+   				Post_{a+1}^{a}\Big) \vee \Big((False)\wedge Post)\Big)\Bigg)\\
+   		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big(Post_{a+1}^{a}\Big) \vee \Big(False\Big)\Bigg)\\
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} Post_{a+1}^{a}\\
+    	a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a+1=\sum_{j=0}^{i}(\textrm{if }s[j] \neq 0
+    \textrm{ then 1 else 0 fi})\\
+    a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
+    \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a=\sum_{j=0}^{i-1}(\textrm{if }s[j] \neq 0
+    \textrm{ then 1 else 0 fi})\\
+		\end{align*}
+	
 \end{enumerate}
 \end{document}
