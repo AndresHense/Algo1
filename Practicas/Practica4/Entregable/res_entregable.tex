@@ -143,7 +143,7 @@ formalmente su corrección usando la precondición más débil
     \textrm{ then 1 else 0 fi })\Bigg\} &\rightarrow  \color{blue}\Bigg\{0\leq i<|s|\wedge_L 
    			\Bigg(\Big((s[i]\neq 0)\wedge
    				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\Bigg\}\\
-   			0 \leq i < |s| &\rightarrow \color{blue} 0\leq i<|s|\\
+   			0 \leq i < |s| &\rightarrow \color{blue} 0\leq i<|s| \quad\color{green}\blacklozenge\\
    			a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((s[i]\neq 0)\wedge
    				Post_{a+1}^{a}\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
@@ -166,7 +166,7 @@ formalmente su corrección usando la precondición más débil
     \textrm{ then 1 else 0 fi})\\
     a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a=\sum_{j=0}^{i-1}(\textrm{if }s[j] \neq 0
-    \textrm{ then 1 else 0 fi})\\
+    \textrm{ then 1 else 0 fi})\quad\color{green}\blacklozenge\\
 		\end{align*}
 \textbf{2.}$(s[i]\neq 0)=True$\\
    		\begin{align*}
@@ -175,13 +175,14 @@ formalmente su corrección usando la precondición más débil
    				Post_{a+1}^{a}\Big) \vee \Big((False)\wedge Post)\Big)\Bigg)\\
    		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big(Post_{a+1}^{a}\Big) \vee \Big(False\Big)\Bigg)\\
+    a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} Post_{a+1}^{a}\\
     	a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a+1=\sum_{j=0}^{i}(\textrm{if }s[j] \neq 0
     \textrm{ then 1 else 0 fi})\\
     a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} a=\sum_{j=0}^{i-1}(\textrm{if }s[j] \neq 0
-    \textrm{ then 1 else 0 fi})\\
+    \textrm{ then 1 else 0 fi})\quad\color{green}\blacklozenge\\
 		\end{align*}
 	
 \end{enumerate}
