@@ -543,9 +543,16 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] \geq 0)$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(i>0)\wedge_L 
-   				\Bigg(\Big((i>0)\wedge S1\Big) \vee\Big(\neg (i>0)\wedge S2)\Big)\Bigg)\\
-   							&\equiv True \wedge_L \Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
-   							&\equiv () \\
+   				\Bigg(\Big((i>0)\wedge wp(s[i] := 0,Q))\Big) \vee\Big(\neg (i>0)\wedge wp(s[0] := 0,Q)\Big)\Bigg)\\
+   					&\equiv True \wedge \Bigg(\Big((i>0)\wedge wp(setAt(s,i,0),Q))\Big) 
+   						\vee\Big(i\leq0\wedge wp(setAt(s,0,0),Q)\Big)\Bigg)\\ 
+   				&\equiv \Big((i>0)\wedge wp(setAt(s,i,0),Q))\Big) 
+   						\vee\Big(i\leq0\wedge wp(setAt(s,0,0),Q)\Big)\\ 
+   				&\equiv \Big((i>0)\wedge wp(setAt(s,i,0),Q))\Big) 
+   						\vee True\\ 
+   				&\equiv 0\leq i<|A| \wedge_L (\forall j :\mathbb{Z})
+				\Big(0 < j < |A|\Big) \rightarrow_L  
+				\Big((i\neq j \wedge A[j] \geq 0)\vee(i=j\wedge 0\geq 0)\Big)\\			   				  				
    		\end{align*}
 	\item
 		\textbf{S: if $(i>1)$ then $s[i] := s[i-1]$ else $s[i] := 0$ endif}\\
