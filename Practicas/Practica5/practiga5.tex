@@ -1,0 +1,48 @@
+
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+\usepackage{pdfpages}
+
+\input{../macros/Algo1Macros}
+
+\begin{document}
+
+%\practica{4}{Precondición más débil en SmallLang}
+\includepdf[pages=-]{practica5.pdf}
+
+\begin{center}
+\section*{RESOLUCIONES.}
+\end{center}
+
+\paragraph{Ejercicio 1}
+\begin{enumerate}[label=\alph*)]
+\item
+	\begin{align*}
+		Pre&: \{result=0\wedge i=0\}\\
+		Post&: \{result=\sum_{j=0}^{|s|-1}s[j]\}
+	\end{align*}
+\item Si le sacas el igual a la segunda desigualdad no te agarra el ultimo elemento la 
+	sumatoria.
+\end{enumerate}
+
+%\includegraphics[width=\linewidth]{pe.png}
+
+
+\end{document}
