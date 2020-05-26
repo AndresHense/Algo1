@@ -76,7 +76,7 @@ $$\textbf{S:} \  result := a[i] + a[i + 1]\\$$
 		\color{blue}\{wp(S,Post)\}
 			&\color{blue} \equiv wp(result := a[i] + a[i + 1],Post) \\
 			&\color{blue} \stackrel{Ax.1}{\equiv}
-			\textrm{def}(result := a[i] + a[i + 1])\wedge_L Post_{a[i]+a[i+1]}^{result} \\
+			\textrm{def}(a[i] + a[i + 1])\wedge_L Post_{a[i]+a[i+1]}^{result} \\
 			&\color{blue} \equiv \Big(((\textrm{def(a)}\wedge
 				 \textrm{def(i)})\wedge_L 0\leq i+1<|a|\Big)\wedge_L Post_{a[i]+a[i+1]}^{result} \\
 			&\color{blue} \equiv \Big(((True\wedge
@@ -114,7 +114,7 @@ formalmente su corrección usando la precondición más débil
 
 \item Calculamos $\color{blue}\{wp(S,Post)\}$
 		\begin{align*}
-		wp(\textbf{S},Post)&\stackrel{Ax.3}{\equiv} \textrm{def}(s[i]\neq 0)\wedge_L 
+		wp(\textbf{S},Post)&\stackrel{Ax.4}{\equiv} \textrm{def}(s[i]\neq 0)\wedge_L 
    					\Bigg(\Big((s[i]\neq 0)\wedge (wp(a:=a+1,Post))\Big) 
    					\vee \Big(\neg(s[i]\neq 0)\wedge (wp(skip,Post))\Big)\Bigg)\\
    			&\stackrel{Ax.2}{\equiv}  \textrm{def}(s[i]\neq 0)\wedge_L 
@@ -126,7 +126,7 @@ formalmente su corrección usando la precondición más débil
    				\vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\  
    			&\stackrel{Ax.1}{\equiv} \Big(((True\wedge
 				 True)\wedge_L 0\leq i<|s|\Big)\wedge_L 
-   				\Bigg(\Big((s[i]\neq 0)\wedge (\textrm{def}(a:=a+1)\wedge_L
+   				\Bigg(\Big((s[i]\neq 0)\wedge (\textrm{def}(a+1)\wedge_L
    					Post_{a+1}^{a})\Big) \vee \Big((s[i] = 0)\wedge Post)\Big)\Bigg)\\
    			&\equiv  0\leq i<|s|\wedge_L 
    				\Bigg(\Big((s[i]\neq 0)\wedge (True \wedge_L
@@ -149,7 +149,7 @@ formalmente su corrección usando la precondición más débil
    		\end{align*}
 
    		\textbf{Separo en casos.}\medskip \\
-   		\textbf{1.}$(s[i]=0)=True$\\
+   		\textbf{1.}$(s[i]=0)=True$
    		\begin{align*}
    		a=\sum_{j=0}^{i-1}(\textrm{ if }s[j] \neq 0 
     \textrm{ then 1 else 0 fi }) &\rightarrow \color{blue} \Bigg(\Big((False)\wedge
