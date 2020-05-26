@@ -78,13 +78,16 @@ $$\textbf{S:} \  result := a[i] + a[i + 1]\\$$
 			&\color{blue} \stackrel{Ax.1}{\equiv}
 			\textrm{def}(a[i] + a[i + 1])\wedge_L Post_{a[i]+a[i+1]}^{result} \\
 			&\color{blue} \equiv \Big(((\textrm{def(a)}\wedge
-				 \textrm{def(i)})\wedge_L 0\leq i+1<|a|\Big)\wedge_L Post_{a[i]+a[i+1]}^{result} \\
+				 \textrm{def(i)})\wedge_L 0\leq i<|a|\wedge0\leq i+1<|a| \Big)
+				 	\wedge_L Post_{a[i]+a[i+1]}^{result} \\
 			&\color{blue} \equiv \Big(((True\wedge
-				 True)\wedge_L 0\leq i+1<|a|\Big)\wedge_L Post_{a[i]+a[i+1]}^{result} \\
-			&\color{blue} \equiv \Big( 0\leq i+1<|a|\Big)\wedge_L Post_{a[i]+a[i+1]}^{result} \\
-			&\color{blue} \equiv \Big( 0\leq i+1<|a|\Big)\wedge_L \Big(a[i] + a[i + 1]=a[i] + a[i + 1]\Big) \\
-			&\color{blue} \equiv  0\leq i+1<|a|\wedge_L True \\
-			&\color{blue} \equiv  0\leq i+1<|a| \\		  		
+				 True)\wedge_L 0\leq i\wedge i+1<|a|\Big)\wedge_L Post_{a[i]+a[i+1]}^{result} \\
+			&\color{blue} \equiv \Big( 0\leq i\wedge i+1<|a|\Big)\wedge_L
+				 Post_{a[i]+a[i+1]}^{result} \\
+			&\color{blue} \equiv \Big(0\leq i\wedge i+1<|a|\Big)\wedge_L
+				 \Big(a[i] + a[i + 1]=a[i] + a[i + 1]\Big) \\
+			&\color{blue} \equiv  0\leq i\wedge i+1<|a|\wedge_L True \\
+			&\color{blue} \equiv  0\leq i\wedge i+1<|a| \\		  		
 		\end{align*}
 \item Chequeamos $Pre \rightarrow \color{blue}\{wp(S,Post)\}$		
 		\begin{align*}
