@@ -35,11 +35,73 @@
 \begin{enumerate}[label=\alph*)]
 \item
 	\begin{align*}
-		Pre&: \{result=0\wedge i=0\}\\
-		Post&: \{result=\sum_{j=0}^{|s|-1}s[j]\}
+		P_c&: \{result=0\wedge i=0\}\\
+		Q_c&: \{result=\sum_{j=0}^{|s|-1}s[j]\}
 	\end{align*}
 \item Si le sacas el igual a la segunda desigualdad no te agarra el ultimo elemento la 
 	sumatoria.
+\item Si le sacas el -1 al supraindice de la sumatoria entonces va a tratar de sumar la posicion del tamaño
+	de la secuencia, como la secuencia no posee esta posicion se va a indefinir el resultado.
+\item Si invertis de lugar las instrucciones del cuerpo del ciclo entonces no te agarra el primer elemento de la 
+secuencia.
+\item 
+	Vamos  a demostrar los primeros 3 puntos del teorema del invariante. Esto nos permite afirmar que el ciclo, si termina entonces
+	es correcto respecto a su especificacón. Especificacion del ciclo:
+	\begin{itemize}
+		\item $P_c: result=0 \wedge i=0$
+		\item $Q_c:r esult=\sum_{j=0}^{|s|-1}s[j] $
+		\item $I\equiv 0\leq i\leq |s| \wedge_L result=\sum_{j=0}^
+			{i-1}s[j]$
+	\end{itemize}
+	\begin{flushleft}$P_c\Rightarrow I$\end{flushleft}
+	Tenemos que vale $P_c$ como hipótesis. Queremos probar que vale I. Vamos a probarlo por partes:
+	\begin{itemize}
+		\item Queremos ver que vale $ 0\leq i\leq |s|$\smallskip \\
+		Sabemos que i=0 (es información que nos da $P_c$). Entonces reemplazando, lo que queremos ver es que 
+		$0\leq 0\leq |s|$. La primera parte, $0\leq 0$, es una tautología. Nos resta ver si $0\leq |s|$. Pero si la lista es
+		vacia entonces $0\leq 0$, caso contrario si la lista fuera no vacia entonces $|s|>0$ y la desigualdad $0\leq |s|$ 
+		se cumple.
+		\item Queremos ver que $result=\sum_{j=0}^{i-1}s[j]$\\
+		Como $i=0$, entonces $\sum_{j=0}^{i-1}s[j]=0=result$.
+	\end{itemize}	 
+	$(I\wedge \neg B)\Rightarrow Q_c$\smallskip \\
+	Queremos demostrar que vale $Q_c$, asumiendo que valen tanto $I$ como $\neg B$.\\ Es decir, queremos probar que 
+	$result =\sum_{j=0}^{|s|-1}s[j]$\\
+	Como sabemos que vale $I$, podemos afirmar que $0\leq i\leq |s|$.\\ Además sabemos que vale $\neg B\equiv i\geq |s|$.
+	\\ Luego $|s|\leq i\leq |s|$, entonces el unico valor que cumple esta condición es $i=|s|$. Analicemoslo.\\
+	\begin{itemize}
+	\item $i=|s|$
+	\end{itemize}
+	En este caso, podemos reemplazar $i$ por $|s|$ en la sumatoria del invariante y llegamos a $result =\sum_{j=0}^{|s|-1}s[j]$, exactamante lo que queríamos probar.
+	$\{I\wedge B\} \textbf{ ciclo } \{I\}$\smallskip \\
+	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
+	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
+	S1$: result:=result+s[i];$\\
+	S2$: i:=i+1$\\
+	Lo primero que haremos es calcular $wp(ciclo,I)$.
+	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
+	\begin{align*}
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(i+1)\wedge_L I_{i+1}^{i}\\
+		&true\wedge_L (0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])\\
+		& (0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])
+	\end{align*}
+	Volviendo a (1), reemplazamos $wp(S2,I)$ y nos queda:
+	\begin{align*}
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\equiv wp(S1,0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])\\
+		&\stackrel{Ax1}{\equiv}def(result+s[i])\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
+		&\equiv 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
+		&\equiv 0\leq i \wedge i+1\leq |s| \wedge_L result=\sum_{j=0}^{i}s[j]-s[i]\\
+		&\equiv 0\leq i \wedge i+1\leq |s| \wedge_L result=\sum_{j=0}^{i-1}s[j]
+	\end{align*}
+	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
+	parte por separado:
+	\begin{itemize}
+		\item $ 0\leq i \wedge i+1\leq |s|$\smallskip \\
+		Sabemos por $I$ que $i\leq 0$, entonces la primera parte ya esta demostrada, ahora AAAAAAAHHHHHH
+		\item $result=\sum_{j=0}^{i-1}s[j]$\smallskip \\
+		Este $result$ es igual al del $I$.
+	\end{itemize}
 \end{enumerate}
 
 %\includegraphics[width=\linewidth]{pe.png}
