@@ -260,7 +260,7 @@ bool estaAmenazada(const vector<vector<int> > m,const unsigned int i,const unsig
 }
 
 bool hayAmenaza(vector<vector<int> > m){
-	imprimirMatriz(m);
+	//imprimirMatriz(m);
 	bool res=false;
 	for(unsigned int i=0;i<m.size();i++){
 		for(unsigned int j=0;j<m[0].size();j++){
@@ -273,7 +273,12 @@ bool hayAmenaza(vector<vector<int> > m){
 }
 
 int diferenciaDiagonales(vector<vector<int> > m) {
-    //COMPLETAR
-    m.clear();
-    return 0;
+    
+	int diag1=0,diag2=0;
+	for(unsigned int j=m.size()-1,i=0;i<m.size();i++,j--){
+		diag1+=m[i][i];
+		diag2+=m[j][i];
+	}
+	return abs(diag1-diag2);
+    
 }

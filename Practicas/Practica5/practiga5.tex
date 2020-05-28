@@ -6,7 +6,7 @@
 \usepackage{enumerate}
 \usepackage{xspace}
 \usepackage{longtable}
-\usepackage{graphics}
+\usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{calc}
@@ -53,7 +53,7 @@ secuencia.
 		\item $I\equiv 0\leq i\leq |s| \wedge_L result=\sum_{j=0}^
 			{i-1}s[j]$
 	\end{itemize}
-	\begin{flushleft}$P_c\Rightarrow I$\end{flushleft}
+	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
 	Tenemos que vale $P_c$ como hipótesis. Queremos probar que vale I. Vamos a probarlo por partes:
 	\begin{itemize}
 		\item Queremos ver que vale $ 0\leq i\leq |s|$\smallskip \\
@@ -64,7 +64,7 @@ secuencia.
 		\item Queremos ver que $result=\sum_{j=0}^{i-1}s[j]$\\
 		Como $i=0$, entonces $\sum_{j=0}^{i-1}s[j]=0=result$.
 	\end{itemize}	 
-	$(I\wedge \neg B)\Rightarrow Q_c$\smallskip \\
+	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
 	Queremos demostrar que vale $Q_c$, asumiendo que valen tanto $I$ como $\neg B$.\\ Es decir, queremos probar que 
 	$result =\sum_{j=0}^{|s|-1}s[j]$\\
 	Como sabemos que vale $I$, podemos afirmar que $0\leq i\leq |s|$.\\ Además sabemos que vale $\neg B\equiv i\geq |s|$.
@@ -72,8 +72,8 @@ secuencia.
 	\begin{itemize}
 	\item $i=|s|$
 	\end{itemize}
-	En este caso, podemos reemplazar $i$ por $|s|$ en la sumatoria del invariante y llegamos a $result =\sum_{j=0}^{|s|-1}s[j]$, exactamante lo que queríamos probar.
-	$\{I\wedge B\} \textbf{ ciclo } \{I\}$\smallskip \\
+	En este caso, podemos reemplazar $i$ por $|s|$ en la sumatoria del invariante y llegamos a $result =\sum_{j=0}^{|s|-1}s[j]$, exactamante lo que queríamos probar.\medskip \\
+	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
 	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
 	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
 	S1$: result:=result+s[i];$\\
@@ -91,17 +91,37 @@ secuencia.
 	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\equiv wp(S1,0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])\\
 		&\stackrel{Ax1}{\equiv}def(result+s[i])\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
 		&\equiv 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
-		&\equiv 0\leq i \wedge i+1\leq |s| \wedge_L result=\sum_{j=0}^{i}s[j]-s[i]\\
-		&\equiv 0\leq i \wedge i+1\leq |s| \wedge_L result=\sum_{j=0}^{i-1}s[j]
+		&\equiv 0\leq i<|s| \wedge_L result=\sum_{j=0}^{i}s[j]-s[i]\\
+		&\equiv 0\leq i<|s| \wedge_L result=\sum_{j=0}^{i-1}s[j]
 	\end{align*}
 	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
 	parte por separado:
 	\begin{itemize}
-		\item $ 0\leq i \wedge i+1\leq |s|$\smallskip \\
-		Sabemos por $I$ que $i\leq 0$, entonces la primera parte ya esta demostrada, ahora AAAAAAAHHHHHH
+		\item $ 0\leq i< |s|$\smallskip \\
+		Sabemos por $I$ que $\leq i$, entonces la primera parte ya esta demostrada, ahora la interseccion entre la guarda
+		y el invariante da como cota superior $i<|s|$, que es lo mismo que tengo en mi $wp$.
 		\item $result=\sum_{j=0}^{i-1}s[j]$\smallskip \\
 		Este $result$ es igual al del $I$.
+		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
+	\item 
+	Vamos  a demostrar los ultimos 2 puntos del teorema del invariante. Esto nos permite afirmar que el ciclo termina. Especificación del ciclo:
+	\begin{itemize}
+	\item $f_v:|s|-i$
+	\end{itemize}
+	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
+	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
+	\begin{align*}
+		wp(S1;S2,f_v<v_0)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,|s|-i<v_0))\\
+			&\stackrel{Ax1}{\equiv}wp(S1,true\wedge_L |s|-(i+1)<v_0)\\
+			&\stackrel{Ax3}{\equiv}true\wedge_L(true\wedge_L  |s|-(i+1)<v_0)\\
+			&\equiv |s|-i-1<v_0
+	\end{align*}
+	Es decir, $wp(S1;S2,f_v<v_0)=|s|-i-1<v_0$. Ahora debemos ver que $(I\wedge B\wedge v_0=f_v)$ implican dicha WP. Parte de la 
+	hipótesis es que $v_0=f_v$, es decir $v_0=|s|-i$. Restando 1 a ambos lados, $|s|-1-i=v_0-1<v_0$.\medskip \\
+	$\scalebox{1.3}{$(I\wedge f_v\leq 0)\Rightarrow \neg B$}$\medskip\\
+	Debemos mostrar que vale $\neg B$, es decir $i\geq |s|$.\\
+	Sabemos que $f_v\leq 0$, es decir $|s|-i\leq 0$, luego $|s|\leq i$, como queriamos demostrar.
 \end{enumerate}
 
 %\includegraphics[width=\linewidth]{pe.png}
