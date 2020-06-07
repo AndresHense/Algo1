@@ -19,6 +19,12 @@
 \usepackage{enumitem}
 \usepackage{tasks}
 \usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{bera}
+
+\lstset{basicstyle=\ttfamily,
+escapeinside={||},
+mathescape=true}
 
 \input{../macros/Algo1Macros}
 
@@ -186,7 +192,7 @@ Vamos  a demostrar los 5 puntos del teorema del invariante. Esto nos permite afi
 		&\equiv true\wedge_L (0\leq i+2\leq n+1\wedge i+2\textrm{ mod }2=0 \wedge_L result=\sum_{j=0}^{i+2-1}\textrm{(if j mod 2=0 then j else 0 fi)})\\
 		&\equiv (0\leq i+2\leq n+1\wedge i+2\textrm{ mod }2=0 \wedge_L result=\sum_{j=0}^{i+1}\textrm{(if j mod 2=0 then j else 0 fi)})
 	\end{align*}
-	Volviendo a (1), reemplazamos $wp(S2,I)$ y nos queda:
+	Volviendo a (2), reemplazamos $wp(S2,I)$ y nos queda:
 	\begin{align*}
 	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\equiv wp(S1,0\leq i+2\leq n+1 \wedge i+2\textrm{ mod }2=0 
 			\wedge result=\sum_{j=0}^{i+1}\textrm{(if j mod 2=0 then j else 0 fi)})\\
@@ -199,7 +205,7 @@ Vamos  a demostrar los 5 puntos del teorema del invariante. Esto nos permite afi
 	parte por separado:
 	\begin{itemize}
 		\item $ 0\leq i+2\leq n+1$\smallskip \\
-		Sabemos por $I$ que $ i>0$, luego podemos afirmar que $0\leq +2$\\
+		Sabemos por $I$ que $ i>0$, luego podemos afirmar que $0\leq i+2$\\
 		Sabemos por $B$ que $i<n$, luego (sumando 2 en ambos términos): $i+2<n+2$, lo cual es equivalente a decir
 		que $i+2\leq n+1$
 		\item $i+2$ mod 2=0\smallskip \\
@@ -236,86 +242,98 @@ Vamos  a demostrar los 5 puntos del teorema del invariante. Esto nos permite afi
 	
 \paragraph{Ejercicio 3\\}
 \noindent
-\textbf{proc name}(in $s:seq\langle \mathbb{Z}\rangle$, inout $r:seq\langle \mathbb{Z}\rangle)\ \{$\smallskip \\
-\hspace*{6mm}\textbf{Pre}$\{ True=Ture\}$\\
-\hspace*{6mm}\textbf{Post}$\{ True=Ture\}$\\
+\textbf{proc exponenciacion}(in $s: \mathbb{Z}$,in $n:\mathbb{Z}$, out $result: \mathbb{Z})\ \{$\smallskip \\
+\hspace*{6mm}\textbf{Pre}$\{ n\geq 0 \wedge \neg(m=0\wedge n=0)\}$\\
+\hspace*{6mm}\textbf{Post}$\{ result=m^n\}$\\
 $\}$\medskip\\
+
 \noindent
-	\textbf{i:=0\\
-	while(i$<$s.size()) do\\
-	\hspace*{4mm}r[i]=:s[i];\\
-	\hspace*{4mm}i:=i+1\\
-	endwhile\\
-}
+\begin{enumerate}[label=\alph*)]
+	\item 
+
+\begin{lstlisting}
+i:=1;
+result:=m;
+
+|\textbf{while}|(i<n |\textbf{do}|
+  result=:result*m;
+  i:=i+1
+|\textbf{endwhile}|
+\end{lstlisting}
 
  Especificacion del ciclo:
 	\begin{itemize}
-		\item $P_c: result=0 \wedge i=0$
-		\item $Q_c:result=$
-		\item $I\equiv 0\leq i$
+		\item $P_c: result=m \wedge i=1\wedge n\geq 0 \wedge \neg(m=0\wedge n=0)$
+		\item $Q_c:result=m^n$
+		\item $I\equiv 1\leq i\leq n \wedge result=m^i$
 		\item $f_v:n-i$
 	\end{itemize}
 	Solo demostraremos correción parcial de este ciclo.
 	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
 	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
 	\begin{itemize}
-		\item $ 0\leq i\leq |s|$\smallskip \\
-		Demo.
-		\item  $result=algo$\\
-		Demo.
+		\item $ 1\leq i\leq n$\smallskip \\
+		Por $P_c$ sabemos que $i=1$, entonces, la primera desigualdad es una tautologia,
+		$1\leq 1$, para la segunda vemos que $n\geq0\wedge \neg(m=0 \wedge n=0)$, luego como 
+		$n$, no puede ser 0 y es mayor o igual a cero tengo que $1\leq n$.
+		\item  $result=m^i$\\
+		Trivial, por $P_c$ $result=m$, y como $i=1$, entonces $m^i=m$, por lo que 
+		 la igualdad vale.  
 	\end{itemize}	 
 	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
-	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge neg B$.\\
+	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
 	\begin{itemize}
-	\item $i=|s|$ Demo.
+	\item cuando deja de valer la guarda, $i=n$ sabemos por el invariante que $result=m^i$, como $i=n$, entonces,
+	vale que $result=m^n$, que es exactamente lo mismo que $Q_c$
 	\end{itemize}
 	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
 	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
 	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
-	S1$: result:=result+s[i];$\\
+	S1$: result:=result*m;$\\
 	S2$: i:=i+1$\\
 	Lo primero que haremos es calcular $wp(ciclo,I)$.
 	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
 	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
 	\begin{align*}
 	wp(S2,I)&\stackrel{Ax1}{\equiv}def(i+1)\wedge_L I_{i+1}^{i}\\
-		&true\wedge_L (0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])\\
-		& (0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])
+		&true\wedge_L (1\leq i+1\leq n \wedge_L result=m^{i+1})\\
+		& (1\leq i+1\leq n \wedge_L result=m^{i+1})
 	\end{align*}
-	Volviendo a (1), reemplazamos $wp(S2,I)$ y nos queda:
+	Volviendo a (3), reemplazamos $wp(S2,I)$ y nos queda:
 	\begin{align*}
-	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\equiv wp(S1,0\leq i+1\leq |s| \wedge_L result=\sum_{j=0}^{i+1-1}s[j])\\
-		&\stackrel{Ax1}{\equiv}def(result+s[i])\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
-		&\equiv 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge_L result+s[i]=\sum_{j=0}^{i}s[j]\\
-		&\equiv 0\leq i<|s| \wedge_L result=\sum_{j=0}^{i}s[j]-s[i]\\
-		&\equiv 0\leq i<|s| \wedge_L result=\sum_{j=0}^{i-1}s[j]
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\equiv wp(S1,1\leq i+1\leq n \wedge_L result=m^{i+1})\\
+		&\stackrel{Ax1}{\equiv}def(result*m)\wedge_L 1\leq i+1\leq n \wedge_L result*m=m^{i+1}\\
+		&\equiv 1\leq i+1\leq n \wedge_L result*m=m^{i+1}
 	\end{align*}
 	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
 	parte por separado:
 	\begin{itemize}
-		\item $ 0\leq i+2\leq n+1$\smallskip \\
-		Sabemos por $I$ que $ i>0$, luego podemos afirmar que $0\leq +2$\\
-		Sabemos por $B$ que $i<n$, luego (sumando 2 en ambos términos): $i+2<n+2$, lo cual es equivalente a decir
-		que $i+2\leq n+1$
-		\item $i+2$ mod 2=0\smallskip \\
-		Sabemos por $I$ que $i$ mod 2=0. Si $i$ es par, al sumarle 2 sigue siendo par, luego i +2 mod 2=0 vale. 
-		\item $result+i=\sum_{j=0}^{i-1}$\smallskip \\
-		Este $result$ es igual al del $I$.
+		\item $ 0\leq i+1\leq n$\smallskip \\
+		Sabemos por $I$ que $ i>0$, luego podemos afirmar que $1\leq i+1$\\
+		Sabemos por $B$ que $i<n$, luego $i+1\geq n$.
+		\item $result*m=m^{i+1}$\smallskip \\
+		Divido en ambos miembros por $m$, y tengo lo mismo que en mi invariante.\smallskip \\
 		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
 	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
 	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
 	\begin{align*}
-		wp(S1;S2,f_v<v_0)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,|s|-i<v_0))\\
-			&\stackrel{Ax1}{\equiv}wp(S1,true\wedge_L |s|-(i+1)<v_0)\\
-			&\stackrel{Ax3}{\equiv}true\wedge_L(true\wedge_L  |s|-(i+1)<v_0)\\
-			&\equiv |s|-i-1<v_0
+		wp(S1;S2,f_v<v_0)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,n-i<v_0))\\
+			&\stackrel{Ax1}{\equiv}wp(S1,true\wedge_L n-(i+1)<v_0)\\
+			&\stackrel{Ax3}{\equiv}true\wedge_L(true\wedge_L  n-(i+1)<v_0)\\
+			&\equiv n-i-1<v_0
 	\end{align*}
-	Es decir, $wp(S1;S2,f_v<v_0)=|s|-i-1<v_0$. Ahora debemos ver que $(I\wedge B\wedge v_0=f_v)$ implican dicha WP. Parte de la 
-	hipótesis es que $v_0=f_v$, es decir $v_0=|s|-i$. Restando 1 a ambos lados, $|s|-1-i=v_0-1<v_0$.\medskip \\
+	Es decir, $wp(S1;S2,f_v<v_0)=n-i-1<v_0$. Ahora debemos ver que $(I\wedge B\wedge v_0=f_v)$ implican dicha WP. Parte de la 
+	hipótesis es que $v_0=f_v$, es decir $v_0=n-i$. Restando 1 a ambos lados, $n-1-i=v_0-1<v_0$.\medskip \\
 	$\scalebox{1.3}{$(I\wedge f_v\leq 0)\Rightarrow \neg B$}$\medskip\\
-	Debemos mostrar que vale $\neg B$, es decir $i\geq |s|$.\\
-	Sabemos que $f_v\leq 0$, es decir $|s|-i\leq 0$, luego $|s|\leq i$, como queriamos demostrar.
+	Debemos mostrar que vale $\neg B$, es decir $i\geq n$.\\
+	Sabemos que $f_v\leq 0$, es decir $n-i\leq 0$, luego $n\leq i$, como queriamos demostrar.
+	
+	\item falla el primero, el segundo el tercero el cuarto y el quinto, falla todo para ser más preciso.
+	\item creo que no falla, empieza con el caso $m^0=1$, y sigue como en mi demostración en a), no lo
+	voy a probar de vuelta.
+	\item habria que agregar en la pre que $n\geq 2$.
+\end{enumerate}
 %\includegraphics[width=\linewidth]{pe.png}
 
 
