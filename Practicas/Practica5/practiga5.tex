@@ -436,23 +436,23 @@ $\}$\medskip\\
 	\item 
 
 \begin{lstlisting}
-i:=0;
+j:=0;
 result:=0;
 
-|\textbf{while}|(i<s.size()) |\textbf{do}|
-  |\textbf{if}| (i mod 2 = 1) 
-     result=:result +s[i]
+|\textbf{while}|(j<s.size()) |\textbf{do}|
+  |\textbf{if}| (j mod 2 = 1) 
+     result=:result +s[j]
   |\textbf{else}|
      skip
   |\textbf{endif}|;
-   i:=i+1
+   j:=j+1
 |\textbf{endwhile}|
 \end{lstlisting}
 	\item
 	
  Especificacion del ciclo:
 	\begin{itemize}
-		\item $P_c: result=0 \wedge i=0$
+		\item $P_c: result=0 \wedge j=0$
 		\item $Q_c: result=\sum_{i=0}^{|s|-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))$
 		\item $I\equiv 0\leq j\leq |s| \wedge result=\sum_{i=0}^{j-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$
 		\item $f_v:n-i$
@@ -466,9 +466,9 @@ result:=0;
 		Por $P_c$ sabemos que $j=0$, entonces, la primera desigualdad es una tautologia,
 		$0\leq 0$, para la segunda vemos que $|s|\geq 0$, luego como 
 		$|s|$, no puede ser menor que cero es valido.
-		\item  $result=\sum_{i=0}^{j}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$\\
+		\item  $result=\sum_{i=0}^{j-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$\\
 		Trivial, por $P_c$ $result=0$, y  como $j=0$, entonces
-		 $\sum_{i=0}^{0}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})=result=0$.
+		 $\sum_{i=0}^{-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})=result=0$.
 	\end{itemize}	 
 	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
 	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
@@ -479,36 +479,41 @@ result:=0;
 	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
 	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
 	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
-	S1$: i:=i+1$\\
-	S2$: \textbf{if}\ (n\ mod\ i=0)\ \textbf{then}\ result:=result+i\ \textbf{else}\ skip\ \textbf{endif};$\\
+	S1$: \textbf{if}\ (j\ mod\ 2=1\ \textbf{then}\ result:=result+s[j]\ \textbf{else}\ skip\ \textbf{endif};$\\
+	S2$: j:=j+1$\\
 	Lo primero que haremos es calcular $wp(ciclo,I)$.
 	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
 	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
 	\begin{align*}
-	wp(S2,I)&\stackrel{Ax4}{\equiv}def(n\ mod\ i=0)\wedge_L \Bigg(\Big((n\ mod\ i=0)\wedge (wp(result:=result+i,I))\Big) 
-   				\vee \Big(\neg  (n\ mod\ i=0)\wedge (wp(skip,I))\Big)\Bigg)\\
-		&\equiv True \wedge_L \Bigg(\Big((n\ mod\ i=0)\wedge (def(result+i)\wedge_LI_{result+i}^{result}))\Big) 
-   				\vee \Big(\neg  (n\ mod\ i=0)\wedge (I)\Big)\Bigg)\\
-		&\equiv \Bigg(\Big((n\ mod\ i=0)\wedge (I_{result+i}^{result}))\Big) 
-   				\vee \Big(\neg  (n\ mod\ i=0)\wedge (I)\Big)\Bigg)\\
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(j+1)\wedge_L I_{j+1}^{j}\\
+		&\equiv true\wedge_L 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})\\
+		&\equiv 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))
 	\end{align*}
+	
 	Volviendo a (4), reemplazamos $wp(S2,I)$ y nos queda:
 	\begin{align*}
 	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\\
-	&\equiv  wp(S1,\Big((n\ mod\ i=0)\wedge (1\leq i\leq n \wedge result+1=\sum_{j=1}^{i}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})))\Big) 
-   				\\ &\vee \Big(\neg  (n\ mod\ i=0)\wedge (1\leq i\leq n \wedge result=\sum_{j=1}^{i}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi}))\Big))\\
-		&\stackrel{Ax1}{\equiv}def(i+1)\wedge_L \Big((n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result+1=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})))\Big) 
-   				\\ &\vee \Big(\neg  (n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi}))\Big))\\
-		&\equiv  \Big((n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result+1=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})))\Big) 
-   				\\ &\vee \Big(\neg  (n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi}))\Big))\\
+	&\equiv  wp(S1,0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\\
+	&\equiv  wp(S1,I_{j+1}^{j})\\
+	&\stackrel{Ax4}{\equiv}def(j\ mod\ 2=1)\wedge_L \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge (wp(skip,I_{j+1}^{j}))\Big)\Bigg)\\
+		&\stackrel{Ax1}{\equiv} True\wedge_L \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\vee \Big(\neg  (j\ mod\ 2=1)\wedge I_{j+1}^{j})\Big)\Bigg)\\
+		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\vee \Big(\neg  (j\ mod\ 2=1)\wedge I_{j+1}^{j})\Big)\Bigg)\\
+   		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) 
+   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)\Bigg)\\
 	\end{align*}
+	(ya se como sigue lo dejo asi para que quede mas corto)\\
 	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
 	parte por separado:
 	\begin{itemize}
-		\item $\Big((n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result+1=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})))\Big) $\smallskip \\
-		Ya lo hice en la guia 4
-		\item $\Big(\neg  (n\ mod\ i+1=0)\wedge (1\leq i+1\leq n \wedge result=\sum_{j=1}^{i+1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi}))\Big))$\smallskip \\
-		Ya lo hice en la guia 4\smallskip \\
+		\item $\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) $\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.
+		\item $\Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)$\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.\smallskip \\
 		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
 \end{enumerate}
