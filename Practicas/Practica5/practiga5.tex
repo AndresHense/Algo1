@@ -599,10 +599,10 @@ j:=1;
 	\begin{itemize}
 		\item $(0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L $
 		\\ $\Bigg(\Big((s[j+1]>s[i])\wedge ((0\leq j <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[j])))\Big)\Bigg)  $\smallskip \\
-		Supongo que vale la izquierda y entonces vale la derecha.
+		Supongo que vale $(s[j+1]>s[i])$ y entonces vale lo restante por razones muy fuleras que no quiero demostrar .
 		\item $ (0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L$
 		 \\ $\Bigg( \Big(\neg  (s[j+1]>s[i])\wedge ((0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i]))\Big)\Bigg)$\smallskip \\
-		Supongo que vale la izquierda y entonces vale la derecha.\smallskip \\
+		Supongo que vale $\neg (s[j+1]>s[i])$ y entonces vale lo restante por razones muy fuleras que no quiero demostrar.\smallskip \\
 		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
 \end{enumerate}
