@@ -593,17 +593,15 @@ j:=1;
 		&\equiv   (0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L 
 		\\&\Bigg(\Big((s[j+1]>s[i])\wedge ((0\leq j <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[j])))\Big) 
    				\\&\vee \Big(\neg  (s[j+1]>s[i])\wedge ((0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i]))\Big)\Bigg)\\
-   		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
-   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) 
-   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)\Bigg)\\
 	\end{align*}
 	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
-	parte por separado:
+	parte por separado suponiendo que vale o no la guarda:
 	\begin{itemize}
-		\item $\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
-   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) $\smallskip \\
+		\item $(0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L $
+		\\ $\Bigg(\Big((s[j+1]>s[i])\wedge ((0\leq j <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[j])))\Big)\Bigg)  $\smallskip \\
 		Supongo que vale la izquierda y entonces vale la derecha.
-		\item $\Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)$\smallskip \\
+		\item $ (0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L$
+		 \\ $\Bigg( \Big(\neg  (s[j+1]>s[i])\wedge ((0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i]))\Big)\Bigg)$\smallskip \\
 		Supongo que vale la izquierda y entonces vale la derecha.\smallskip \\
 		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
