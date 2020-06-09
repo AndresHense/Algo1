@@ -426,6 +426,191 @@ result:=0;
 
 \paragraph{Ejercicio 5\\}
 \noindent
+\textbf{proc sumaPosicionesImpares}(in $s: seq\langle\mathbb{Z}\rangle$, out $result: \mathbb{Z})\ \{$\smallskip \\
+\hspace*{6mm}\textbf{Pre}$\{True \}$\\
+\hspace*{6mm}\textbf{Post}$\{ result=\sum_{i=0}^{|s|-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})\}$\\
+$\}$\medskip\\
+
+\noindent
+\begin{enumerate}[label=\alph*)]
+	\item 
+
+\begin{lstlisting}
+j:=0;
+result:=0;
+
+|\textbf{while}|(j<s.size()) |\textbf{do}|
+  |\textbf{if}| (j mod 2 = 1) 
+     result:=result +s[j]
+  |\textbf{else}|
+     skip
+  |\textbf{endif}|;
+   j:=j+1
+|\textbf{endwhile}|
+\end{lstlisting}
+	\item
+	
+ Especificacion del ciclo:
+	\begin{itemize}
+		\item $P_c: result=0 \wedge j=0$
+		\item $Q_c: result=\sum_{i=0}^{|s|-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))$
+		\item $I\equiv 0\leq j\leq |s| \wedge result=\sum_{i=0}^{j-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$
+		\item $f_v:n-i$
+	\end{itemize}
+	
+	Solo demostraremos correción parcial de este ciclo.
+	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
+	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
+	\begin{itemize}
+		\item $ 0\leq j\leq |s|$\smallskip \\
+		Por $P_c$ sabemos que $j=0$, entonces, la primera desigualdad es una tautologia,
+		$0\leq 0$, para la segunda vemos que $|s|\geq 0$, luego como 
+		$|s|$, no puede ser menor que cero es valido.
+		\item  $result=\sum_{i=0}^{j-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$\\
+		Trivial, por $P_c$ $result=0$, y  como $j=0$, entonces
+		 $\sum_{i=0}^{-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})=result=0$.
+	\end{itemize}	 
+	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
+	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
+	\begin{itemize}
+	\item cuando deja de valer la guarda, $j=|s|$ sabemos por el invariante que $result=\sum_{i=0}^{j-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})$, como $j=|s|$, entonces,
+	vale que $result=\sum_{j=1}^{|s|-1}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})$, que es exactamente lo mismo que $Q_c$
+	\end{itemize}
+	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
+	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
+	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
+	S1$: \textbf{if}\ (j\ mod\ 2=1\ \textbf{then}\ result:=result+s[j]\ \textbf{else}\ skip\ \textbf{endif};$\\
+	S2$: j:=j+1$\\
+	Lo primero que haremos es calcular $wp(ciclo,I)$.
+	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
+	\begin{align*}
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(j+1)\wedge_L I_{j+1}^{j}\\
+		&\equiv true\wedge_L 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})\\
+		&\equiv 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))
+	\end{align*}
+	
+	Volviendo a (4), reemplazamos $wp(S2,I)$ y nos queda:
+	\begin{align*}
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\\
+	&\equiv  wp(S1,0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\\
+	&\equiv  wp(S1,I_{j+1}^{j})\\
+	&\stackrel{Ax4}{\equiv}def(j\ mod\ 2=1)\wedge_L \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge (wp(skip,I_{j+1}^{j}))\Big)\Bigg)\\
+		&\stackrel{Ax1}{\equiv} True\wedge_L \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\vee \Big(\neg  (j\ mod\ 2=1)\wedge I_{j+1}^{j})\Big)\Bigg)\\
+		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (wp(result:=result+s[j],I_{j+1}^{j}))\Big) 
+   				\vee \Big(\neg  (j\ mod\ 2=1)\wedge I_{j+1}^{j})\Big)\Bigg)\\
+   		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) 
+   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)\Bigg)\\
+	\end{align*}
+	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
+	parte por separado:
+	\begin{itemize}
+		\item $\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) $\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.
+		\item $\Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)$\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.\smallskip \\
+		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
+	\end{itemize}
+\end{enumerate}
+
+\paragraph{Ejercicio 6\\}
+\noindent
+\textbf{proc maximo}(in $s: seq\langle\mathbb{Z}\rangle$, out $i: \mathbb{Z})\ \{$\smallskip \\
+\hspace*{6mm}\textbf{Pre}$\{|s|\geq 1 \}$\\
+\hspace*{6mm}\textbf{Post}$\{ 0\leq i<|s|\wedge_L (\forall j:\mathbb{Z})(0\leq j<|s|\rightarrow_L s[j]\leq s[i])\}$\\
+$\}$\medskip\\
+
+\noindent
+\begin{enumerate}[label=\alph*)]
+	\item 
+
+\begin{lstlisting}
+i:=0;
+j:=1;
+
+|\textbf{while}|(j<s.size()) |\textbf{do}|
+  |\textbf{if}| (s[j] > s[i]) 
+     i := j
+  |\textbf{else}|
+     skip
+  |\textbf{endif}|;
+   j:=j+1
+|\textbf{endwhile}|
+\end{lstlisting}
+	\item
+	
+ Especificacion del ciclo:
+	\begin{itemize}
+		\item $P_c: i=0 \wedge j=1\wedge |s|\geq 1$
+		\item $Q_c: 0\leq i<|s|\wedge_L (\forall j:\mathbb{Z})(0\leq j<|s|\rightarrow_L s[j]\leq s[i])$
+		\item $I\equiv (0\leq i <|s|\wedge 1\leq j\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j\rightarrow_L s[k]\leq s[i])$
+		\item $f_v:|s|+1-j$
+	\end{itemize}
+	
+	Solo demostraremos correción parcial de este ciclo.
+	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
+	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
+	\begin{itemize}
+		\item $ (0\leq i <|s|\wedge 1\leq j\leq |s|)$\smallskip \\
+		Por $P_c$ sabemos que $j=1,i=0$, entonces, la primera desigualdad de ambos terminos es una tautologia,
+		$0\leq 0\wedge 1\leq 1$, para la segunda vemos que por $P_c$ $|s|\geq 1$, luego como $i,j$ son o menores o iguales
+		a 1 vale.
+		\item  $(\forall k:\mathbb{Z})(0\leq k<j\rightarrow_L s[k]\leq s[i])$\\
+		Parto desde que $i=0,j=1$
+		El unico .$k$ que cumple que $k<1$ es 0, por lo que es cierto que $s[0]\leq s[0]$. 
+	\end{itemize}	 
+	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
+	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
+	\begin{itemize}
+	\item cuando deja de valer la guarda, $j=|s|$ reemplazamos $j$ por $|s|$ en el invariante y tenemos $Q_c$
+	\end{itemize}
+	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
+	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
+	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
+	S1$: \textbf{if}\ (s[j]>s[i])\ \textbf{then}\ i:=j\ \textbf{else}\ skip\ \textbf{endif};$\\
+	S2$: j:=j+1$\\
+	Lo primero que haremos es calcular $wp(ciclo,I)$.
+	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
+	\begin{align*}
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(j+1)\wedge_L I_{j+1}^{j}\\
+		&\equiv true\wedge_L (0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i])\\
+		&\equiv (0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i])
+	\end{align*}
+	
+	Volviendo a (4), reemplazamos $wp(S2,I)$ y nos queda:
+	\begin{align*}
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\\
+	&\equiv  wp(S1,I_{j+1}^{j})\\
+	&\stackrel{Ax4}{\equiv}def(s[j+1]>s[i])\wedge_L \Bigg(\Big((s[j+1]>s[i])\wedge (wp(i:=j,I_{j+1}^{j}))\Big) 
+   				\\&\vee \Big(\neg  (s[j+1]>s[i])\wedge (wp(skip,I_{j+1}^{j}))\Big)\Bigg)\\
+		&\stackrel{Ax1}{\equiv} (0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L \Bigg(\Big((s[j+1]>s[i])\wedge (wp(i:=j,I_{j+1}^{j}))\Big) 
+   				\\&\vee \Big(\neg  (s[j+1]>s[i])\wedge (I_{j+1}^{j})\Big)\Bigg)\\
+		&\equiv   (0\leq i <|s|\wedge 0\leq j+1\leq |s|)\wedge_L 
+		\\&\Bigg(\Big((s[j+1]>s[i])\wedge ((0\leq j <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[j])))\Big) 
+   				\\&\vee \Big(\neg  (s[j+1]>s[i])\wedge ((0\leq i <|s|\wedge 1\leq j+1\leq |s|)\wedge_L (\forall k:\mathbb{Z})(0\leq k<j+1\rightarrow_L s[k]\leq s[i]))\Big)\Bigg)\\
+   		&\equiv  \Bigg(\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) 
+   				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)\Bigg)\\
+	\end{align*}
+	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
+	parte por separado:
+	\begin{itemize}
+		\item $\Big((j\ mod\ 2=1)\wedge (0\leq j+1\leq |s| \wedge result+s[j]=\sum_{i=0}^{j-1+1}
+   			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) $\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.
+		\item $\Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)$\smallskip \\
+		Supongo que vale la izquierda y entonces vale la derecha.\smallskip \\
+		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
+	\end{itemize}
+\end{enumerate}
+
+\paragraph{Ejercicio 7\\}
+\noindent
 \textbf{proc sumaPosicionesImpares}(in $n: seq\langle\mathbb{Z}\rangle$, out $result: \mathbb{Z})\ \{$\smallskip \\
 \hspace*{6mm}\textbf{Pre}$\{True \}$\\
 \hspace*{6mm}\textbf{Post}$\{ result=\sum_{i=0}^{|s|-1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi})\}$\\
@@ -505,7 +690,6 @@ result:=0;
    			(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big) 
    				\\&\vee \Big(\neg  (j\ mod\ 2=1)\wedge 0\leq j+1\leq |s| \wedge result=\sum_{i=0}^{j-1+1}(\textrm{if}\ i\ mod\ 2=1\ \textrm{then}\ s[i]\ \textrm{else}\ 0\ \textrm{fi}))\Big)\Bigg)\\
 	\end{align*}
-	(ya se como sigue lo dejo asi para que quede mas corto)\\
 	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
 	parte por separado:
 	\begin{itemize}
