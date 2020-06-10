@@ -365,10 +365,10 @@ result:=0;
 	\begin{itemize}
 		\item $P_c: result=0 \wedge i=0\wedge n\geq 1$
 		\item $Q_c:result=\sum_{j=1}^{n}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})$
-		\item $I\equiv 1\leq i\leq n \wedge result=\sum_{j=1}^{i}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})$
+		\item $I\equiv 0\leq i\leq n \wedge result=\sum_{j=1}^{i}(\textrm{if}\ n\ mod\ j=0\ \textrm{then}\ j\ \textrm{else}\ 0\ \textrm{fi})$
 		\item $f_v:n-i$
 	\end{itemize}
-	
+	Cambio el invariante para que empieze en $0\leq i$\\
 	Solo demostraremos correción parcial de este ciclo.
 	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
 	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
@@ -746,6 +746,160 @@ j:=0;
 	ver si vale es $[i+1..|r|)$, el cual está incluído en $rango_1$ (nuestro rango es más chico que $rango_1$), con lo cual podemos
 	afirmar que $r[j]=r_0[j]$ para los $j $ que nos interesan.
 	\end{itemize}
+\end{enumerate}
+
+\paragraph{Ejercicio 8\\}
+\noindent
+\textbf{proc copiarSecuencia}(in $n: seq\langle\mathbb{Z}\rangle$, inout $r: seq\langle\mathbb{Z}\rangle)\ \{$\smallskip \\
+\hspace*{6mm}\textbf{Pre}$\{|s|=|r|\wedge r=r_0\}$\\
+\hspace*{6mm}\textbf{Post}$\{ |s|=|r|\wedge_L (\forall j:\mathbb{Z})(0\leq j<|s|\rightarrow_L s[j]=r[j])\}$\\
+$\}$\medskip\\
+
+\noindent
+\begin{enumerate}[label=\alph*)]
+	\item 
+
+\begin{lstlisting}
+j:=0;
+|\textbf{while}|(i<s.size()) |\textbf{do}|
+  r[i]:=s[i];
+   i:=i+1
+|\textbf{endwhile}|
+\end{lstlisting}
+	\item
+	
+ Especificacion del ciclo:
+	\begin{itemize}
+		\item $P_c: i=0 \wedge |s|=|r|\wedge r=r_0$
+		\item $Q_c: i=|s|\wedge |s|=|r|\wedge_L (\forall j:\mathbb{Z})(0\leq j<|s|\rightarrow_L s[j]=r[j])$
+		\item $I\equiv 0\leq i\leq |s|\wedge |r_0|=|r|\wedge |s|=|r|\wedge_L (\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L r[j]=s[j])\wedge
+		 (\forall j:\mathbb{Z})(i\leq j<|r|\rightarrow_L r[j]=r_0[j])$
+		\item $f_v:n-i$
+	\end{itemize}
+	
+	Solo demostraremos correción parcial de este ciclo.
+	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
+	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
+	\begin{itemize}
+		\item $ 0\leq i\leq |s|$\smallskip \\
+		Por $P_c$ sabemos que $i=0$, entonces $0\leq i $ vale. Además, $|s|\geq 0$ (porque las listas no pueden tener una cantidad 
+		negativa de elementos), luegos $|s|\geq i$
+		\item $|r_0|=|r|$\smallskip \\
+		$P_c$ indica que $r=r_0$. Si dos secuencias son iguales, entonces tienen la misma longitud.
+		\item $|s|=|r|$\smallskip \\
+		$P_c$ afirma eso.
+		\item $(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L r[j]=s[j])$\\
+		Dado que $i=0$, al evaluar cualquier valor de $j$ en $0\leq j<i$ obtenemos $False$. Luego la implicación es verdadera para
+		 cualquier valor de $j$ (es decir, para todos los valores).
+		\item $(\forall j:\mathbb{Z})(i\leq j<|r|\rightarrow_L r[j]=r_0[j])$\\
+		Dado que $i=0$, esa expresión afirma que todas las posiciones de $r$ son iguales a las de $r:0$. Esto es cierto pues por
+		 $P_c$ sabemos que $r=r_0$
+	\end{itemize}	 
+	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
+	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
+	\begin{itemize}
+	\item Por $I$ savemos que $i\leq |s|$, y por $\neg B$ savemos que $i\geq |s|$. Entonces $i$ debe ser igual a $|s|$
+	\item Es trivial ver que vale $|s|=|r|$ ya que el invariante expresa exactamente eso.
+	\item Sabemos por $I$ que $(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L r[j]=s[j])$, y además sabemos que $i=|s|$. Reemplazando, el 
+	valor de $i$ nos queda $(\forall j:\mathbb{Z})(0\leq j<|s| \rightarrow_L r[j]=s[j])$, que es lo que queriamos ver.
+	\end{itemize}
+	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
+	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
+	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
+	S1$: r[i]:=s[i];$\\
+	S2$: i:=i+1$\\
+	Lo primero que haremos es calcular $wp(ciclo,I)$.
+	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
+	\begin{align*}
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(i+1)\wedge_L I_{i+1}^{j}\\
+		&\equiv true\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i+1 \rightarrow_L r[j]=s[j])\wedge (\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])\\
+		&\equiv 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=|r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i+1 \rightarrow_L r[j]=s[j])\wedge (\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])
+	\end{align*}
+	
+	Volviendo a (7). Qué axioma usar? No hay ningún axioma para una instrucción con la forma de S1. Pero en realidad
+	 lo que estamos haciendo es una asignación. Podemos reescribirla como \textbf{r:= setAt(r, i, s[i])} (también podemos
+	 escribirlo como \textbf{r:= setAt(r, i, s[i])})). Ahora sí tenemos una instrucción que permite utilizar el axioma 1.
+	\begin{align*}
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(r:=setAt(r,i,s[i]),wp(S2,I))\\
+	&\stackrel{Ax1}{\equiv}  def(setAt(r,i,s[i]))\wedge_L wp(S2,I)_{setAt(r,i,s[i])}^{r}\\
+	&\equiv   0\leq i<|r|\wedge 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|setAt(r,i,s[i])|\wedge |s|=|setAt(r,i,s[i])|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i+1 \rightarrow_L setAt(r,i,s[i])[j]=s[j])\wedge \\
+		&(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L setAt(r,i,s[i])[j]=r_0[j])
+	\end{align*}
+	Revisemos las apariciones de setAt para ver si pueden ser errmplazadas/simplificadas:
+	\begin{itemize}
+		\item $|setAt(r,i,s[i])|$. Esta expresión es equivalente a $|r|$
+		\item $setAt(r,i,s[i])[j]$. El valor de esta expresion depende del valor de $i$ y el valor de $j$. Si $i=j$, la expresión evalúa a
+		$s[i]$, en caso contrario evalúa a $r[j]$. En la primer aparición de dicha expresión, no podemos saber si $i=j$, ya que sabemos
+		 que $j<i+1$,  asi que tendremos que trabajar un poco más en esa parte de la expresión. La segunda aparición de setAt se da cuando
+		  $i+1\leq j$, luego podemos afirmar que $i\neq j$, es decir que en ese caso: $setAt(r,i,s[i])[j]=r[j]$\\ 
+	\end{itemize}
+	Entonces,\\
+	\begin{align*}
+	wp(S1;S2,I)&\equiv   0\leq i<|r|\wedge 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=|r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i+1 \rightarrow_L setAt(r,i,s[i])[j]=s[j])\wedge \\
+		&(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])
+	\end{align*}
+	El cuantificador $(\forall j:\mathbb{Z})(0\leq j<i+1$... puede reescribirse, teniendo en cuenta el rango hasta $<i$, y la expresión
+	con $j=i$ aparte:\\
+	\begin{align*}
+	wp(S1;S2,I)&\equiv   0\leq i<|r|\wedge 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=|r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L setAt(r,i,s[i])[j]=s[j])\wedge setAt(r,i,s[i])[i]=s[i])\wedge\\
+		&(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])
+	\end{align*}
+	Ahora sí, en cada aparición de setAt, sabemos con certeza si $i=j$ o no:\\
+	\begin{align*}
+	wp(S1;S2,I)&\equiv   0\leq i<|r|\wedge 0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=|r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L setAt(r,i,s[i])[j]=s[j])\wedge s[i]=s[i])\wedge\\
+		&(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])
+	\end{align*}
+	Para tener en cuenta:\\
+	\begin{itemize}
+	\item $s[i]=s[i]\equiv True$
+	\item Como $|s|=|r|$, entonces $\equiv 0\leq i<|r|\equiv 0\leq i<|s|$, y podemos dejar solo una de las expresiones.
+	\end{itemize}
+	\begin{align*}
+	wp(S1;S2,I)&\equiv   0\leq i<|s|\wedge_L 0\leq i+1\leq |s| \wedge |r_0|=|r|\wedge |s|=|r|\wedge_L \\
+		&(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L setAt(r,i,s[i])[j]=s[j]))\wedge\\
+		&(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])
+	\end{align*}
+	Veamos ahora que $(I\wedge B) \Rightarrow wp(ciclo,I)$. Usando como hipótesis $I\wedge B$, veamos que se cumplen todas 
+	las partes de $wp(S1,S2,I)$:
+	\begin{itemize}
+	\item $0\leq i<|s|$\\
+	Vale pues por $I$ sabemos que $i\geq 0$, y por $B$ sabemos que $i<|s|$
+	\item $0\leq i+1\leq|s|$\
+	Vale pues por $I$ sabemos que $i\geq 0$,entonces $i+1\geq i\geq 0$ y por transitividad $i+1\geq 0$\\
+	Además, por $B$ sabemos que $i<|s|$, lo cual (dado que tratamos números enteros) es equivalente a $i+1\leq |s|$
+	\item $|r_0|=|r|$\\
+	Vale porque el invariante incluye esta misma expresión
+	\item $|s|=|r|$\\
+	Vale porque el invariante incluye esta misma expresión
+	\item $(\forall j:\mathbb{Z})(0\leq j<i \rightarrow_L setAt(r,i,s[i])[j]=s[j]))$\\
+	Vale porque el invariante incluye esta misma expresión
+	\item $(\forall j:\mathbb{Z})(i+1\leq j<|r|\rightarrow_L r[j]=r_0[j])$\\
+	El invariante afirma que $r[j]=r_0[j]$ para los $j$ que estén en el rango $rango_1=[i..|r|)$. El rango para el cual queremos 
+	ver si vale es $[i+1..|r|)$, el cual está incluído en $rango_1$ (nuestro rango es más chico que $rango_1$), con lo cual podemos
+	afirmar que $r[j]=r_0[j]$ para los $j $ que nos interesan.
+	\end{itemize}
+	\item Demostremos que el ciclo termina.\\
+	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
+	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
+	\begin{align*}
+		wp(S1;S2,f_v<v_0)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,n-i<v_0))\\
+			&\stackrel{Ax1}{\equiv}wp(S1,true\wedge_L n-(i+1)<v_0)\\
+			&\stackrel{Ax3}{\equiv}true\wedge_L(true\wedge_L  n-(i+1)<v_0)\\
+			&\equiv n-i-1<v_0
+	\end{align*}
+	Es decir, $wp(S1;S2,f_v<v_0)=n-i-1<v_0$. Ahora debemos ver que $(I\wedge B\wedge v_0=f_v)$ implican dicha WP. Parte de la 
+	hipótesis es que $v_0=f_v$, es decir $v_0=n-i$. Restando 1 a ambos lados, $n-1-i=v_0-1<v_0$.\medskip \\
+	$\scalebox{1.3}{$(I\wedge f_v\leq 0)\Rightarrow \neg B$}$\medskip\\
+	Debemos mostrar que vale $\neg B$, es decir $i\geq n$.\\
+	Sabemos que $f_v\leq 0$, es decir $n-i\leq 0$, luego $n\leq i$, como queriamos demostrar.
+	
 \end{enumerate}
 %\includegraphics[width=\linewidth]{pe.png}
 
