@@ -1,0 +1,69 @@
+
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{bera}
+
+\lstset{basicstyle=\ttfamily,
+escapeinside={||},
+mathescape=true}
+
+\input{../macros/Algo1Macros}
+
+\begin{document}
+
+%\practica{4}{Precondición más débil en SmallLang}
+\includepdf[pages=-]{practica6.pdf}
+
+\begin{center}
+\section*{RESOLUCIONES.}
+\end{center}
+
+\paragraph{Ejercicio 1}
+
+\begin{multicols}{2}
+\begin{enumerate}
+\item \includegraphics[width=45mm]{./img/ex1.png}
+\item 
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+Test & L1 & L2 & L3 & L4 & L5 \\ 
+\hline 
+test1 & V & V & X & V & V \\ 
+\hline 
+test2 & V & V & V & X & V \\ 
+\hline 
+\end{tabular} \bigskip\\
+\item \begin{tabular}{|c|c|c|}
+\hline 
+Test & L2-True & L2-False \\ 
+\hline 
+test1 & X & V \\ 
+\hline 
+test2 & V & X \\ 
+\hline 
+\end{tabular}\bigskip\\
+\item Si pasa eso.
+\end{enumerate}
+\end{multicols}
+
+
+\end{document}
