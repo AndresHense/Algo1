@@ -560,9 +560,13 @@ wp(\textbf{S},Q)\equiv \textrm{def}(B) \wedge_L &((B\wedge wp(\textbf{S1},Q))\ve
    			\rightarrow_L s[j] = s[j - 1])$\\
    		\begin{align*}
    			wp(\textbf{S},Q)&\equiv \textrm{def}(i>1)\wedge_L 
-   				\Bigg(\Big((i>1)\wedge S1\Big) \vee\Big(\neg (i>1)\wedge S2)\Big)\Bigg)\\
-   							&\equiv True \wedge_L\Bigg(\Big(\Big) \vee \Big(\Big)\Bigg)\\
-   							&\equiv () \\
+   				\Bigg(\Big((i>1)\wedge wp(s[i] := s[i-1],Q)\Big) \vee\Big(\neg (i>1)\wedge wp(s[i] := 0,Q))\Big)\Bigg)\\
+   							&\equiv True \wedge_L\Bigg(\Big((i>1)\wedge wp(s[i] := s[i-1],Q)\Big) \vee\Big( (i\leq1)\wedge wp(s[i] := 0,Q))\Big)\Bigg)\\
+   							&\equiv \Big((i>1)\wedge wp(s[i] := s[i-1],Q)\Big) \vee\Big( (i\leq1)\wedge wp(s[i] := 0,Q))\Big)\\
+   							&\equiv \Big((i>1)\wedge (def(setAt(s,i,s[i-1])\wedge_L Q_{setAt(s,i,s[i-1])}^{s})\Big)\\
+   							 &\vee\Big( (i\leq1)\wedge (def(setAt(s,i,0)\wedge_L Q_{setAt(s,i,0)}^{s})\Big)\\
+   							&\color{blue}//galerazo magico\\
+   							& \equiv (\forall j :Z)(1 \leq j < |s| \rightarrow_L s[j] = 0)   							 
    		\end{align*}
 	\item
 		\textbf{S: if $(s[i]<0)$ then $s[i] := -s[i]$ else $skip$ endif}\\
