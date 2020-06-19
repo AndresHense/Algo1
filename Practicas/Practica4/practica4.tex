@@ -125,41 +125,41 @@ es una secuencia de reales.
 	\item
 		
 		\begin{align*}
-		\color{blue}\{wp(\textbf{a := a+1; b := a/2}, b \geq 0)\} &\color{blue}
-			\equiv \{(a+1)/2\geq 0\}\\
-		a &:= a+1;\\
-		\color{blue}\{wp(\textbf{b := a/2},Q)\}&\color{blue}\equiv \{a/2\geq 0\}\\
-		\textbf{b := a/2;}\\
-		\color{blue}\{Q:b \geq 0\}
+		\{wp(\textbf{a := a+1; b := a/2}, b \geq 0)\}
+		 &\equiv 	wp(a:=a+1,wp(b:=a/2,b\geq 0))\\	
+		 &\equiv wp(a:=a+1,def(a/2)\wedge_L (b\geq 0)_{a/2}^{b})\\	
+		 &\equiv wp(a:=a+1,True\wedge_L (a/2\geq 0))\\
+		 &\equiv def(a+1)\wedge_L (a/2\geq 0)_{a+1}^{a}\\	
+		  &\equiv  (a+1)/2\geq 0\\		
 		\end{align*}
 		
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{a := A[i] + 1; b := a*a}, b\neq 2)\} &\color{blue}
-			\equiv \{0\leq i<|A|\wedge_L (A[i] + 1)*(A[i] + 1)\neq 0\}\\
-		\textbf{a := A[i] + 1;}\\
-		\color{blue}\{wp(\textbf{b := a*a},Q)\}&\color{blue}\equiv \{a*a\neq 0\}\\
-		\textbf{b := a*a;}\\
-		\color{blue}\{Q:b \neq 0\}
+		\{wp(\textbf{a := A[i] + 1; b := a*a}, b\neq 2)\}
+		 &\equiv 	wp(a:= A[i] + 1,wp(b:= a*a,b\neq 2))\\	
+		 &\equiv wp(a:= A[i] + 1,def( a*a)\wedge_L (b\neq 2)_{ a*a}^{b})\\	
+		 &\equiv wp(a:= A[i] + 1,True\wedge_L (a*a\neq 2)\\
+		 &\equiv def(A[i] + 1)\wedge_L (a*a\neq 2)_{A[i] + 1}^{a}\\	
+		  &\equiv  0\leq i<|A| \wedge_L (A[i]+1)^2\neq 2\\	
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{a := A[i] + 1; a := b*b}, a \geq 0)\} &\color{blue}
-			\equiv \{0\leq i<|A|\wedge b\geq 0\}\\
-		\textbf{a := A[i] + 1;}\\
-		\color{blue}\{wp(\textbf{a := b*b},Q)\}&\color{blue}\equiv \{b\geq 0\}\\
-		\textbf{a := b*b;}\\
-		\color{blue}\{Q:b \geq 0\}
+		\{wp(\textbf{a := A[i] + 1; a := b*b}, a\geq 0)\}
+		 &\equiv wp(a:= A[i] + 1,wp(a := b*b,a\geq 0))\\	
+		 &\equiv wp(a:= A[i] + 1,def( b*b)\wedge_L (a\geq 0)_{ a*a}^{b})\\	
+		 &\equiv wp(a:= A[i] + 1,True\wedge_L (b*b\geq 0)\\
+		 &\equiv def(A[i] + 1)\wedge_L (b*b\geq 0)_{A[i] + 1}^{a}\\	
+		  &\equiv  0\leq i<|A| \wedge_L b*b\geq 0\\	
 		\end{align*}
 	\item
 		\begin{align*}
-		\color{blue}\{wp(\textbf{a := a-b; b := a+b}, a \geq 0 \wedge b \geq 0)\} &\color{blue}
-			\equiv \{a-b \geq 0 \wedge a+b \geq 0\}\\
-		\textbf{a := a-b;}\\
-		\color{blue}\{wp(\textbf{b := a+b},Q)\}&\color{blue}
-			\equiv \{a \geq 0 \wedge a+b \geq 0\}\\
-		\textbf{b := a+b;}\\
-		\color{blue}\{Q:a \geq 0 \wedge b \geq 0\}
+		\{wp(\textbf{a := a-b; b := a+b},  a \geq 0 \wedge b \geq 0)\}
+		 &\equiv wp(a := a-b,wp(b := a+b,a \geq 0 \wedge b \geq 0))\\	
+		 &\equiv wp(a := a-b,def( a+b)\wedge_L (a \geq 0 \wedge b \geq 0)_{a+b}^{b})\\	
+		 &\equiv wp(a := a-b,True\wedge_L (a \geq 0 \wedge a+b \geq 0)\\
+		 &\equiv def(a-b)\wedge_L (a \geq 0 \wedge a+b \geq 0)_{a-b}^{a}\\	
+		  &\equiv  a-b \geq 0 \wedge a-b+b \geq 0\\
+		  &\equiv  a \geq b \wedge a \geq 0\\
 		\end{align*}
 \end{enumerate}
 
