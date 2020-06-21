@@ -48,8 +48,10 @@ Para probar que el programa es correcto respecto a la especificacón, vamos a pr
 \end{itemize}
  Especificacion del ciclo:
 	\begin{itemize}
+		\item $Pre: True$
+		\item $Post: r=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]) $
 		\item $P_c: i=0\wedge j=-1$
-		\item $Q_c: r=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])$
+		\item $Q_c: i=|s|\wedge if\ (\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])\ then\ j=k\ else\ j=-1\ fi$
 		\item $B: i<|s|$
 		\item $I: 0\leq i<|s|\wedge\ if\ (\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])\ then\ j=k\ else\ j=-1\ fi$
 		\item $f_v:|s|-i$
@@ -68,5 +70,20 @@ $\scalebox{1.3}{$P_c \rightarrow wp(\textbf{ciclo},Q_c)$}$\medskip \\
 
 blablalbabla\medskip\\
 $\scalebox{1.3}{$Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$}$\medskip \\
+\textbf{S: if $(j != -1)$ then $r=True$ else $r=False$ endif}\\
+\begin{align*}
+   			wp(\textbf{S},Post)&\equiv \textrm{def}(j != -1)\wedge_L 
+   				\Bigg(\Big((j!=-1)\wedge wp(r=True,Post))\Big) \vee\Big(\neg (j!=-1)\wedge wp(j=False,Post)\Big)\Bigg)\\
+   					&\equiv True \wedge \Bigg(\Big((j!=-1)\wedge Post_{True}^{r})\Big) 
+   						\vee\Big(j=-1\wedge Post_{False}^{r})\Big)\Bigg)\\ 
+   				&\equiv \Big(j!=-1\wedge True=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])\Big) \vee\\
+   						&\ \ \ \ \Big(j=-1\wedge False=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]))\Big)\\ 
+   				&\equiv \Big(j!=-1\wedge True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])\Big) \vee\\
+   						&\ \ \ \ \Big(j=-1\wedge False \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]))\Big)\\   
+   				&\equiv \Big(j!=-1\wedge ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])\Big) \vee\\
+   						&\ \ \ \ \Big(j=-1\wedge \neg((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]))\Big)\\    	
+   				&\equiv (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])  						   				  		
+   		\end{align*}
+
 
 \end{document}
