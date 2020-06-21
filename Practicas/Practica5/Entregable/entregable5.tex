@@ -1,0 +1,72 @@
+
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{graphics}
+\usepackage{listings}
+
+
+\usepackage{calc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tasks}
+
+
+\input{../../macros/Algo1Macros}
+
+
+\title{Resuelto Entregable Algoritmos y Estructuras de Datos I}
+\author{Andres M. Hense,Victoria Espil}
+\date{}
+\begin{document}
+%\maketitle
+
+
+%\section*{Práctica 1 --- Lógica}
+
+\practica{4}{Resolución de los Ejercicios Entregables}
+
+\begin{center}
+\textbf{Integrantes:} Andrés M. Hense, Victoria Espil
+\end{center}
+
+\paragraph{Ejercicio 12}
+Para probar que el programa es correcto respecto a la especificacón, vamos a probar estas implicaciones
+ por separado, y por monotonia llegaremos a que el programa es correcto.\\
+\begin{itemize}
+\item $Pre \rightarrow wp(\textbf{codigo previo al ciclo},P_c)$
+\item $P_c \rightarrow wp(\textbf{ciclo},Q_c)$
+\item $Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$
+\end{itemize}
+ Especificacion del ciclo:
+	\begin{itemize}
+		\item $P_c: i=0\wedge j=-1$
+		\item $Q_c: r=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])$
+		\item $B: i<|s|$
+		\item $I: 0\leq i<|s|\wedge\ if\ (\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])\ then\ j=k\ else\ j=-1\ fi$
+		\item $f_v:|s|-i$
+	\end{itemize}
+Empecemos probando la primer implicación\\
+$\scalebox{1.3}{$Pre\rightarrow wp(\textbf{codigo previo al ciclo},P_c)$}$\medskip \\
+\begin{align*}
+wp(i:=0; j:=-1,P_c)&\equiv wp(i:=0,wp(j:=-1,P_c))\\
+&\equiv wp(i:=0,(P_c)_{-1}^{j})\\
+&\equiv (i=0\wedge -1=-1)_{0}^{i}\\
+&\equiv 0=0\wedge True\\
+&\equiv True
+\end{align*}
+Luego $True\rightarrow True$, es tautologia.\medskip\\
+$\scalebox{1.3}{$P_c \rightarrow wp(\textbf{ciclo},Q_c)$}$\medskip \\
+
+blablalbabla\medskip\\
+$\scalebox{1.3}{$Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$}$\medskip \\
+
+\end{document}
