@@ -51,9 +51,9 @@ Para probar que el programa es correcto respecto a la especificacón, vamos a pr
 		\item $Pre: True$
 		\item $Post: r=True \leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]) $
 		\item $P_c: i=0\wedge j=-1$
-		\item $Q_c: i=|s|\wedge if\ (\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])\ then\ j=k\ else\ j=-1\ fi$
+		\item $Q_c: i=|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])$
 		\item $B: i<|s|$
-		\item $I: 0\leq i<|s|\wedge\ if\ (\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])\ then\ j=k\ else\ j=-1\ fi$
+		\item $I: 0\leq i<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e]) $
 		\item $f_v:|s|-i$
 	\end{itemize}
 Empecemos probando la primer implicación\\
@@ -68,7 +68,46 @@ wp(i:=0; j:=-1,P_c)&\equiv wp(i:=0,wp(j:=-1,P_c))\\
 Luego $True\rightarrow True$, es tautologia.\medskip\\
 $\scalebox{1.3}{$P_c \rightarrow wp(\textbf{ciclo},Q_c)$}$\medskip \\
 
-blablalbabla\medskip\\
+Demostraremos que el ciclo es correcto respecto a su especificación y ademas termina.
+	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
+	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
+	\begin{itemize}
+		\item $ 0\leq i< |s|$\smallskip \\
+		Por $P_c$ sabemos que $i=0$, entonces $0\leq i $ vale. Además, $|s|\geq 0$ (porque las listas no pueden tener una cantidad 
+		negativa de elementos), luegos $|s|\geq i$
+		\item $ (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k=e])$\smallskip \\
+		$P_c$ indica que $i=0$ y $j=-1$. Luego como no existe un $k$ entre $0\leq k <0$, la doble implicacion no se cumple, por lo
+		 que tiene que pasar que $j=-1$.
+	\end{itemize}	 
+	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
+	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
+	\begin{itemize}
+	\item Por $I$ sabemos que $i< |s|$, y por $\neg B$ sabemos que $i\geq |s|$. Entonces $i$ debe ser igual a $|s|$
+	\item Es trivial ver que vale $ (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])$ ya que, al reemplazar
+	 $i=|s|$ en el invariante llego a eso.
+	\end{itemize}
+	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
+	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
+	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
+	S1$: r[i]:=s[i];$\\
+	S2$: i:=i+1$\\
+	Lo primero que haremos es calcular $wp(ciclo,I)$.
+	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	
+	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
+	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
+	\begin{align*}
+		wp(S1;S2,f_v<v_0)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,|s|-i<v_0))\\
+			&\stackrel{Ax1}{\equiv}wp(S1,true\wedge_L |s|-(i+1)<v_0)\\
+			&\stackrel{Ax3}{\equiv}true\wedge_L(true\wedge_L  |s|-(i+1)<v_0)\\
+			&\equiv |s|-i-1<v_0
+	\end{align*}
+	Es decir, $wp(S1;S2,f_v<v_0)=|s|-i-1<v_0$. Ahora debemos ver que $(I\wedge B\wedge v_0=f_v)$ implican dicha WP. Parte de la 
+	hipótesis es que $v_0=f_v$, es decir $v_0=|s|-i$. Restando 1 a ambos lados se prueba, $|s|-i-1=v_0-1<v_0$.\medskip \\
+	$\scalebox{1.3}{$(I\wedge f_v\leq 0)\Rightarrow \neg B$}$\medskip\\
+	Debemos mostrar que vale $\neg B$, es decir $i\geq |s|$.\\
+	Sabemos que $f_v\leq 0$, es decir $|s|-i\leq 0$, luego $|s|\leq i$, como queriamos demostrar.\medskip\\
+	\noindent
 $\scalebox{1.3}{$Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$}$\medskip \\
 \textbf{S: if $(j != -1)$ then $r=True$ else $r=False$ endif}\\
 \begin{align*}
@@ -84,6 +123,6 @@ $\scalebox{1.3}{$Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$}$\
    						&\ \ \ \ \Big(j=-1\wedge \neg((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e]))\Big)\\    	
    				&\equiv (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k=e])  						   				  		
    		\end{align*}
-
+Como llegue  a lo mismo que $Q_c$, entonces vale.
 
 \end{document}
