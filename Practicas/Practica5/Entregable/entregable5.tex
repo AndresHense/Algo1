@@ -89,10 +89,40 @@ Demostraremos que el ciclo es correcto respecto a su especificación y ademas te
 	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
 	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
 	Llamemos S1 a la primer instrucción del cuerpo del ciclo, S2 a la segunda:\\
-	S1$: r[i]:=s[i];$\\
+	\textbf{S1: if $(s[i]=e)$ then $j:=i$ else $skip$ endif}\\
 	S2$: i:=i+1$\\
 	Lo primero que haremos es calcular $wp(ciclo,I)$.
 	\begin{equation}wp(S1;S2,I)\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\end{equation}
+	Antes de seguir, debemos calcular $wp(S2,I)$. Para eso usaremos el axioma 1:
+	\begin{align*}
+	wp(S2,I)&\stackrel{Ax1}{\equiv}def(i+1)\wedge_L I_{i+1}^{i}\\
+		&\equiv true\wedge_L (0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e]))\\
+		&\equiv 0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e])
+	\end{align*}
+	Volviendo a (1), reemplazamos $wp(S2,I)$ y nos queda:
+	\begin{align*}
+	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\\
+	&\equiv wp(S1,0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e]))\\
+	&\equiv wp(S1,I_{i+1}^{i})\\
+	&\equiv \textrm{def}(s[i]=e)\wedge_L 
+   			\Bigg(\Big((s[i]=e)\wedge wp(j:=i,I_{i+1}^{i}))\Big) \vee\Big(\neg (s[i]=e)\wedge wp(skip,I_{i+1}^{i})\Big)\Bigg)\\
+   	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge wp(j:=i,I_{i+1}^{i}))\Big) 
+   			\vee\Big( s[i]!=e\wedge I_{i+1}^{i}\Big)\Bigg)\\
+   	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge wp(j:=i,0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e])))\Big) \vee\\
+   	&\Big( s[i]!=e\wedge0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e])\Big)\Bigg)\\	 
+   	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge (i!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e]))\Big) \vee\\
+   	&\Big( s[i]!=e\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k=e])\Big)\Bigg)\\	 
+	\end{align*}
+	Una vez calculada la precondición más débil, debemos ver si $(I\wedge B)$ implican dicha precondición. Probamos cada
+	parte por separado:
+	\begin{itemize}
+		\item $ 0\leq i\leq |s|$\smallskip \\
+		Sabemos por $I$ que $ i>0$, luego podemos afirmar que $1\leq i+1$\\
+		Sabemos por $B$ que $i<n$, luego $i+1\geq n$.
+		\item $result*m=m^{i+1}$\smallskip \\
+		Divido en ambos miembros por $m$, y tengo lo mismo que en mi invariante.\smallskip \\
+		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
+	\end{itemize}
 	
 	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
 	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
