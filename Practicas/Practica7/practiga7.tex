@@ -67,5 +67,16 @@ vector<int> incSecuencia(vector<int> &a){
 	}
 }
 \end{lstlisting}
+.
+\paragraph*{Ejercicio 3}.
 
+\begin{lstlisting}
+int cantApariciones(vector<int> s, int e){
+	int r=0;
+	for(int i=0; i<s.size();i++){
+		r=r+(s[i]==e);
+	}
+	return r;
+}
+\end{lstlisting}
 \end{document}
