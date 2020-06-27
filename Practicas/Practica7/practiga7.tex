@@ -108,4 +108,29 @@ void duplicarElementos(vector<int> &s){
 	return;
 }
 \end{lstlisting}
+.
+\paragraph*{Ejercicio 6}.
+
+\begin{lstlisting}
+void dividirPorPromedio(vector<float> &s){
+	int i=0;
+	vector<float> s0=s;
+	int p=promedio(s0);
+	while( i<s.size()/2){
+		s[i]=s0[i]/p;
+		s[s.size()-i-1]=s0[s0.size()-i-1]/p;
+		i++;
+	}
+	return;
+}
+
+float promedio(vector<float> &s){
+	float res=0;
+	for(int i=0;i<s.size();i++){
+		res+=s[i];	
+	}
+	res/=s.size();
+	return res;
+}
+\end{lstlisting}
 \end{document}
