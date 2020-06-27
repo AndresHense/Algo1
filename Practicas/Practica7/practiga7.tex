@@ -35,15 +35,16 @@ mathescape=true}
 \input{../macros/Algo1Macros}
 
 \begin{document}
+\renewcommand{\thelstlisting}{\thesection.\arabic{lstlisting}}
 
 \includepdf[pages=-]{practica7.pdf}
 
 \begin{center}
 \section*{RESOLUCIONES.}
 \end{center}
-\paragraph{Ejercicio 1.}progama:
+\paragraph{Ejercicio 1}.
 
-\begin{lstlisting}{language=C++}
+\begin{lstlisting}
 vector<int> copiarSecuencia(vector<int> s){
 	vector<int> r;
 	int i=0;
@@ -52,6 +53,18 @@ vector<int> copiarSecuencia(vector<int> s){
 		i++;	
 	}
 	return r;
+}
+\end{lstlisting}
+.
+\paragraph*{Ejercicio 2}.
+
+\begin{lstlisting}
+vector<int> incSecuencia(vector<int> &a){
+	int i=0;
+	while(i<s.size()){
+		a[i]++;
+		i++;	
+	}
 }
 \end{lstlisting}
 
