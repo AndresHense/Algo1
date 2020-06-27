@@ -28,7 +28,6 @@
 }
 
 \usepackage{bera}
-\usepackage{minted}
 \lstset{basicstyle=\ttfamily,
 escapeinside={||},
 mathescape=true}
@@ -55,15 +54,5 @@ vector<int> copiarSecuencia(vector<int> s){
 	return r;
 }
 \end{lstlisting}
-\begin{minted}[linenos]{c++}
-vector<int> copiarSecuencia(vector<int> s){
-	vector<int> r;
-	int i=0;
-	while(i<s.size()){
-		r.push_back(s[i]);
-		i++;	
-	}
-	return r;
-}
-\end{minted}
+
 \end{document}
