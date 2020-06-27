@@ -79,4 +79,18 @@ int cantApariciones(vector<int> s, int e){
 	return r;
 }
 \end{lstlisting}
+.
+\paragraph*{Ejercicio 4}.
+
+\begin{lstlisting}
+void raizConEsei(vector<int> &s){
+	int i=-1;
+	vector<int> s0=s;
+	while( i<s.size()-1){
+		i++;
+		s[i]=sqrt(s0[i]);
+	}
+	return;
+}
+\end{lstlisting}
 \end{document}
