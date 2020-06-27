@@ -59,10 +59,10 @@ vector<int> copiarSecuencia(vector<int> s){
 \paragraph*{Ejercicio 2}.
 
 \begin{lstlisting}
-vector<int> incSecuencia(vector<int> &a){
+vector<int> incSecuencia(vector<int> &s){
 	int i=0;
 	while(i<s.size()){
-		a[i]++;
+		s[i]++;
 		i++;	
 	}
 }
@@ -89,6 +89,21 @@ void raizConEsei(vector<int> &s){
 	while( i<s.size()-1){
 		i++;
 		s[i]=sqrt(s0[i]);
+	}
+	return;
+}
+\end{lstlisting}
+.
+\paragraph*{Ejercicio 5}.
+
+\begin{lstlisting}
+void duplicarElementos(vector<int> &s){
+	int i=0;
+	vector<int> s0=s;
+	while( i<s.size()/2){
+		s[s.size()-2*i-1]=2*s0[s0.size()-2*i-1];
+		s[s.size()-2*i-2]=2*s0[s0.size()-2*i-2];
+		i++;
 	}
 	return;
 }
