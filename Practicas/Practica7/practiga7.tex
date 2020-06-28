@@ -133,4 +133,37 @@ float promedio(vector<float> &s){
 	return res;
 }
 \end{lstlisting}
+
+.
+\paragraph*{Ejercicio 7}
+\begin{enumerate}[label=\alph*)]
+\item primer I.\\
+\begin{lstlisting}
+void armarPiramide(int v,vector<int> &s){
+	int i=0;
+	vector<float> s0=s;
+	while( i<s.size()/2){
+		s[i]=i+v;
+		s[s.size()-i-1]=v+s.size()-i-1;
+		i++;
+	}
+	return;
+}
+\end{lstlisting}
+\item segundo I.\\
+ \begin{lstlisting}
+void armarPiramide(int v,vector<int> &s){
+	int i=0;
+	while(i<s.size()/2){
+		s[i]=i+v;
+		i++;	
+	}
+	while(i<s.size()){
+		s[i]=v+s.size()-i-1;
+		i++;	
+	}
+	return;
+}
+\end{lstlisting}
+\end{enumerate}
 \end{document}
