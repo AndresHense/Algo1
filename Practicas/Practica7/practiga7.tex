@@ -166,4 +166,19 @@ void armarPiramide(int v,vector<int> &s){
 }
 \end{lstlisting}
 \end{enumerate}
+.
+\paragraph*{Ejercicio 8}.
+
+\begin{lstlisting}
+void multiplicar(vector<int> &s){
+	int i=s.size()/2;
+	vector<float> s0=s;
+	while( i<s.size()){
+		s[s.size()-i-1]=10*s0[s0.size()-i-1];
+		s[i]=10*s0[i];
+		i++;
+	}
+	return;
+}
+\end{lstlisting}
 \end{document}
