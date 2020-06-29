@@ -68,7 +68,8 @@ wp(i:=0; j:=-1,P_c)&\equiv wp(i:=0,wp(j:=-1,P_c))\\
 Luego $True\rightarrow True$, es tautologia.\medskip\\
 $\scalebox{1.3}{$P_c \rightarrow wp(\textbf{ciclo},Q_c)$}$\medskip \\
 
-Demostraremos que el ciclo es correcto respecto a su especificación y ademas termina.
+Demostraremos que el ciclo es correcto respecto a su especificación y ademas termina, para eso demostraremos los 5 puntos del 
+teorema del invariante.
 	\begin{flushleft}$\scalebox{1.3}{$P_c\Rightarrow I$}$\end{flushleft}
 	Debemos demostrar que vale $I$ sabiendo que vale $P_c$ 
 	\begin{itemize}
@@ -76,8 +77,7 @@ Demostraremos que el ciclo es correcto respecto a su especificación y ademas te
 		Por $P_c$ sabemos que $i=0$, entonces $0\leq i $ vale. Además, $|s|\geq 0$ (porque las listas no pueden tener una cantidad 
 		negativa de elementos), luegos $|s|\geq i$
 		\item $ (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k]=e)$\smallskip \\
-		$P_c$ indica que $i=0$ y $j=-1$. Luego como no existe un $k$ entre $0\leq k <0$, la doble implicacion no se cumple, por lo
-		 que tiene que pasar que $j=-1$.
+		$P_c$ indica que $i=0$ y $j=-1$. Luego como no existe un $k$ entre $0\leq k <0$, la doble implicacion queda $false\leftrightarrow false$, y como esto es verdadero entonces la precondicion implica al invariante.
 	\end{itemize}	 
 	$\scalebox{1.3}{$(I\wedge \neg B)\Rightarrow Q_c$}$\smallskip \\
 	Queremos demostrar que vale $Q_c$, asumiendo que vale  $I\wedge \neg B$.
@@ -102,14 +102,14 @@ Demostraremos que el ciclo es correcto respecto a su especificación y ademas te
 	Volviendo a (1), reemplazamos $wp(S2,I)$ y nos queda:
 	\begin{align*}
 	wp(S1;S2,I)&\stackrel{Ax3}{\equiv}wp(S1,wp(S2,I))\\
-	&\equiv wp(S1,0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e))\\
+	&\equiv wp(S1,0\leq i+1\leq |s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e))\\
 	&\equiv wp(S1,I_{i+1}^{i})\\
 	&\equiv \textrm{def}(s[i]=e)\wedge_L 
    			\Bigg(\Big((s[i]=e)\wedge wp(j:=i,I_{i+1}^{i}))\Big) \vee\Big(\neg (s[i]=e)\wedge wp(skip,I_{i+1}^{i})\Big)\Bigg)\\
    	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge wp(j:=i,I_{i+1}^{i}))\Big) 
    			\vee\Big( s[i]!=e\wedge I_{i+1}^{i}\Big)\Bigg)\\
-   	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge wp(j:=i,0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)))\Big) \vee\\
-   	&\Big( s[i]!=e\wedge0\leq i+1<|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)\Big)\Bigg)\\	 
+   	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge wp(j:=i,0\leq i+1\leq|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)))\Big) \vee\\
+   	&\Big( s[i]!=e\wedge0\leq i+1\leq |s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)\Big)\Bigg)\\	 
    	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge (i!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e))\Big) \vee\\
    	&\Big( s[i]!=e\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)\Big)\Bigg)\\	
    	&\equiv 0\leq i<|s| \wedge \Bigg(\Big((s[i]=e)\wedge (\exists k:\mathbb{Z})(0\leq k<i+1)\wedge_L s[k]=e)\Big) \vee\\
