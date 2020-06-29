@@ -56,7 +56,7 @@ Para probar que el programa es correcto respecto a la especificacón, vamos a pr
 		\item $I: 0\leq i\leq|s|\wedge (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<i)\wedge_L s[k]=e) $
 		\item $f_v:|s|-i$
 	\end{itemize}
-Empecemos probando la primer implicación\\
+Empecemos probando la primer implicación\medskip \\
 $\scalebox{1.3}{$Pre\rightarrow wp(\textbf{codigo previo al ciclo},P_c)$}$\medskip \\
 \begin{align*}
 wp(i:=0; j:=-1,P_c)&\equiv wp(i:=0,wp(j:=-1,P_c))\\
@@ -84,7 +84,7 @@ teorema del invariante.
 	\begin{itemize}
 	\item Por $I$ sabemos que $i\leq |s|$, y por $\neg B$ sabemos que $i\geq |s|$. Entonces $i$ debe ser igual a $|s|$
 	\item Es trivial ver que vale $ (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k]=e)$ ya que, al reemplazar
-	 $i=|s|$ en el invariante llego a eso.
+	 $i$ por $|s|$ en el invariante llego a eso.
 	\end{itemize}
 	$\scalebox{1.3}{$\{I\wedge B\} \textbf{ ciclo } \{I\}$}$\medskip \\
 	Queremos ver que vale la siguiente tripla de Hoare $\{I\wedge B\} \textbf{ ciclo } \{I\}$.\\
@@ -134,7 +134,7 @@ teorema del invariante.
 		\end{itemize}
 		Como $(I\wedge B) \Rightarrow wp(ciclo,I)$, podemos afirmar que el cuerpo del ciclo preserva el invariante.
 	\end{itemize}
-	
+	\noindent
 	$\scalebox{1.3}{$\{(I\wedge B\wedge v_0=f_v)\}\textbf{ ciclo }\{(f_v<v_0)\}$}$\medskip \\
 	Dado que queremos demostrar que vale una tripla de Hoare, comenzaremos calculando la\\ precondición más débil $wp(ciclo,f_v<v_0)$.
 	\begin{align*}
@@ -164,6 +164,6 @@ $\scalebox{1.3}{$Q_c \rightarrow wp(\textbf{codigo posterior al ciclo},Post)$}$\
    						&\ \ \ \ \Big(j=-1\wedge \neg((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k]=e))\Big)\\    	
    				&\equiv (j!=-1)\leftrightarrow ((\exists k:\mathbb{Z})(0\leq k<|s|)\wedge_L s[k]=e)  						   				  		
    		\end{align*}
-Como llegue  a lo mismo que $Q_c$, entonces vale.
+Como llegue  a algo que esta contenido en $Q_c$, entonces este lo implica.
 
 \end{document}
