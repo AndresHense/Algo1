@@ -20,8 +20,14 @@
 \usepackage{tasks}
 \usepackage{pdfpages}
 \usepackage{listings}
-\usepackage{bera}
+\lstset{
+	language=C++,
+	numbers=left,
+	tabsize=3,
+	basicstyle=\ttfamily,
+}
 
+\usepackage{bera}
 \lstset{basicstyle=\ttfamily,
 escapeinside={||},
 mathescape=true}
@@ -35,5 +41,7 @@ mathescape=true}
 \begin{center}
 \section*{RESOLUCIONES.}
 \end{center}
+\paragraph{Ejercicio 1}.
+\lstinputlisting{src/ej1.cpp}
 
 \end{document}
