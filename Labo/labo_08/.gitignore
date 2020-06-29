@@ -1,0 +1,7 @@
+*.pc
+labo09
+CMakeFiles
+Makefile
+CMakeCache.txt
+*.cmake
+lib
