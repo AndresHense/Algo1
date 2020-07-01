@@ -44,5 +44,19 @@
 \lstinputlisting{src/ej1.cpp}.
 \paragraph{Ejercicio 2}.
 \lstinputlisting{src/ej2.cpp}.
-
+\paragraph{Ejercicio 2}.
+\begin{enumerate}[label=\alph*)]
+\item  Las generalizaciones son la muerte, más eficiente en relación a qué?.
+ Si suponemos que los vectores de entrada rondan alrededor del tamaño donde se realizo la comparación
+  entonces sin lugar a dudas A es más eficiente, sin embargo no tengo ese dato, y como no se como se comportan los algoritmos
+   en el limite del tamaño del vector tendiendo a infinito no puedo asegurar que uno sea mejor que otro, por lo tanto esa afirmación es falsa.
+\item Esta afirmación es falsa, ambos algoritmos difieren en catidad de operaciones por una constante, por lo tanto su tiempo de ejecución no tiene por que ser el mismo, lo que si se puede afirmar es que a medida que n se haga cada vez más grande sus tiempos de ejecución se van a empezar a asemejar.
+\item Por intuición y porque como ya dije antes, las generalizaciones son la muerte, se que no puedo decir que simplemente para todo programa con complejidad $O(log(n))$, si $n>100$ entonces se va a ejecutar más rapido que otro de complejidad $O(n)$, que clase de numero divino es el 100 como para poder afirmar semejante guasada. Un contraejemplo pavo seria el siguiente:
+\begin{itemize}
+\item $t(n)= n \rightarrow O(n)$
+\item $t(n)= 101+log(n) \rightarrow O(log(n))$
+\end{itemize}
+\item Es intuitivo, pero la demostración formal se me escapa de las manos en este instante.
+\item Falso, contraejemplo: el ciclo de afuera no tiene porque necesariamente depender de $n$.
+\end{enumerate}
 \end{document}
