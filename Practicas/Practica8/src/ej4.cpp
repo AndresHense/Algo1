@@ -6,7 +6,7 @@ int mesetaMasLarga(vector<int> &v) {	//|v|=n
 		int j = i + 1;				//3
 		while (j < v.size() && v[i] == v[j]) {	//9, n-j iteraciones
 			j++;						//1
-		}							//t(n)= 9+10(n-j)
+		}							//t(n)= 9+10(n-j) ESTE J ME HACE RUIDO AAAAH
 		meseta = j - i;		//3
 		i = j;					//1
 		if (meseta > maxMeseta) {	//3

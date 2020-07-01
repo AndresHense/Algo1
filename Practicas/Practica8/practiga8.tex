@@ -56,7 +56,28 @@
 \item $t(n)= n \rightarrow O(n)$
 \item $t(n)= 101+log(n) \rightarrow O(log(n))$
 \end{itemize}
-\item Es intuitivo, pero la demostración formal se me escapa de las manos en este instante.
+\item Es intuitivo, pero vamos a demostrarlo, para eso hay que demostrar que $log(n)\leq n$, vamos a hacerlo usando inducción. Reescribamos la expresión para que quede mas manejable.
+\begin{align*}
+log(n) &\leq n\\
+e^{log(n)} &\leq e^n\\
+n &\leq e^n
+\end{align*}
+Mi hipotesis inductiva es : $$\textbf{HI:\ }n \leq e^n$$ \\
+\begin{align*}
+\textrm{quiero ver que}\qquad n+1 &\leq e^{n+1}\\
+\textrm{por HI}\qquad n &\leq e^n\\
+\leftrightarrow n +1 &\leq e^n +1\\
+\textrm{por transitividad}\qquad e^n +1 &\leq e^{n+1}\\
+\frac{e^n +1}{e^n} &\leq \frac{e^{n+1}}{e^n}\\
+\textrm{nueva HI}\qquad 1 +\frac{1}{e^n} &\leq e-1\\
+\textrm{qvq}\qquad 1 +\frac{1}{e^{n+1}} &\leq e-1\\
+\textrm{por HI}\qquad  1 +\frac{1}{e^n} &\leq e-1\\
+\leftrightarrow \frac{1}{e^n}\frac{1}{e} &\leq \frac{e-1}{e} \\
+\leftrightarrow \frac{1}{e^{n+1}} &\leq 1-\frac{1}{e} \\
+\textrm{por transitividad}\qquad 1-\frac{1}{e}&\leq e-1\\
+\leftrightarrow 2 &\leq e+\frac{1}{e} 
+\end{align*}$\square$
+
 \item Falso, contraejemplo: el ciclo de afuera no tiene porque necesariamente depender de $n$.
 \end{enumerate}
 \paragraph{Ejercicio 4.}
@@ -67,4 +88,5 @@
 \end{enumerate}
 \paragraph{Ejercicio 5}.
 \lstinputlisting{src/ej5.cpp}.
+\paragraph{Ejercicio 6.}
 \end{document}
