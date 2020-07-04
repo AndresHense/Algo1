@@ -4,14 +4,14 @@ int mesetaMasLarga(vector<int> &v) {	//|v|=n
 	int meseta;					//1
 	while (i < v.size()) {	//3, n iteraciones
 		int j = i + 1;				//3
-		while (j < v.size() && v[i] == v[j]) {	//9, n-j iteraciones
+		while (j < v.size() && v[i] == v[j]) {	//9, n-i-1 iteraciones
 			j++;						//1
-		}							//t(n)= 9+10(n-j) ESTE J ME HACE RUIDO AAAAH
+		}							//t(n)= 9+10(n-i-1) 
 		meseta = j - i;		//3
 		i = j;					//1
 		if (meseta > maxMeseta) {	//3
 			maxMeseta = meseta;			//1
 		}
-	}					//t(n)=3+ (3+9+10(n-j)+3+1+3+1)n
-	return maxMeseta;
-}					//t(n)=3+3+20n+10n(n-j) 
+	}					//t(n)=3+ 8n+ suma(i=0,n-1)(9+10(n-i-1))
+	return maxMeseta;			//1
+}					//t(n)=7+17n+10n^2 -n -n(n-1)/2 -> O(n^2) 
