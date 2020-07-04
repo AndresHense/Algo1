@@ -101,8 +101,16 @@ Mi hipotesis inductiva es : $$\textbf{HI:\ }n \leq e^n$$ \\
 \paragraph{Ejercicio 7}.
 \begin{enumerate}[label=\alph*)]
 \item .\\\lstinputlisting{src/ej7a.cpp}.
-\item .\\\lstinputlisting{src/ej7b.cpp}.
-\item .\\\lstinputlisting{src/ej7c.cpp}.
+\item Por Algebra I se que $\sum_{i=0}^{x}2^i=2^{x+1}-1$, entonces busco el primer $x$ tq $2^x>=n$, y devuelvo la 
+ $\sum_{i=0}^{x-2}2^i$, que seria igual a $2^{x-1}-1$ \\\lstinputlisting{src/ej7b.cpp}.
+\item Se que $(\exists x:\mathbb{Z})\ n=2^x+1$, entonces puedo despejarlo.
+\begin{align*}
+n &= 2^x+1 \\
+log(n-1) &= log(2^x) \\ 
+log(n-1) &= xlog(2) \\
+\frac{log(n-1)}{log(2)} &= x \\
+log(n-1)-log(2) &= x \\
+\end{align*} \lstinputlisting{src/ej7c.cpp}.
 \end{enumerate}
 
 \end{document}
