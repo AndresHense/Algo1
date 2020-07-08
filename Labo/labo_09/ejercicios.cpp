@@ -147,21 +147,22 @@ int puntoFijo(vector<int> v){
 	int low=0;
 	int high=v.size()-1;
 	std::vector<int> res{};
-	while(low+1<high){
+	while(low<=high){
 		int mid=low + (high-low)/2;
 
 		if(v[low]==low)
 			res.push_back(low);
 		
 		if(v[mid]<=low){
-			low=mid;
+			low=mid+1;
 		}else{
-			high=mid;
+			high=mid-1;
 		}
 	}
 	if(res.size()==0)return -1;
 	int min_res=res[0];
 	for(int i=0;i<res.size();i++){
+		std::cout<<"res["<<i<<"]: "<<res[i]<<", ";
 		if(res[i]<min_res)min_res=res[i];
 	}
 	return min_res;
@@ -169,6 +170,11 @@ int puntoFijo(vector<int> v){
 }
 
 int encontrarRotado(vector<int> v, int x){
+	int res=-1;
+	for(int i=0;i<v.size();i++){
+		if(v[i]==x)
+			return i;
+	}
 	return -1;
 }
 
