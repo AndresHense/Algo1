@@ -11,3 +11,5 @@ CMakeFiles
 *.jpg
 practica5.pdf
 practica6.pdf
+*.pc
+*.swp
