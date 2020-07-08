@@ -5,7 +5,7 @@
 #include "stdlib.h"
 #include <string>
 #include<iostream>
-
+#include<algorithm>
 using namespace std;
 
 int busquedaBinaria(vector<int> v, int x){
@@ -139,7 +139,33 @@ int indicePico(vector<int> v){
 }
 
 int puntoFijo(vector<int> v){
-	return -1;
+	
+	if(v.size()==0)return -1;
+	if(v.size()==1)return (v[0]==0)?0:-1;
+	if(v[v.size()-1]==v.size()-1)return v.size()-1;
+
+	int low=0;
+	int high=v.size()-1;
+	std::vector<int> res{};
+	while(low+1<high){
+		int mid=low + (high-low)/2;
+
+		if(v[low]==low)
+			res.push_back(low);
+		
+		if(v[mid]<=low){
+			low=mid;
+		}else{
+			high=mid;
+		}
+	}
+	if(res.size()==0)return -1;
+	int min_res=res[0];
+	for(int i=0;i<res.size();i++){
+		if(res[i]<min_res)min_res=res[i];
+	}
+	return min_res;
+
 }
 
 int encontrarRotado(vector<int> v, int x){
