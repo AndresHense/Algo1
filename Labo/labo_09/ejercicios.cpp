@@ -1,6 +1,7 @@
 #include "ejercicios.h"
 #include "time.h"
 #include <ctime>
+#include <cmath>
 #include "stdlib.h"
 #include <string>
 #include<iostream>
@@ -8,16 +9,78 @@
 using namespace std;
 
 int busquedaBinaria(vector<int> v, int x){
-	return -1;
+	
+	if(v.size()==0)return {};
+	if(v.size()==1){
+		return ((v[0]==x) ? 0 :-1);
+	}
+	//hay que asegurarse de q el elem pertenezca al intervalo de 
+	//la lista?
+	if(x == v[v.size()-1])
+		return v.size()-1;
+
+	int low=0;
+	int high=v.size()-1;
+	while(low+1<high && v[low] != x){
+		int mid= (low+high)/2;
+
+		if(v[0]<=v[v.size()-1]){
+			(v[mid]<= x) ? low=mid : high=mid;
+		}else{
+			(v[mid]>= x) ? low=mid : high=mid;
+		}
+	}
+	return ((v[low]==x) ? low :-1);
 }
 
 int busquedaJumpSearch(vector<int> v, int x){
+	
+	if(v.size()==0)return {};
+	if(v.size()==1){
+		return ((v[0]==x) ? 0 :-1);
+	}
+	if(v[0]<=v[v.size()-1]){
+		if(x<v[0])
+			return -1;
+	}else{
+		if(x>v[v.size()-1])
+			return -1;
+	}
+
+
+	int m=sqrt(v.size());
+	int i=0;
+	while(i<v.size()){
+		if(v[i]==x)
+			return i;
+
+		if(v[0]<=v[v.size()-1]){
+			if(v[i]>x){
+				i-=m;
+				while(i<v.size()){
+					if(v[i]==x)return i;
+					i++;
+				}
+			}
+		}else{
+			if(v[i]<x){
+				i-=m;
+				while(i<v.size()){
+					if(v[i]==x)return i;
+					i++;
+				}
+
+			}
+		}
+		(i+m >v.size()-1)?i++:i+=m;
+	}
 	return -1;
 }
 
 int buscar(vector<int> v, int x){
-    return busquedaBinaria(v, x);
-    //return busquedaJumpSearch(v, x);
+	
+    //return busquedaBinaria(v, x);
+    return busquedaJumpSearch(v, x);
 }
 
 
@@ -62,6 +125,16 @@ vector<int> construir_vector(int size, string mode){
 
 
 int indicePico(vector<int> v){
+	
+	if(v.size()==0)return {};
+	if(v.size()==1)return 0;
+	if(v[0]>=v[1])return 0;
+
+	for(int i=1;i<v.size()-1;i++){
+		if(v[i-1]<= v[i] && v[i]>= v[i+1])
+			return i;
+	}
+	if(v[v.size()-2] <= v[v.size()-1])return v[v.size()-1];
 	return -1;
 }
 
