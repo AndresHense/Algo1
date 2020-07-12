@@ -5,6 +5,7 @@
 
 int busquedaA(std::vector<std::vector<int>> v,int x);
 int busquedaB(std::vector<std::vector<int>> v,int x);
+int busquedaC(std::vector<std::vector<int>> v,int x);
 
 #endif  
 

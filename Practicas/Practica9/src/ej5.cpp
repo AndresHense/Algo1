@@ -36,3 +36,23 @@ int busquedaB(std::vector<std::vector<int>> v,int x){
 }
 
 
+//c) //es una copia del b todavia 
+int busquedaC(std::vector<std::vector<int>> v,int x){
+	int res=0;
+	int i=0,j=v[0].size()-1;
+	while(i<v.size() && j>=0){
+		if(v[i][j]==x){
+			res++;i++;
+			while(i<v.size() && v[i][j]==x){
+				res++;
+				i++;
+			}
+			break;
+		}
+			
+		(v[i][j]>x)? j-- : i++;
+	}	
+	return res;
+}
+
+
