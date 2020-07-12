@@ -23,10 +23,11 @@ int busquedaB(std::vector<std::vector<int>> v,int x){
 	while(i<v.size() && j>=0){
 		if(v[i][j]==x){
 			res++;i++;
-			while(v[i][j]==x && i<v.size()){
+			while(i<v.size() && v[i][j]==x){
 				res++;
 				i++;
 			}
+			break;
 		}
 			
 		(v[i][j]>x)? j-- : i++;
