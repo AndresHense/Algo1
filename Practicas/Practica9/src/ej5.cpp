@@ -19,12 +19,14 @@ int busquedaA(std::vector<std::vector<int>> v,int x){
 //b)
 int busquedaB(std::vector<std::vector<int>> v,int x){
 	int res=0;
-	int i=0,j=v[0].size();
+	int i=0,j=v[0].size()-1;
 	while(i<v.size() && j>=0){
 		if(v[i][j]==x){
-		res++;i++;
-		while(v[i][j]==x)
-			res++;
+			res++;i++;
+			while(v[i][j]==x && i<v.size()){
+				res++;
+				i++;
+			}
 		}
 			
 		(v[i][j]>x)? j-- : i++;
