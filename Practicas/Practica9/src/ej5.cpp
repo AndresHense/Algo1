@@ -42,10 +42,12 @@ int busquedaC(std::vector<std::vector<int>> v,int x){
 	int i=0,j=v[0].size()-1;
 	while(i<v.size() && j>=0){
 		if(v[i][j]==x){
-			res++;i++;
-			while(i<v.size() && v[i][j]==x){
-				res++;
-				i++;
+			while(j>=0 && v[i][j]==x){
+				for(int k=i;k<v.size() && v[k][j]==x;k++){
+					res++;
+					
+				}
+				j--;
 			}
 			break;
 		}
