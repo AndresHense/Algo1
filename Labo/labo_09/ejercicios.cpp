@@ -142,16 +142,13 @@ int puntoFijo(vector<int> v){
 	
 	if(v.size()==0)return -1;
 	if(v.size()==1)return (v[0]==0)?0:-1;
-	if(v[v.size()-1]==v.size()-1)return v.size()-1;
+	//if(v[v.size()-1]==v.size()-1)return v.size()-1;
 
 	int low=0;
 	int high=v.size()-1;
 	std::vector<int> res{};
-	while(low<=high){
+	while(low<=high && v[low]!=low){
 		int mid=low + (high-low)/2;
-
-		if(v[low]==low)
-			res.push_back(low);
 		
 		if(v[mid]<=low){
 			low=mid+1;
@@ -159,13 +156,8 @@ int puntoFijo(vector<int> v){
 			high=mid-1;
 		}
 	}
-	if(res.size()==0)return -1;
-	int min_res=res[0];
-	for(int i=0;i<res.size();i++){
-		std::cout<<"res["<<i<<"]: "<<res[i]<<", ";
-		if(res[i]<min_res)min_res=res[i];
-	}
-	return min_res;
+
+	return (v[low]==low)?low:-1;
 
 }
 

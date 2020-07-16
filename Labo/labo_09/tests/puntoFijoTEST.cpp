@@ -36,3 +36,9 @@ TEST(puntoFijo, repes){
 	int res = puntoFijo(v);
 	ASSERT_EQ(3, res);
 }
+
+TEST(puntoFijo, todosPuntos){
+	vector<int> v={0,1,2,3,4,5,6};
+	int res=puntoFijo(v);
+	ASSERT_EQ(0,res);
+}
