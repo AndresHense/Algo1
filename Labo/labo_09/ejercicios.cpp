@@ -148,7 +148,7 @@ int puntoFijo(vector<int> v){
 	int high=v.size()-1;
 	std::vector<int> res{};
 	while(low<=high && v[low]!=low){
-		int mid=low + (high-low)/2;
+		int mid= (high+low)/2;
 		
 		if(v[mid]<=low){
 			low=mid+1;
@@ -174,6 +174,7 @@ int menorMasGrande(vector<int> v, int x){
 	
 	if(v.size()==0)return -1;
 	if(x<=v[0])return 0;
+	if(x>v[v.size()-1])return -1;
 	int low=1;
 	int high=v.size()-1;
 	

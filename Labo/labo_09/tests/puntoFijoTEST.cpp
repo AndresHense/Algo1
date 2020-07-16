@@ -42,3 +42,9 @@ TEST(puntoFijo, todosPuntos){
 	int res=puntoFijo(v);
 	ASSERT_EQ(0,res);
 }
+
+TEST(puntoFijo, todosMenosPrimeros){
+	vector<int> v={-3,1,2,3,4,5,6};
+	int res=puntoFijo(v);
+	ASSERT_EQ(1,res);
+}
