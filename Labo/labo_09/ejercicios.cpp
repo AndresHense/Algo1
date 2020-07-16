@@ -179,6 +179,25 @@ int encontrarRotado(vector<int> v, int x){
 }
 
 int menorMasGrande(vector<int> v, int x){
+	
+	if(v.size()==0)return -1;
+	if(x<=v[0])return 0;
+	int low=1;
+	int high=v.size()-1;
+	
+	while(low<=high){
+		int m=(low+high)/2;
+
+		if(v[low-1] <= x && v[low]>x)
+			return low;
+		if(v[m]<=x){
+			low=m+1;
+		}else{
+			high=m-1;
+		}
+	}
+	if(v[low-1] <= x && v[low]>x)
+		return low;
 	return -1;
 }
 
